@@ -20,7 +20,7 @@ mpi.bcast.cmd(options(np.messages=FALSE),
 ## Generate some data and broadcast it to all slaves (it will be known
 ## to the master node so no need to broadcast it)
 
-set.seed(123)
+set.seed(42)
 x <- rnorm(2500)
 mpi.bcast.Robj2slave(x)
 

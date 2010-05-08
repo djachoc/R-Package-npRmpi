@@ -24,7 +24,7 @@ mpi.bcast.Robj2slave(wage1)
 
 t1 <- Sys.time()
 
-## A regression example
+## A regression example. 
 
 mpi.bcast.cmd(bw <- npregbw(lwage~married+
                             female+
@@ -34,8 +34,12 @@ mpi.bcast.cmd(bw <- npregbw(lwage~married+
                             tenure,
                             regtype="ll",
                             bwmethod="cv.aic",
+                            nmulti=1,
+                            random.seed=42,
                             data=wage1),
               caller.execute=TRUE)
+
+summary(bw)
 
 mpi.bcast.cmd(model <- npreg(bws=bw),
               caller.execute=TRUE)

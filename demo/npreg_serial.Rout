@@ -43,4 +43,60 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 +               tenure,
 +               regtype="ll",
 +               bwmethod="cv.aic",
++               nmulti=1,
++               random.seed=42,
 +               data=wage1)
+> 
+> summary(bw)
+
+Regression Data (526 observations, 6 variable(s)):
+
+Regression Type: Local-Linear
+Bandwidth Selection Method: Expected Kullback-Leibler Cross-Validation
+Formula: lwage ~ married + female + nonwhite + educ + exper + tenure
+Bandwidth Type: Fixed
+Objective Function Value: -0.8578375 (achieved on multistart 1)
+
+Exp. Var. Name: married  Bandwidth: 0.1910285    Lambda Max: 0.5     
+Exp. Var. Name: female   Bandwidth: 0.01945675   Lambda Max: 0.5     
+Exp. Var. Name: nonwhite Bandwidth: 0.2022780    Lambda Max: 0.5     
+Exp. Var. Name: educ     Bandwidth: 7.024557   Scale Factor: 11.59596
+Exp. Var. Name: exper    Bandwidth: 7.299918   Scale Factor: 1.31638 
+Exp. Var. Name: tenure   Bandwidth: 34.94047   Scale Factor: 16.47966
+
+Continuous Kernel Type: Second-Order Gaussian
+No. Continuous Explanatory Vars.: 3
+
+Unordered Categorical Kernel Type: Aitchison and Aitken
+No. Unordered Categorical Explanatory Vars.: 3
+
+> 
+> model <- npreg(bws=bw)
+> 
+> t2 <- Sys.time()
+> 
+> as.numeric((t2-t1),units="secs")
+[1] 59.91666
+> 
+> summary(model)
+
+Regression Data: 526 training points, in 6 variable(s)
+                married     female  nonwhite     educ    exper   tenure
+Bandwidth(s): 0.1910285 0.01945675 0.2022780 7.024557 7.299918 34.94047
+
+Kernel Regression Estimator: Local-Linear
+Bandwidth Type: Fixed
+Residual standard error: 0.1313059
+R-squared: 0.5361446
+
+Continuous Kernel Type: Second-Order Gaussian
+No. Continuous Explanatory Vars.: 3
+
+Unordered Categorical Kernel Type: Aitchison and Aitken
+No. Unordered Categorical Explanatory Vars.: 3
+
+> 
+> 
+> proc.time()
+   user  system elapsed 
+ 57.270   0.088  60.564 

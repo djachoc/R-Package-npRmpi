@@ -21,7 +21,11 @@ bw <- npregbw(lwage~married+
               tenure,
               regtype="ll",
               bwmethod="cv.aic",
+              nmulti=1,
+              random.seed=42,
               data=wage1)
+
+summary(bw)
 
 model <- npreg(bws=bw)
 

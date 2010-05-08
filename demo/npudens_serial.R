@@ -8,7 +8,7 @@ options(np.messages=FALSE)
 
 ## Generate some data
 
-set.seed(123)
+set.seed(42)
 x <- rnorm(2500)
 
 t1 <- Sys.time()
