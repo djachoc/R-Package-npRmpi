@@ -29,7 +29,6 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > options(np.messages=FALSE)
 > 
 > data(wage1)
-> attach(wage1)
 > 
 > t1 <- Sys.time()
 > 
@@ -76,7 +75,7 @@ No. Unordered Categorical Explanatory Vars.: 3
 > t2 <- Sys.time()
 > 
 > as.numeric((t2-t1),units="secs")
-[1] 91.71703
+[1] 92.00142
 > 
 > summary(model)
 
@@ -102,4 +101,4 @@ No. Unordered Categorical Explanatory Vars.: 3
 > 
 > proc.time()
    user  system elapsed 
- 91.683   0.102  92.195 
+ 91.926   0.132  92.465 

@@ -9,6 +9,11 @@ simple density bandwidth selection illustration. Kindly study these
 files and the comments in each in order to extend this approach to
 your problem.
 
+Note - the output from the serial and parallel runs ought to be
+_identical_ save for execution time. If they are not there is a
+problem with the underlying code and kindly report this to me
+immediately.
+
 *** Installation of the parallel MPI package `npRmpi'
 
 Installation will depend on your hardware and software

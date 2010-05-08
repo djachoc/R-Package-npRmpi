@@ -1,0 +1,32 @@
+## This is the serial version of npscoef_npRmpi.R for comparison
+## purposes (bandwidth ought to be identical, timing may
+## differ). Study the differences between this file and its MPI
+## counterpart for insight about your own problems.
+
+library(np)
+options(np.messages=FALSE)
+
+## Generate some data
+
+n <- 1000
+
+set.seed(42)
+x <- runif(n)
+z <- runif(n, min=-2, max=2)
+y <- x*exp(z)*(1.0+rnorm(n,sd = 0.2))
+
+## A smooth coefficient model example
+
+t1 <- Sys.time()
+
+bw <- npscoefbw(y~x|z)
+
+t2 <- Sys.time()
+
+as.numeric((t2-t1),units="secs")
+
+summary(bw)
+
+model <- npscoef(bws=bw, gradients=TRUE)
+
+summary(model)

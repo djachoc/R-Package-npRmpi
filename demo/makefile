@@ -15,6 +15,9 @@ all:
 	R CMD BATCH --vanilla npindex_serial.R
 	mpirun -np 2 R CMD BATCH --no-save npindex_npRmpi.R
 
+	R CMD BATCH --vanilla npscoef_serial.R
+	mpirun -np 2 R CMD BATCH --no-save npscoef_npRmpi.R
+
 npudens:
 
 	R CMD BATCH --vanilla npudens_serial.R
@@ -39,3 +42,8 @@ npindex:
 
 	R CMD BATCH --vanilla npindex_serial.R
 	mpirun -np 2 R CMD BATCH --no-save npindex_npRmpi.R
+
+npscoef:
+
+	R CMD BATCH --vanilla npscoef_serial.R
+	mpirun -np 2 R CMD BATCH --no-save npscoef_npRmpi.R

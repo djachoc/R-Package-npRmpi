@@ -7,7 +7,6 @@ library(np)
 options(np.messages=FALSE)
 
 data(wage1)
-attach(wage1)
 
 t1 <- Sys.time()
 
