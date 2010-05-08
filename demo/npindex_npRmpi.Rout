@@ -26,7 +26,7 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > ## current directory or home directory. It is necessary.
 > 
 > ## To run this on systems with OPENMPI installed and working, try
-> ## mpirun -np 2 R CMD BATCH npudens_npRmpi. Check the time in the
+> ## mpirun -np 2 R CMD BATCH npindex_npRmpi. Check the time in the
 > ## output file foo.Rout (the name of this file with extension .Rout),
 > ## then try with, say, 4 processors and compare run time.
 > 
@@ -44,35 +44,65 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > ## Generate some data and broadcast it to all slaves (it will be known
 > ## to the master node so no need to broadcast it)
 > 
+> n <- 1000
+> 
 > set.seed(42)
-> x <- rnorm(2500)
-> mpi.bcast.Robj2slave(x)
+> x1 <- runif(n, min=-1, max=1)
+> x2 <- runif(n, min=-1, max=1)
+> y <- x1 - x2 + rnorm(n)
+> 
+> mpi.bcast.Robj2slave(x1)
+> mpi.bcast.Robj2slave(x2)
+> mpi.bcast.Robj2slave(y)
+> 
+> ## A single index model example
 > 
 > t1 <- Sys.time()
 > 
-> ## A simple example with likelihood cross-validation
-> 
-> mpi.bcast.cmd(bw <- npudensbw(~x),
+> mpi.bcast.cmd(bw <- npindexbw(formula=y~x1+x2),
 +               caller.execute=TRUE)
 > 
 > t2 <- Sys.time()
 > 
 > as.numeric((t2-t1),units="secs")
-[1] 16.00871
+[1] 4.06673
 > 
 > summary(bw)
 
-Data (2500 observations, 1 variable(s)):
+Single Index Model
+Regression data (1000 observations, 2 variable(s)):
 
-Bandwidth Selection Method: Maximum Likelihood Cross-Validation
-Formula: ~x
-Bandwidth Type: Fixed
-Objective Function Value: 1.416243 (achieved on multistart 1)
-
-Var. Name: x Bandwidth: 0.2155757 Scale Factor: 1.050824
+      x1        x2
+Beta:  1 -0.944812
+Bandwidth:  0.1724932
+Optimisation Method:  Nelder-Mead
+Regression Type: Local-Constant
+Bandwidth Selection Method: Ichimura
+Formula: y ~ x1 + x2
+Objective Function Value: 0.971478 (achieved on multistart 1)
 
 Continuous Kernel Type: Second-Order Gaussian
-No. Continuous Vars.: 1
+No. Continuous Explanatory Vars.: 1
+
+> 
+> mpi.bcast.cmd(model <- npindex(bws=bw, gradients=TRUE),
++               caller.execute=TRUE)
+> 
+> summary(model)
+
+Single Index Model
+Regression Data: 1000 training points, in 2 variable(s)
+
+      x1        x2
+Beta:  1 -0.944812
+Bandwidth: 0.1724932
+Kernel Regression Estimator: Local-Constant
+
+Residual standard error: 0.954653
+R-squared: 0.4272527
+
+Continuous Kernel Type: Second-Order Gaussian
+No. Continuous Explanatory Vars.: 1
 
 > 
 > ## Clean up properly then quit()

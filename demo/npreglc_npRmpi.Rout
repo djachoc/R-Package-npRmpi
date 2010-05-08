@@ -1,0 +1,120 @@
+
+R version 2.11.0 (2010-04-22)
+Copyright (C) 2010 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+Loading required package: boot
+Loading required package: cubature
+Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8) + Rmpi 0.5-8
+master (rank 0, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
+slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
+> ## Make sure you have the .Rprofile file from npRmpi/inst/ in your
+> ## current directory or home directory. It is necessary.
+> 
+> ## To run this on systems with OPENMPI installed and working, try
+> ## mpirun -np 2 R CMD BATCH npreg_npRmpi. Check the time in the output
+> ## file foo.Rout (the name of this file with extension .Rout), then
+> ## try with, say, 4 processors and compare run time.
+> 
+> ## Initialize master and slaves.
+> 
+> mpi.bcast.cmd(np.mpi.initialize(),
++               caller.execute=TRUE)
+> 
+> ## Turn off progress i/o as this clutters the output file (if you want
+> ## to see search progress you can comment out this command)
+> 
+> mpi.bcast.cmd(options(np.messages=FALSE),
++               caller.execute=TRUE)
+> 
+> ## Load your data and broadcast it to all slave nodes
+> 
+> data(wage1)
+> mpi.bcast.Robj2slave(wage1)
+> 
+> t1 <- Sys.time()
+> 
+> ## A regression example (local constant)
+> 
+> mpi.bcast.cmd(bw <- npregbw(lwage~married+
++                             female+
++                             nonwhite+                
++                             educ+
++                             exper+
++                             tenure,
++                             regtype="lc",
++                             bwmethod="cv.aic",
++                             nmulti=1,
++                             data=wage1),
++               caller.execute=TRUE)
+> 
+> summary(bw)
+
+Regression Data (526 observations, 6 variable(s)):
+
+Regression Type: Local-Constant
+Bandwidth Selection Method: Expected Kullback-Leibler Cross-Validation
+Formula: lwage ~ married + female + nonwhite + educ + exper + tenure
+Bandwidth Type: Fixed
+Objective Function Value: -0.7779482 (achieved on multistart 1)
+
+Exp. Var. Name: married  Bandwidth: 0.25       Lambda Max: 0.5      
+Exp. Var. Name: female   Bandwidth: 0.25       Lambda Max: 0.5      
+Exp. Var. Name: nonwhite Bandwidth: 0.25       Lambda Max: 0.5      
+Exp. Var. Name: educ     Bandwidth: 1.644756 Scale Factor: 2.71512  
+Exp. Var. Name: exper    Bandwidth: 4.22416  Scale Factor: 0.7617346
+Exp. Var. Name: tenure   Bandwidth: 8.176016 Scale Factor: 3.856216 
+
+Continuous Kernel Type: Second-Order Gaussian
+No. Continuous Explanatory Vars.: 3
+
+Unordered Categorical Kernel Type: Aitchison and Aitken
+No. Unordered Categorical Explanatory Vars.: 3
+
+> 
+> mpi.bcast.cmd(model <- npreg(bws=bw),
++               caller.execute=TRUE)
+> 
+> t2 <- Sys.time()
+> 
+> as.numeric((t2-t1),units="secs")
+[1] 17.50062
+> 
+> summary(model)
+
+Regression Data: 526 training points, in 6 variable(s)
+              married female nonwhite     educ   exper   tenure
+Bandwidth(s):    0.25   0.25     0.25 1.644756 4.22416 8.176016
+
+Kernel Regression Estimator: Local-Constant
+Bandwidth Type: Fixed
+Residual standard error: 0.1333591
+R-squared: 0.5605358
+
+Continuous Kernel Type: Second-Order Gaussian
+No. Continuous Explanatory Vars.: 3
+
+Unordered Categorical Kernel Type: Aitchison and Aitken
+No. Unordered Categorical Explanatory Vars.: 3
+
+> 
+> ## Clean up properly then quit()
+> 
+> mpi.close.Rslaves()
+[1] 1
+> 
+> mpi.quit()

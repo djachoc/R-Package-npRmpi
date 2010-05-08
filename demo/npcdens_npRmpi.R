@@ -2,7 +2,7 @@
 ## current directory or home directory. It is necessary.
 
 ## To run this on systems with OPENMPI installed and working, try
-## mpirun -np 2 R CMD BATCH npreg_npRmpi. Check the time in the output
+## mpirun -np 2 R CMD BATCH npcdens_npRmpi. Check the time in the output
 ## file foo.Rout (the name of this file with extension .Rout), then
 ## try with, say, 4 processors and compare run time.
 
@@ -24,24 +24,21 @@ mpi.bcast.Robj2slave(wage1)
 
 t1 <- Sys.time()
 
-## A regression example. 
+## A conditional density estimation example. 
 
-mpi.bcast.cmd(bw <- npregbw(lwage~married+
-                            female+
-                            nonwhite+                
-                            educ+
-                            exper+
-                            tenure,
-                            regtype="ll",
-                            bwmethod="cv.aic",
-                            nmulti=1,
-                            random.seed=42,
-                            data=wage1),
+mpi.bcast.cmd(bw <- npcdensbw(lwage~married+
+                              female+
+                              nonwhite+                
+                              educ+
+                              exper+
+                              tenure,
+                              nmulti=1,
+                              data=wage1),
               caller.execute=TRUE)
 
 summary(bw)
 
-mpi.bcast.cmd(model <- npreg(bws=bw),
+mpi.bcast.cmd(model <- npcdens(bws=bw),
               caller.execute=TRUE)
 
 t2 <- Sys.time()

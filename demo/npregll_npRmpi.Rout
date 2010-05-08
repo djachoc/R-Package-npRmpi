@@ -48,7 +48,7 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > 
 > t1 <- Sys.time()
 > 
-> ## A regression example. 
+> ## A regression example (local linear)
 > 
 > mpi.bcast.cmd(bw <- npregbw(lwage~married+
 +                             female+
@@ -59,7 +59,6 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 +                             regtype="ll",
 +                             bwmethod="cv.aic",
 +                             nmulti=1,
-+                             random.seed=42,
 +                             data=wage1),
 +               caller.execute=TRUE)
 > 
@@ -93,7 +92,7 @@ No. Unordered Categorical Explanatory Vars.: 3
 > t2 <- Sys.time()
 > 
 > as.numeric((t2-t1),units="secs")
-[1] 41.95941
+[1] 30.70607
 > 
 > summary(model)
 

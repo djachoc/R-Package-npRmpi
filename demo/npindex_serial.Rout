@@ -17,7 +17,7 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> ## This is the serial version of npudens_npRmpi.R for comparison
+> ## This is the serial version of npindex_npRmpi.R for comparison
 > ## purposes (bandwidth ought to be identical, timing may
 > ## differ). Study the differences between this file and its MPI
 > ## counterpart for insight about your own problems.
@@ -30,36 +30,61 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > 
 > ## Generate some data
 > 
+> n <- 1000
+> 
 > set.seed(42)
-> x <- rnorm(2500)
+> x1 <- runif(n, min=-1, max=1)
+> x2 <- runif(n, min=-1, max=1)
+> y <- x1 - x2 + rnorm(n)
+> 
+> ## A single index model example
 > 
 > t1 <- Sys.time()
 > 
-> ## A simple example with likelihood cross-validation
-> 
-> bw <- npudensbw(~x)
+> bw <- npindexbw(formula=y~x1+x2)
 > 
 > t2 <- Sys.time()
 > 
 > as.numeric((t2-t1),units="secs")
-[1] 24.05590
+[1] 7.044834
 > 
 > summary(bw)
 
-Data (2500 observations, 1 variable(s)):
+Single Index Model
+Regression data (1000 observations, 2 variable(s)):
 
-Bandwidth Selection Method: Maximum Likelihood Cross-Validation
-Formula: ~x
-Bandwidth Type: Fixed
-Objective Function Value: 1.416243 (achieved on multistart 1)
-
-Var. Name: x Bandwidth: 0.2155757 Scale Factor: 1.050824
+      x1        x2
+Beta:  1 -0.944812
+Bandwidth:  0.1724932
+Optimisation Method:  Nelder-Mead
+Regression Type: Local-Constant
+Bandwidth Selection Method: Ichimura
+Formula: y ~ x1 + x2
+Objective Function Value: 0.971478 (achieved on multistart 1)
 
 Continuous Kernel Type: Second-Order Gaussian
-No. Continuous Vars.: 1
+No. Continuous Explanatory Vars.: 1
 
 > 
+> model <- npindex(bws=bw, gradients=TRUE)
+> 
+> summary(model)
+
+Single Index Model
+Regression Data: 1000 training points, in 2 variable(s)
+
+      x1        x2
+Beta:  1 -0.944812
+Bandwidth: 0.1724932
+Kernel Regression Estimator: Local-Constant
+
+Residual standard error: 0.954653
+R-squared: 0.4272527
+
+Continuous Kernel Type: Second-Order Gaussian
+No. Continuous Explanatory Vars.: 1
+
 > 
 > proc.time()
    user  system elapsed 
- 24.439   0.053  24.507 
+  7.513   0.053   7.618 
