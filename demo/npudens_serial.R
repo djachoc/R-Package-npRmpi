@@ -4,9 +4,9 @@
 ## counterpart for insight about your own problems.
 
 library(np)
+options(np.messages=FALSE)
 
-## Generate some data and broadcast it to all slaves (it is known to
-## the master node)
+## Generate some data
 
 set.seed(123)
 x <- rnorm(2500)

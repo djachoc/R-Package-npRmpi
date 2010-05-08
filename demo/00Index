@@ -3,18 +3,49 @@ The files
     npudens_serial.R
     npudens_npRmpi.R
 
-demonstrate the difference between constructing serial versus MPI np
-programs. Kindly study these files and the comments in each in order
-to extend this approach to your problem.
+and other similar files in this directory demonstrate the difference
+between constructing serial versus parallel MPI np programs via a
+simple density bandwidth selection illustration. Kindly study these
+files and the comments in each in order to extend this approach to
+your problem.
 
-To run the serial version install the np program and then run
+*** Installation of the parallel MPI package `npRmpi'
+
+Installation will depend on your hardware and software
+configuration. If you are not familiar with parallel computing you
+must seek local advice. That being said, if you have Open MPI and MPI2
+properly installed on your system, installation could be as simple as
+downloading the tarball and, from a command shell, running
+
+R CMD INSTALL npRmpi_xxx.tar.gz 
+
+where xxx is the version number. For clusters you may additionally
+need to provide locations of libraries (kindly see your local sysadmin
+as there are far too many variations for me to assist with). On a
+local Linux cluster I use the following by way of illustration (we
+need to set MPI library paths and MPI root directories):
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/sharcnet/openmpi/1.4.1/intel/lib
+export MPI_ROOT=/opt/sharcnet/openmpi/1.4.1/intel 
+
+R CMD INSTALL npRmpi_xxx.tar.gz
+
+where again xxx is the version number. Please seek local help for
+further assistance on installing and running parallel programs.
+
+*** Serial (non-parallel) program batch execution:
+
+To run the serial version (i.e. standard non-parallel version) install
+the np program from CRAN and then, from a command shell, run
 
 R CMD BATCH npudens_serial.R
+
+*** Parallel MPI program batch execution:
 
 To run the MPI version install the npRmpi program, copy the Rprofile
 file in npRmpi/inst to the current directory and name it .Rprofile (or
 copy it to your home directory and again name it .Rprofile) and then
-on OPENMPI systems run
+on Open MPI systems run something like
 
 mpirun -np 2 R CMD BATCH npudens_npRmpi.R
 

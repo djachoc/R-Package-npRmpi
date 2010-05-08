@@ -21,8 +21,6 @@ Loading required package: boot
 Loading required package: cubature
 Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8) + Rmpi 0.5-8
 Multistart 1 of 1 |Multistart 1 of 1 |Multistart 1 of 1 |Multistart 1 of 1 |Multistart 1 of 1 |                   g on: jeffrey-racines-macbook-pro 
-[Previously saved workspace restored]
-
 > ## Make sure you have the .Rprofile file from npRmpi/inst/ in your
 > ## current directory or home directory. It is necessary.
 > 
@@ -53,7 +51,7 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8) + Rmpi 0.5-8
 > t2 <- Sys.time()
 > 
 > as.numeric((t2-t1),units="secs")
-[1] 8.444833
+[1] 8.473449
 > 
 > summary(bw)
 

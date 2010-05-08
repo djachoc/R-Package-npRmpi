@@ -17,7 +17,7 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> ## This is the serial version of npudens_npRmpi.R for comparison
+> ## This is the serial version of npreg_npRmpi.R for comparison
 > ## purposes (bandwidth ought to be identical, timing may
 > ## differ). Study the differences between this file and its MPI
 > ## counterpart for insight about your own problems.
@@ -28,38 +28,19 @@ Loading required package: cubature
 Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > options(np.messages=FALSE)
 > 
-> ## Generate some data
-> 
-> set.seed(123)
-> x <- rnorm(2500)
+> data(wage1)
+> attach(wage1)
 > 
 > t1 <- Sys.time()
 > 
 > ## A simple example with likelihood cross-validation
 > 
-> bw <- npudensbw(~x)
-> 
-> t2 <- Sys.time()
-> 
-> as.numeric((t2-t1),units="secs")
-[1] 16.58478
-> 
-> summary(bw)
-
-Data (2500 observations, 1 variable(s)):
-
-Bandwidth Selection Method: Maximum Likelihood Cross-Validation
-Formula: ~x
-Bandwidth Type: Fixed
-Objective Function Value: 1.410698 (achieved on multistart 1)
-
-Var. Name: x Bandwidth: 0.2158522 Scale Factor: 1.058914
-
-Continuous Kernel Type: Second-Order Gaussian
-No. Continuous Vars.: 1
-
-> 
-> 
-> proc.time()
-   user  system elapsed 
- 16.987   0.047  17.034 
+> bw <- npregbw(lwage~married+
++               female+
++               nonwhite+                
++               educ+
++               exper+
++               tenure,
++               regtype="ll",
++               bwmethod="cv.aic",
++               data=wage1)
