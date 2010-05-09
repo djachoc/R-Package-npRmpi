@@ -75,7 +75,7 @@ No. Unordered Categorical Explanatory Vars.: 3
 > t2 <- Sys.time()
 > 
 > as.numeric((t2-t1),units="secs")
-[1] 92.00142
+[1] 92.10869
 > 
 > summary(model)
 
@@ -101,4 +101,4 @@ No. Unordered Categorical Explanatory Vars.: 3
 > 
 > proc.time()
    user  system elapsed 
- 91.926   0.132  92.465 
+ 91.937   0.139  92.579 

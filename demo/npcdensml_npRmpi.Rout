@@ -26,7 +26,7 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > ## current directory or home directory. It is necessary.
 > 
 > ## To run this on systems with OPENMPI installed and working, try
-> ## mpirun -np 2 R CMD BATCH npreg_npRmpi. Check the time in the output
+> ## mpirun -np 2 R CMD BATCH npcdens_npRmpi. Check the time in the output
 > ## file foo.Rout (the name of this file with extension .Rout), then
 > ## try with, say, 4 processors and compare run time.
 > 
@@ -48,65 +48,69 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > 
 > t1 <- Sys.time()
 > 
-> ## A regression example (local linear)
+> ## A conditional density estimation example. 
 > 
-> mpi.bcast.cmd(bw <- npregbw(lwage~married+
-+                             female+
-+                             nonwhite+                
-+                             educ+
-+                             exper+
-+                             tenure,
-+                             regtype="ll",
-+                             bwmethod="cv.aic",
-+                             nmulti=1,
-+                             data=wage1),
+> mpi.bcast.cmd(bw <- npcdensbw(lwage~married+
++                               female+
++                               nonwhite+                
++                               educ+
++                               exper+
++                               tenure,
++                               nmulti=1,
++                               data=wage1),
 +               caller.execute=TRUE)
 > 
 > summary(bw)
 
-Regression Data (526 observations, 6 variable(s)):
+Conditional density data (526 observations, 7 variable(s))
+(1 dependent variable(s), and 6 explanatory variable(s))
 
-Regression Type: Local-Linear
-Bandwidth Selection Method: Expected Kullback-Leibler Cross-Validation
+Bandwidth Selection Method: Maximum Likelihood Cross-Validation
 Formula: lwage ~ married + female + nonwhite + educ + exper + tenure
 Bandwidth Type: Fixed
-Objective Function Value: -0.7171337 (achieved on multistart 1)
+Objective Function Value: 0.5072355 (achieved on multistart 1)
 
-Exp. Var. Name: married  Bandwidth: 0.25       Lambda Max: 0.5     
-Exp. Var. Name: female   Bandwidth: 0.25       Lambda Max: 0.5     
-Exp. Var. Name: nonwhite Bandwidth: 0.25       Lambda Max: 0.5     
-Exp. Var. Name: educ     Bandwidth: 267.5935 Scale Factor: 441.7363
-Exp. Var. Name: exper    Bandwidth: 76.75837 Scale Factor: 13.84169
-Exp. Var. Name: tenure   Bandwidth: 6.561652 Scale Factor: 3.094801
+Exp. Var. Name: married  Bandwidth: 0.25         Lambda Max: 0.5      
+Exp. Var. Name: female   Bandwidth: 0.03045943   Lambda Max: 0.5      
+Exp. Var. Name: nonwhite Bandwidth: 0.25         Lambda Max: 0.5      
+Exp. Var. Name: educ     Bandwidth: 1.473311   Scale Factor: 2.174668 
+Exp. Var. Name: exper    Bandwidth: 4.371435   Scale Factor: 0.7048525
+Exp. Var. Name: tenure   Bandwidth: 12.51481   Scale Factor: 5.277821  
+
+Dep. Var. Name: lwage    Bandwidth: 0.1880402 Scale Factor: 0.7741754
 
 Continuous Kernel Type: Second-Order Gaussian
 No. Continuous Explanatory Vars.: 3
+No. Continuous Dependent Vars.: 1
 
 Unordered Categorical Kernel Type: Aitchison and Aitken
 No. Unordered Categorical Explanatory Vars.: 3
 
 > 
-> mpi.bcast.cmd(model <- npreg(bws=bw),
+> mpi.bcast.cmd(model <- npcdens(bws=bw),
 +               caller.execute=TRUE)
 > 
 > t2 <- Sys.time()
 > 
 > as.numeric((t2-t1),units="secs")
-[1] 34.46975
+[1] 32.81566
 > 
 > summary(model)
 
-Regression Data: 526 training points, in 6 variable(s)
-              married female nonwhite     educ    exper   tenure
-Bandwidth(s):    0.25   0.25     0.25 267.5935 76.75837 6.561652
+Conditional Density Data: 526 training points, in 7 variable(s)
+(1 dependent variable(s), and 6 explanatory variable(s))
 
-Kernel Regression Estimator: Local-Linear
+                            lwage
+Dep. Var. Bandwidth(s): 0.1880402
+                        married     female nonwhite     educ    exper   tenure
+Exp. Var. Bandwidth(s):    0.25 0.03045943     0.25 1.473311 4.371435 12.51481
+
 Bandwidth Type: Fixed
-Residual standard error: 0.1567501
-R-squared: 0.4457549
+Log Likelihood: -111.7674
 
 Continuous Kernel Type: Second-Order Gaussian
 No. Continuous Explanatory Vars.: 3
+No. Continuous Dependent Vars.: 1
 
 Unordered Categorical Kernel Type: Aitchison and Aitken
 No. Unordered Categorical Explanatory Vars.: 3

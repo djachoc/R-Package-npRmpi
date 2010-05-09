@@ -56,6 +56,7 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 +                               educ+
 +                               exper+
 +                               tenure,
++                               bwmethod="cv.ls",
 +                               nmulti=1,
 +                               data=wage1),
 +               caller.execute=TRUE)
@@ -65,19 +66,19 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 Conditional density data (526 observations, 7 variable(s))
 (1 dependent variable(s), and 6 explanatory variable(s))
 
-Bandwidth Selection Method: Maximum Likelihood Cross-Validation
+Bandwidth Selection Method: Least Squares Cross-Validation
 Formula: lwage ~ married + female + nonwhite + educ + exper + tenure
 Bandwidth Type: Fixed
-Objective Function Value: 0.5072355 (achieved on multistart 1)
+Objective Function Value: -3.586283e+13 (achieved on multistart 1)
 
-Exp. Var. Name: married  Bandwidth: 0.25         Lambda Max: 0.5      
-Exp. Var. Name: female   Bandwidth: 0.03045943   Lambda Max: 0.5      
-Exp. Var. Name: nonwhite Bandwidth: 0.25         Lambda Max: 0.5      
-Exp. Var. Name: educ     Bandwidth: 1.473311   Scale Factor: 2.174668 
-Exp. Var. Name: exper    Bandwidth: 4.371435   Scale Factor: 0.7048525
-Exp. Var. Name: tenure   Bandwidth: 12.51481   Scale Factor: 5.277821  
+Exp. Var. Name: married  Bandwidth: 0.3260366   Lambda Max: 0.5     
+Exp. Var. Name: female   Bandwidth: 0.2399864   Lambda Max: 0.5     
+Exp. Var. Name: nonwhite Bandwidth: 0.3194618   Lambda Max: 0.5     
+Exp. Var. Name: educ     Bandwidth: 3.451477  Scale Factor: 5.094524
+Exp. Var. Name: exper    Bandwidth: 47052799  Scale Factor: 7586819 
+Exp. Var. Name: tenure   Bandwidth: 15.61908  Scale Factor: 6.586976 
 
-Dep. Var. Name: lwage    Bandwidth: 0.1880402 Scale Factor: 0.7741754
+Dep. Var. Name: lwage    Bandwidth: 2.026627e-16 Scale Factor: 8.343775e-16
 
 Continuous Kernel Type: Second-Order Gaussian
 No. Continuous Explanatory Vars.: 3
@@ -93,20 +94,22 @@ No. Unordered Categorical Explanatory Vars.: 3
 > t2 <- Sys.time()
 > 
 > as.numeric((t2-t1),units="secs")
-[1] 34.17787
+[1] 631.8412
 > 
 > summary(model)
 
 Conditional Density Data: 526 training points, in 7 variable(s)
 (1 dependent variable(s), and 6 explanatory variable(s))
 
-                            lwage
-Dep. Var. Bandwidth(s): 0.1880402
-                        married     female nonwhite     educ    exper   tenure
-Exp. Var. Bandwidth(s):    0.25 0.03045943     0.25 1.473311 4.371435 12.51481
+                               lwage
+Dep. Var. Bandwidth(s): 2.026627e-16
+                          married    female  nonwhite     educ    exper
+Exp. Var. Bandwidth(s): 0.3260366 0.2399864 0.3194618 3.451477 47052799
+                          tenure
+Exp. Var. Bandwidth(s): 15.61908
 
 Bandwidth Type: Fixed
-Log Likelihood: -111.7674
+Log Likelihood: 16371.64
 
 Continuous Kernel Type: Second-Order Gaussian
 No. Continuous Explanatory Vars.: 3
