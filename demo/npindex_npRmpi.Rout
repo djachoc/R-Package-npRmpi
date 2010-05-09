@@ -57,15 +57,10 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > 
 > ## A single index model example
 > 
-> t1 <- Sys.time()
-> 
-> mpi.bcast.cmd(bw <- npindexbw(formula=y~x1+x2),
-+               caller.execute=TRUE)
-> 
-> t2 <- Sys.time()
-> 
-> as.numeric((t2-t1),units="secs")
-[1] 4.06673
+> system.time(mpi.bcast.cmd(bw <- npindexbw(formula=y~x1+x2),
++                           caller.execute=TRUE))
+   user  system elapsed 
+  3.680   0.066   3.862 
 > 
 > summary(bw)
 

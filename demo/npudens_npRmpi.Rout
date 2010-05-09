@@ -48,17 +48,12 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > x <- rnorm(2500)
 > mpi.bcast.Robj2slave(x)
 > 
-> t1 <- Sys.time()
-> 
 > ## A simple example with likelihood cross-validation
 > 
-> mpi.bcast.cmd(bw <- npudensbw(~x),
-+               caller.execute=TRUE)
-> 
-> t2 <- Sys.time()
-> 
-> as.numeric((t2-t1),units="secs")
-[1] 16.00871
+> system.time(mpi.bcast.cmd(bw <- npudensbw(~x),
++                           caller.execute=TRUE))
+   user  system elapsed 
+ 14.743   0.843  15.938 
 > 
 > summary(bw)
 

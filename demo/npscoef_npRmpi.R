@@ -33,14 +33,8 @@ mpi.bcast.Robj2slave(y)
 
 ## A smooth coefficient model example
 
-t1 <- Sys.time()
-
-mpi.bcast.cmd(bw <- npscoefbw(y~x|z),
-              caller.execute=TRUE)
-
-t2 <- Sys.time()
-
-as.numeric((t2-t1),units="secs")
+system.time(mpi.bcast.cmd(bw <- npscoefbw(y~x|z),
+                          caller.execute=TRUE))
 
 summary(bw)
 

@@ -24,16 +24,10 @@ set.seed(42)
 x <- rnorm(2500)
 mpi.bcast.Robj2slave(x)
 
-t1 <- Sys.time()
-
 ## A simple example with likelihood cross-validation
 
-mpi.bcast.cmd(bw <- npudensbw(~x),
-              caller.execute=TRUE)
-
-t2 <- Sys.time()
-
-as.numeric((t2-t1),units="secs")
+system.time(mpi.bcast.cmd(bw <- npudensbw(~x),
+                          caller.execute=TRUE))
 
 summary(bw)
 

@@ -22,30 +22,24 @@ mpi.bcast.cmd(options(np.messages=FALSE),
 data(wage1)
 mpi.bcast.Robj2slave(wage1)
 
-t1 <- Sys.time()
-
 ## A regression example (local constant)
 
-mpi.bcast.cmd(bw <- npregbw(lwage~married+
-                            female+
-                            nonwhite+                
-                            educ+
-                            exper+
-                            tenure,
-                            regtype="lc",
-                            bwmethod="cv.aic",
-                            nmulti=1,
-                            data=wage1),
-              caller.execute=TRUE)
+system.time(mpi.bcast.cmd(bw <- npregbw(lwage~married+
+                                        female+
+                                        nonwhite+                
+                                        educ+
+                                        exper+
+                                        tenure,
+                                        regtype="lc",
+                                        bwmethod="cv.aic",
+                                        nmulti=1,
+                                        data=wage1),
+                          caller.execute=TRUE))
 
 summary(bw)
 
 mpi.bcast.cmd(model <- npreg(bws=bw),
               caller.execute=TRUE)
-
-t2 <- Sys.time()
-
-as.numeric((t2-t1),units="secs")
 
 summary(model)
 

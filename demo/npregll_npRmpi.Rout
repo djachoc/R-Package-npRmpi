@@ -46,21 +46,21 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > data(wage1)
 > mpi.bcast.Robj2slave(wage1)
 > 
-> t1 <- Sys.time()
-> 
 > ## A regression example (local linear)
 > 
-> mpi.bcast.cmd(bw <- npregbw(lwage~married+
-+                             female+
-+                             nonwhite+                
-+                             educ+
-+                             exper+
-+                             tenure,
-+                             regtype="ll",
-+                             bwmethod="cv.aic",
-+                             nmulti=1,
-+                             data=wage1),
-+               caller.execute=TRUE)
+> system.time(mpi.bcast.cmd(bw <- npregbw(lwage~married+
++                                         female+
++                                         nonwhite+                
++                                         educ+
++                                         exper+
++                                         tenure,
++                                         regtype="ll",
++                                         bwmethod="cv.aic",
++                                         nmulti=1,
++                                         data=wage1),
++                           caller.execute=TRUE))
+   user  system elapsed 
+ 29.558   0.213  30.486 
 > 
 > summary(bw)
 
@@ -88,11 +88,6 @@ No. Unordered Categorical Explanatory Vars.: 3
 > 
 > mpi.bcast.cmd(model <- npreg(bws=bw),
 +               caller.execute=TRUE)
-> 
-> t2 <- Sys.time()
-> 
-> as.numeric((t2-t1),units="secs")
-[1] 34.46975
 > 
 > summary(model)
 

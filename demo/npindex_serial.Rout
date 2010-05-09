@@ -39,14 +39,9 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > 
 > ## A single index model example
 > 
-> t1 <- Sys.time()
-> 
-> bw <- npindexbw(formula=y~x1+x2)
-> 
-> t2 <- Sys.time()
-> 
-> as.numeric((t2-t1),units="secs")
-[1] 7.044834
+> system.time(bw <- npindexbw(formula=y~x1+x2))
+   user  system elapsed 
+  6.930   0.009   6.945 
 > 
 > summary(bw)
 
@@ -87,4 +82,4 @@ No. Continuous Explanatory Vars.: 1
 > 
 > proc.time()
    user  system elapsed 
-  7.513   0.053   7.618 
+  7.492   0.043   7.536 

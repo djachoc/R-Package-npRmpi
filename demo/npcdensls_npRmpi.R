@@ -22,29 +22,23 @@ mpi.bcast.cmd(options(np.messages=FALSE),
 data(wage1)
 mpi.bcast.Robj2slave(wage1)
 
-t1 <- Sys.time()
-
 ## A conditional density estimation example. 
 
-mpi.bcast.cmd(bw <- npcdensbw(lwage~married+
-                              female+
-                              nonwhite+                
-                              educ+
-                              exper+
-                              tenure,
-                              bwmethod="cv.ls",
-                              nmulti=1,
-                              data=wage1),
-              caller.execute=TRUE)
+system.time(mpi.bcast.cmd(bw <- npcdensbw(lwage~married+
+                                          female+
+                                          nonwhite+                
+                                          educ+
+                                          exper+
+                                          tenure,
+                                          bwmethod="cv.ls",
+                                          nmulti=1,
+                                          data=wage1),
+                          caller.execute=TRUE))
 
 summary(bw)
 
 mpi.bcast.cmd(model <- npcdens(bws=bw),
               caller.execute=TRUE)
-
-t2 <- Sys.time()
-
-as.numeric((t2-t1),units="secs")
 
 summary(model)
 

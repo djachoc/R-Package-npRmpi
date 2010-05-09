@@ -1,6 +1,6 @@
 %% $Id: entropy_np.Rnw,v 1.43 2010/02/18 14:43:37 jracine Exp jracine $
 
-%\VignetteIndexEntry{Entropy-based Inference Using the np Package}
+%\VignetteIndexEntry{Parallel np: Using the npRmpi Package}
 %\VignetteDepends{npRmpi,boot,cubature,MASS}
 %\VignetteKeywords{nonparametric, kernel, entropy, econometrics, qualitative,
 %categorical}
@@ -20,18 +20,18 @@
 
 \author{Jeffrey S.~Racine\\McMaster University}
 
-\title{Parallel np: Using the npRmpi package}
+\title{Parallel np: Using the npRmpi Package}
 
 \Plainauthor{Jeffrey S.~Racine}
 
-\Plaintitle{Parallel np: Using the npRmpi package}
+\Plaintitle{Parallel np: Using the npRmpi Package}
 
 \Abstract{ 
   
   The \pkg{npRmpi} package is a parallel implementation of the
   \proglang{R} (\citet{R}) package \pkg{np} (\citet{np}). The
   underlying \proglang{C} code uses the \proglang{MPI} message passing
-  interface and is MPI2 compliant.
+  interface and is \proglang{MPI2} compliant.
 
 }
 
@@ -65,31 +65,97 @@
 \section{Overview}
 
 A common and understandable complaint often levied against
-nonparametric kernel methods is the amount of time required for
-determining, in particular, data-driven bandwidths for non-trivial
-estimators.
+nonparametric kernel methods is the large amount of computation time
+required for data-driven bandwidth selection when one has a large data
+set. There is a certain irony at play here since nonparametric methods
+are ideally suited to situations involving large data sets, however
+computationally speaking, their analysis may lie beyond the reach of
+many users.  Some background may be in order. Cross-validation
+bandwidth selection methods have run times that are exponential in the
+number of observations (of computational order $n^2$ hence a doubling
+of the sample size will increase run time by a factor of four). 
 
-Some background may be in order. Cross-validation bandwidth selection
-methods have run times that are exponential in the number of
-observations (of computational order $n^2$ hence a doubling of the
-sample size will increase run time by a factor of four). The solution
-adopted in the \pkg{npRmpi} package is to run the code in a parallel
-computing environment. The underlying \proglang{C} code for \pkg{np}
-is \proglang{MPI}-aware (\proglang{MPI} denotes the `message passing interface',
-a popular parallel programming library that is an international
-standard), and we combine the \pkg{R np} and \pkg{Rmpi} packages to
-form the \pkg{npRmpi} package (this requires some modification to some
-of the underlying \pkg{Rmpi} code which is why we cannot simply load
-the \pkg{Rmpi} package itself).
+The solution adopted in the \pkg{npRmpi} package is to run the code in
+a parallel computing environment and exploit the presence of multiple
+processors if available. The underlying \proglang{C} code for \pkg{np}
+is \proglang{MPI}-aware (\proglang{MPI} denotes the `message passing
+interface', a popular parallel programming library that is an
+international standard), and we combine the \pkg{R np} and \pkg{Rmpi}
+packages to form the \pkg{npRmpi} package (this requires some
+modification to some of the underlying \pkg{Rmpi} code which is why we
+cannot simply load the \pkg{Rmpi} package itself).
 
-All of the functions can exploit the presence of multiple processors,
-and runtime is in general linear in the number of processors present
-and two processors will complete the job in one half the amount of
-time that one processor could. Given the availability of commodity
-cluster computers and the presence of multiple cores in desktop and
-laptop machines, leveraging the npRmpi package for large problems may
-present a feasible solution to the computational burden associated
-with nonparametric kernel methods.
+All of the functions in \pkg{np} can exploit the presence of multiple
+processors, and run time is in general linear in the number of
+processors present such that two processors will complete the job in
+one half the amount of time that one processor could. Given the
+availability of commodity cluster computers and the presence of
+multiple cores in desktop and laptop machines, leveraging the
+\pkg{npRmpi} package for large data sets may present a feasible
+solution to the often lengthy computation times associated with
+nonparametric kernel methods.
+
+\section{Differences between np and npRmpi}
+
+There are only a few differences between running code in serial versus
+parallel environments. Typically you run your parallel code in batch
+mode so the first step would be to get your code running in serial
+mode first using \pkg{np} (obviously on a subset of your data). Once
+you have properly functioning code, you will next add some `hooks'
+necessary for \proglang{MPI} to run, and finally you will run the job
+using either \code{mpirun} or, indirectly, via a batch scheduler on
+your cluster.
+
+\subsection*{Installation}
+
+Installation will depend on your hardware and software
+configuration. If you are not familiar with parallel computing you
+must seek local advice. 
+
+That being said, if you have Open \proglang{MPI} and \proglang{MPI2}
+properly installed on your system, installation could be as simple as
+downloading the tarball and, from a command shell, running
+
+\begin{verbatim}
+R CMD INSTALL npRmpi_xxx.tar.gz 
+\end{verbatim}
+
+where xxx is the version number. 
+
+For clusters you may additionally need to provide locations of
+libraries (kindly see your local sysadmin as there are far too many
+variations for me to assist). On a local Linux cluster I use the
+following by way of illustration (we need to set \proglang{MPI}
+library paths and \proglang{MPI} root directories):
+
+\begin{verbatim}
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/sharcnet/openmpi/1.4.1/intel/lib
+export MPI_ROOT=/opt/sharcnet/openmpi/1.4.1/intel 
+R CMD INSTALL npRmpi_xxx.tar.gz
+\end{verbatim}
+
+where again xxx is the version number. 
+
+Please seek local help for further assistance on installing and
+running parallel programs.
+
+\subsection{Parallel MPI Program Batch Execution}
+
+To run the \proglang{MPI} version install the \pkg{npRmpi} program,
+copy the \code{Rprofile} file in \code{npRmpi/inst} to the current
+directory and name it \code{.Rprofile} (or copy it to your home
+directory and again name it \code{.Rprofile}) and then on Open
+\proglang{MPI} systems run something like
+
+\begin{verbatim}
+mpirun -np 2 R CMD BATCH npudens_npRmpi.R
+\end{verbatim}
+
+You can compare run times and any other differences by examining the
+files \verb+npudens_serial.Rout+ and
+\verb+npudens_npRmpi.Rout+. Clearly you could do this with a subset of
+your data for large problems to judge the extent to which the parallel
+code reduces run time.
 
 \bibliography{npRmpi}
 

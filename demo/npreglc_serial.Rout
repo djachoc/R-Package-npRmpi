@@ -31,20 +31,20 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > data(wage1)
 > attach(wage1)
 > 
-> t1 <- Sys.time()
-> 
 > ## A regression example (local constant)
 > 
-> bw <- npregbw(lwage~married+
-+               female+
-+               nonwhite+                
-+               educ+
-+               exper+
-+               tenure,
-+               regtype="lc",
-+               bwmethod="cv.aic",
-+               nmulti=1,
-+               data=wage1)
+> system.time(bw <- npregbw(lwage~married+
++                           female+
++                           nonwhite+                
++                           educ+
++                           exper+
++                           tenure,
++                           regtype="lc",
++                           bwmethod="cv.aic",
++                           nmulti=1,
++                           data=wage1))
+   user  system elapsed 
+ 32.762   0.013  32.815 
 > 
 > summary(bw)
 
@@ -72,11 +72,6 @@ No. Unordered Categorical Explanatory Vars.: 3
 > 
 > model <- npreg(bws=bw)
 > 
-> t2 <- Sys.time()
-> 
-> as.numeric((t2-t1),units="secs")
-[1] 33.14517
-> 
 > summary(model)
 
 Regression Data: 526 training points, in 6 variable(s)
@@ -98,4 +93,4 @@ No. Unordered Categorical Explanatory Vars.: 3
 > 
 > proc.time()
    user  system elapsed 
- 33.359   0.062  33.627 
+ 33.395   0.051  33.479 

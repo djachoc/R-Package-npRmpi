@@ -57,15 +57,10 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > 
 > ## A smooth coefficient model example
 > 
-> t1 <- Sys.time()
-> 
-> mpi.bcast.cmd(bw <- npscoefbw(y~x|z),
-+               caller.execute=TRUE)
-> 
-> t2 <- Sys.time()
-> 
-> as.numeric((t2-t1),units="secs")
-[1] 11.58457
+> system.time(mpi.bcast.cmd(bw <- npscoefbw(y~x|z),
++                           caller.execute=TRUE))
+   user  system elapsed 
+ 11.147   0.154  12.970 
 > 
 > summary(bw)
 

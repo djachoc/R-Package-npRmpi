@@ -17,13 +17,7 @@ y <- x1 - x2 + rnorm(n)
 
 ## A single index model example
 
-t1 <- Sys.time()
-
-bw <- npindexbw(formula=y~x1+x2)
-
-t2 <- Sys.time()
-
-as.numeric((t2-t1),units="secs")
+system.time(bw <- npindexbw(formula=y~x1+x2))
 
 summary(bw)
 

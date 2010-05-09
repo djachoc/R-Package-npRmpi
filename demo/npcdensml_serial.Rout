@@ -30,18 +30,18 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > 
 > data(wage1)
 > 
-> t1 <- Sys.time()
-> 
 > ## A simple example with likelihood cross-validation
 > 
-> bw <- npcdensbw(lwage~married+
-+                 female+
-+                 nonwhite+                
-+                 educ+
-+                 exper+
-+                 tenure,
-+                 nmulti=1,
-+                 data=wage1)
+> system.time(bw <- npcdensbw(lwage~married+
++                             female+
++                             nonwhite+                
++                             educ+
++                             exper+
++                             tenure,
++                             nmulti=1,
++                             data=wage1))
+   user  system elapsed 
+ 91.362   0.027  91.463 
 > 
 > summary(bw)
 
@@ -72,11 +72,6 @@ No. Unordered Categorical Explanatory Vars.: 3
 > 
 > model <- npcdens(bws=bw)
 > 
-> t2 <- Sys.time()
-> 
-> as.numeric((t2-t1),units="secs")
-[1] 92.10869
-> 
 > summary(model)
 
 Conditional Density Data: 526 training points, in 7 variable(s)
@@ -101,4 +96,4 @@ No. Unordered Categorical Explanatory Vars.: 3
 > 
 > proc.time()
    user  system elapsed 
- 91.937   0.139  92.579 
+ 91.884   0.065  92.015 

@@ -11,15 +11,9 @@ options(np.messages=FALSE)
 set.seed(42)
 x <- rnorm(2500)
 
-t1 <- Sys.time()
-
 ## A simple example with likelihood cross-validation
 
-bw <- npudensbw(~x)
-
-t2 <- Sys.time()
-
-as.numeric((t2-t1),units="secs")
+system.time(bw <- npudensbw(~x))
 
 summary(bw)
 

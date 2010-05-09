@@ -39,14 +39,9 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > 
 > ## A smooth coefficient model example
 > 
-> t1 <- Sys.time()
-> 
-> bw <- npscoefbw(y~x|z)
-> 
-> t2 <- Sys.time()
-> 
-> as.numeric((t2-t1),units="secs")
-[1] 12.36271
+> system.time(bw <- npscoefbw(y~x|z))
+   user  system elapsed 
+ 12.317   0.021  12.455 
 > 
 > summary(bw)
 
@@ -86,4 +81,4 @@ No. Continuous Explanatory Vars.: 1
 > 
 > proc.time()
    user  system elapsed 
- 13.985   0.058  14.041 
+ 13.971   0.058  14.140 

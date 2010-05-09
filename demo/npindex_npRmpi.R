@@ -33,14 +33,8 @@ mpi.bcast.Robj2slave(y)
 
 ## A single index model example
 
-t1 <- Sys.time()
-
-mpi.bcast.cmd(bw <- npindexbw(formula=y~x1+x2),
-              caller.execute=TRUE)
-
-t2 <- Sys.time()
-
-as.numeric((t2-t1),units="secs")
+system.time(mpi.bcast.cmd(bw <- npindexbw(formula=y~x1+x2),
+                          caller.execute=TRUE))
 
 summary(bw)
 
