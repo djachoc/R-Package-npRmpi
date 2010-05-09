@@ -1,0 +1,96 @@
+%% $Id: entropy_np.Rnw,v 1.43 2010/02/18 14:43:37 jracine Exp jracine $
+
+%\VignetteIndexEntry{Entropy-based Inference Using the np Package}
+%\VignetteDepends{npRmpi,boot,cubature,MASS}
+%\VignetteKeywords{nonparametric, kernel, entropy, econometrics, qualitative,
+%categorical}
+%\VignettePackage{npRmpi}
+
+\documentclass[nojss]{jss}
+
+%% need no \usepackage{Sweave.sty}
+
+\usepackage{amsmath,amsfonts}
+\usepackage[utf8x]{inputenc} 
+
+\newcommand{\field}[1]{\mathbb{#1}}
+\newcommand{\N}{\field{N}}
+\newcommand{\bbR}{\field{R}} %% Blackboard R
+\newcommand{\bbS}{\field{S}} %% Blackboard S
+
+\author{Jeffrey S.~Racine\\McMaster University}
+
+\title{Parallel np: Using the npRmpi package}
+
+\Plainauthor{Jeffrey S.~Racine}
+
+\Plaintitle{Parallel np: Using the npRmpi package}
+
+\Abstract{ 
+  
+  The \pkg{npRmpi} package is a parallel implementation of the
+  \proglang{R} (\citet{R}) package \pkg{np} (\citet{np}). The
+  underlying \proglang{C} code uses the \proglang{MPI} message passing
+  interface and is MPI2 compliant.
+
+}
+
+\Keywords{nonparametric, semiparametric, kernel smoothing,
+  categorical data.}
+
+\Plainkeywords{Nonparametric, kernel, econometrics, qualitative,
+  categorical}
+
+\Address{Jeffrey S.~Racine\\
+  Department of Economics\\
+  McMaster University\\
+  Hamilton, Ontario, Canada, L8S 4L8\\
+  E-mail: \email{racinej@mcmaster.ca}\\
+  URL: \url{http://www.mcmaster.ca/economics/racine/}\\
+}
+
+\begin{document}
+
+%% Note that you should use the \pkg{}, \proglang{} and \code{} commands.
+
+%% Note - fragile using \label{} in \section{} - must be outside
+
+%% For graphics
+
+\setkeys{Gin}{width=\textwidth}
+
+%% Achim's request for R prompt set invisibly at the beginning of the
+%% paper
+
+\section{Overview}
+
+A common and understandable complaint often levied against
+nonparametric kernel methods is the amount of time required for
+determining, in particular, data-driven bandwidths for non-trivial
+estimators.
+
+Some background may be in order. Cross-validation bandwidth selection
+methods have run times that are exponential in the number of
+observations (of computational order $n^2$ hence a doubling of the
+sample size will increase run time by a factor of four). The solution
+adopted in the \pkg{npRmpi} package is to run the code in a parallel
+computing environment. The underlying \proglang{C} code for \pkg{np}
+is \proglang{MPI}-aware (\proglang{MPI} denotes the `message passing interface',
+a popular parallel programming library that is an international
+standard), and we combine the \pkg{R np} and \pkg{Rmpi} packages to
+form the \pkg{npRmpi} package (this requires some modification to some
+of the underlying \pkg{Rmpi} code which is why we cannot simply load
+the \pkg{Rmpi} package itself).
+
+All of the functions can exploit the presence of multiple processors,
+and runtime is in general linear in the number of processors present
+and two processors will complete the job in one half the amount of
+time that one processor could. Given the availability of commodity
+cluster computers and the presence of multiple cores in desktop and
+laptop machines, leveraging the npRmpi package for large problems may
+present a feasible solution to the computational burden associated
+with nonparametric kernel methods.
+
+\bibliography{npRmpi}
+
+\end{document}

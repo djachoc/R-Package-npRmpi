@@ -3,32 +3,38 @@ The files
     npudens_serial.R
     npudens_npRmpi.R
 
-and other similar files in this directory demonstrate the difference
-between constructing serial versus parallel MPI np programs via a
-simple density bandwidth selection illustration. Kindly study these
-files and the comments in each in order to extend this approach to
-your problem.
+demonstrate the difference between constructing serial versus parallel
+MPI np programs via a simple density bandwidth selection
+illustration. See also other similarly named files in this directory
+for regression and conditional density examples, among others. 
+
+Kindly study these files and the comments in each in order to extend
+this approach to your problem.
 
 Note - the output from the serial and parallel runs ought to be
 _identical_ save for execution time. If they are not there is a
-problem with the underlying code and kindly report this to me
-immediately.
+problem with the underlying code and I would ask you to kindly report
+such things to me immediately along with the offending code.
 
 *** Installation of the parallel MPI package `npRmpi'
 
 Installation will depend on your hardware and software
 configuration. If you are not familiar with parallel computing you
-must seek local advice. That being said, if you have Open MPI and MPI2
-properly installed on your system, installation could be as simple as
-downloading the tarball and, from a command shell, running
+must seek local advice. 
+
+That being said, if you have Open MPI and MPI2 properly installed on
+your system, installation could be as simple as downloading the
+tarball and, from a command shell, running
 
 R CMD INSTALL npRmpi_xxx.tar.gz 
 
-where xxx is the version number. For clusters you may additionally
-need to provide locations of libraries (kindly see your local sysadmin
-as there are far too many variations for me to assist with). On a
-local Linux cluster I use the following by way of illustration (we
-need to set MPI library paths and MPI root directories):
+where xxx is the version number. 
+
+For clusters you may additionally need to provide locations of
+libraries (kindly see your local sysadmin as there are far too many
+variations for me to assist). On a local Linux cluster I use the
+following by way of illustration (we need to set MPI library paths and
+MPI root directories):
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/sharcnet/openmpi/1.4.1/intel/lib
 export MPI_ROOT=/opt/sharcnet/openmpi/1.4.1/intel 
@@ -54,5 +60,7 @@ on Open MPI systems run something like
 
 mpirun -np 2 R CMD BATCH npudens_npRmpi.R
 
-You can compare run times by examining the files npudens_serial.Rout
-and npudens_npRmpi.Rout.
+You can compare run times and any other differences by examining the
+files npudens_serial.Rout and npudens_npRmpi.Rout. Clearly you could
+do this with a subset of your data for large problems to judge the
+extent to which the parallel code reduces run time.
