@@ -19,7 +19,6 @@ system.time(bw <- npregbw(lwage~married+
                           tenure,
                           regtype="ll",
                           bwmethod="cv.aic",
-                          nmulti=1,
                           data=wage1))
             
 summary(bw)

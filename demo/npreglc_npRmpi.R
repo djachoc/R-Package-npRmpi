@@ -32,7 +32,6 @@ system.time(mpi.bcast.cmd(bw <- npregbw(lwage~married+
                                         tenure,
                                         regtype="lc",
                                         bwmethod="cv.aic",
-                                        nmulti=1,
                                         data=wage1),
                           caller.execute=TRUE))
 

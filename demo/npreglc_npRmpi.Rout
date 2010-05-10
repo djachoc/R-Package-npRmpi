@@ -60,7 +60,7 @@ slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2
 +                                         data=wage1),
 +                           caller.execute=TRUE))
    user  system elapsed 
- 41.434   0.040  42.770 
+ 41.416   0.055  44.571 
 > 
 > summary(bw)
 

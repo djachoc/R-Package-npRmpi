@@ -31,7 +31,6 @@ system.time(mpi.bcast.cmd(bw <- npcdensbw(lwage~married+
                                           exper+
                                           tenure,
                                           bwmethod="cv.ls",
-                                          nmulti=1,
                                           data=wage1),
                           caller.execute=TRUE))
 

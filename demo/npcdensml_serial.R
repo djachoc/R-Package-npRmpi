@@ -16,7 +16,6 @@ system.time(bw <- npcdensbw(lwage~married+
                             educ+
                             exper+
                             tenure,
-                            nmulti=1,
                             data=wage1))
 
 summary(bw)
