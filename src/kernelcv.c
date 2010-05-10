@@ -152,7 +152,7 @@ double cv_func_regression_categorical_ls(double *vector_scale_factor){
         vector_Y_extern,
         &vector_scale_factor[1],
         num_categories_extern));
-    } else {
+        } else {
       return(cv_func_regression_categorical_ls_nn(vector_scale_factor));
     }
 }
@@ -673,7 +673,7 @@ double cv_func_regression_categorical_aic_c(double *vector_scale_factor)
     }
 
 /* Compute the AIC_c function */
-    if((BANDWIDTH_reg_extern == BW_FIXED)||(int_ll_extern == LL_LC)){
+/*    if((BANDWIDTH_reg_extern == BW_FIXED)||(int_ll_extern == LL_LC)){
       return(np_kernel_estimate_regression_categorical_ls_aic(
         int_ll_extern,
         RBWM_CVAIC,
@@ -691,7 +691,7 @@ double cv_func_regression_categorical_aic_c(double *vector_scale_factor)
         vector_Y_extern,
         &vector_scale_factor[1],
         num_categories_extern));
-    } else {
+        } else {*/
       return(kernel_estimate_regression_categorical_aic_c(
         int_ll_extern,
         KERNEL_reg_extern,
@@ -708,8 +708,6 @@ double cv_func_regression_categorical_aic_c(double *vector_scale_factor)
         vector_Y_extern,
         &vector_scale_factor[1],
         num_categories_extern));
-    }
+      /*    }*/
 
 }
-
-

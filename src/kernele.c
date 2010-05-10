@@ -11,7 +11,7 @@
 #include "headers.h"
 #include "matrix.h"
 
-#ifdef MPI2
+#ifdef MPI
 
 #include "mpi.h"
 
@@ -153,7 +153,7 @@ double *log_likelihood)
 
 	double log_DBL_MIN = log(DBL_MIN);
 
-	#ifdef MPI2
+	#ifdef MPI
 	double log_likelihood_MPI;
 	int stride = ceil((double) num_obs_eval / (double) iNum_Processors);
 	if(stride < 1) stride = 1;
@@ -197,12 +197,12 @@ double *log_likelihood)
 		lambda,
 		matrix_bandwidth_deriv) == 1)
 	{
-		#ifndef MPI2
+		#ifndef MPI
 		printf("\n** Error: invalid bandwidth.");
 		printf("\nProgram Terminated.\n");
 		exit(EXIT_FAILURE);
 		#endif
-		#ifdef MPI2
+		#ifdef MPI
 		if(my_rank == 0)
 		{
 			printf("\n** Error: invalid bandwidth.");
@@ -222,7 +222,7 @@ double *log_likelihood)
 		&INT_KERNEL_P,
 		&K_INT_KERNEL_P);
 
-	#ifndef MPI2
+	#ifndef MPI
 
 	/* Initialize log likelihood */
 
@@ -419,7 +419,7 @@ double *log_likelihood)
 	}
 	#endif
 
-	#ifdef MPI2
+	#ifdef MPI
 
 	/* Initialize log likelihood */
 
@@ -681,7 +681,7 @@ double *cv)
 	double *p_xj2;
 	double *p_xi2;
 
-	#ifdef MPI2
+	#ifdef MPI
 	double cv_MPI;
 	int stride = ceil((double) num_obs / (double) iNum_Processors);
 	if(stride < 1) stride = 1;
@@ -691,11 +691,11 @@ double *cv)
 
 	lambda = alloc_vecd(num_reg_unordered+num_reg_ordered);
 
-	#ifndef MPI2
+	#ifndef MPI
 	matrix_bandwidth = alloc_matd(num_obs,num_reg_continuous);
 	#endif
 
-	#ifdef MPI2
+	#ifdef MPI
 	matrix_bandwidth = alloc_matd(stride*iNum_Processors,num_reg_continuous);
 	#endif
 
@@ -726,7 +726,7 @@ double *cv)
 		return(1);
 	}
 
-	#ifndef MPI2
+	#ifndef MPI
 
 	*cv = 0.0;
 
@@ -1039,7 +1039,7 @@ double *cv)
 	*cv /= (double) num_obs;
 	#endif
 
-	#ifdef MPI2
+	#ifdef MPI
 
 	cv_MPI = 0.0;
 
@@ -1418,7 +1418,7 @@ double *cv)
 
 	double temp;
 
-	#ifdef MPI2
+	#ifdef MPI
 	double cv_MPI;
 	int stride = ceil((double) num_obs / (double) iNum_Processors);
 	if(stride < 1) stride = 1;
@@ -1458,7 +1458,7 @@ double *cv)
 		return(1);
 	}
 
-	#ifndef MPI2
+	#ifndef MPI
 
 	*cv = 0.0;
 
@@ -1739,7 +1739,7 @@ double *cv)
 	*cv /= (double) num_obs;
 	#endif
 
-	#ifdef MPI2
+	#ifdef MPI
 
 	cv_MPI = 0.0;
 
@@ -2076,7 +2076,7 @@ int itmax)
 	double **matrix_bandwidth = NULL;
 	double **matrix_bandwidth_deriv = NULL;
 
-	#ifdef MPI2
+	#ifdef MPI
 	int stride = ceil((double) num_obs_eval / (double) iNum_Processors);
 	if(stride < 1) stride = 1;
 	#endif
@@ -2119,12 +2119,12 @@ int itmax)
 		lambda,
 		matrix_bandwidth_deriv) == 1)
 	{
-		#ifndef MPI2
+		#ifndef MPI
 		printf("\n** Error: invalid bandwidth.");
 		printf("\nProgram Terminated.\n");
 		exit(EXIT_FAILURE);
 		#endif
-		#ifdef MPI2
+		#ifdef MPI
 		if(my_rank == 0)
 		{
 			printf("\n** Error: invalid bandwidth.");
@@ -2138,7 +2138,7 @@ int itmax)
 
 	/* Conduct the estimation */
 
-	#ifndef MPI2
+	#ifndef MPI
 
 	if(BANDWIDTH_den == 0)
 	{
@@ -2256,7 +2256,7 @@ int itmax)
 	}
 	#endif
 
-	#ifdef MPI2
+	#ifdef MPI
 
 	if(BANDWIDTH_den == 0)
 	{
@@ -2474,7 +2474,7 @@ double *SIGN)
 
 	int num_reg_cat_cont;
 
-	#ifdef MPI2
+	#ifdef MPI
 	int stride = ceil((double) num_obs_eval / (double) iNum_Processors);
 	if(stride < 1) stride = 1;
 	#endif
@@ -2541,12 +2541,12 @@ double *SIGN)
 		lambda,
 		matrix_bandwidth_deriv) == 1)
 	{
-		#ifndef MPI2
+		#ifndef MPI
 		printf("\n** Error: invalid bandwidth.");
 		printf("\nProgram Terminated.\n");
 		exit(EXIT_FAILURE);
 		#endif
-		#ifdef MPI2
+		#ifdef MPI
 		if(my_rank == 0)
 		{
 			printf("\n** Error: invalid bandwidth.");
@@ -2558,7 +2558,7 @@ double *SIGN)
 		#endif
 	}
 
-	#ifndef MPI2
+	#ifndef MPI
 
 	if(int_ll == 0)
 	{
@@ -3044,7 +3044,8 @@ double *SIGN)
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+					XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+
 				}
 
 				DELTA =  mat_mul( XTKXINV, XTKY, DELTA);
@@ -3256,7 +3257,7 @@ double *SIGN)
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+					XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 				}
 
@@ -3471,7 +3472,7 @@ double *SIGN)
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+					XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 				}
 
@@ -3528,7 +3529,7 @@ double *SIGN)
 	}
 	#endif
 
-	#ifdef MPI2
+	#ifdef MPI
 
 	if(int_ll == 0)
 	{
@@ -4007,7 +4008,7 @@ double *SIGN)
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+					XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 				}
 
@@ -4220,7 +4221,7 @@ double *SIGN)
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+					XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 				}
 
@@ -4435,7 +4436,7 @@ double *SIGN)
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+					XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 				}
 
@@ -4574,7 +4575,8 @@ double *mean)
 	int k;
 	int l;
 
-	double epsilon;
+	const double epsilon = 1.0/num_obs;
+  double nepsilon;
 
 	double prod_kernel;
 
@@ -4597,7 +4599,7 @@ double *mean)
 
 	int num_reg_cat_cont;
 
-	#ifdef MPI2
+	#ifdef MPI
 	int stride = ceil((double) num_obs / (double) iNum_Processors);
 	if(stride < 1) stride = 1;
 	#endif
@@ -4616,7 +4618,7 @@ double *mean)
 	lambda = alloc_vecd(num_reg_unordered+num_reg_ordered);
 	matrix_bandwidth = alloc_matd(num_obs,num_reg_continuous);
 
-	#ifndef MPI2
+	#ifndef MPI
 
 	/* Conduct the estimation */
 
@@ -5034,8 +5036,6 @@ double *mean)
 
 					/* Add ridge factor - epsilon goes from zero to one/n*/
 
-					epsilon = 1.0/(double)num_obs;
-
 					for(k=0; k < num_reg_cat_cont + 1; k++)
 					{
 						XTKX[k][k] += epsilon;
@@ -5047,14 +5047,14 @@ double *mean)
 					{
 						for(k=0; k < num_reg_cat_cont + 1; k++)
 						{
-							epsilon += 1.0/(double) num_obs;
 							XTKX[k][k] += epsilon;
+							nepsilon += epsilon;
 						}
 					} while (fabs(mat_det(XTKX)) == 0.0);
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+					XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 				}
 
@@ -5209,8 +5209,6 @@ double *mean)
 
 					/* Add ridge factor - epsilon goes from zero to one/n*/
 
-					epsilon = 1.0/(double)num_obs;
-
 					for(k=0; k < num_reg_cat_cont + 1; k++)
 					{
 						XTKX[k][k] += epsilon;
@@ -5222,14 +5220,14 @@ double *mean)
 					{
 						for(k=0; k < num_reg_cat_cont + 1; k++)
 						{
-							epsilon += 1.0/(double) num_obs;
 							XTKX[k][k] += epsilon;
+							nepsilon += epsilon;
 						}
 					} while (fabs(mat_det(XTKX)) == 0.0);
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+					XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 				}
 
@@ -5384,8 +5382,6 @@ double *mean)
 
 					/* Add ridge factor - epsilon goes from zero to one/n*/
 
-					epsilon = 1.0/(double)num_obs;
-
 					for(k=0; k < num_reg_cat_cont + 1; k++)
 					{
 						XTKX[k][k] += epsilon;
@@ -5397,14 +5393,14 @@ double *mean)
 					{
 						for(k=0; k < num_reg_cat_cont + 1; k++)
 						{
-							epsilon += 1.0/(double) num_obs;
 							XTKX[k][k] += epsilon;
+							nepsilon += epsilon;
 						}
 					} while (fabs(mat_det(XTKX)) == 0.0);
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+					XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 				}
 
@@ -5423,7 +5419,7 @@ double *mean)
 	}
 	#endif
 
-	#ifdef MPI2
+	#ifdef MPI
 
 	/* Conduct the estimation - MPI-enables */
 
@@ -5843,7 +5839,6 @@ double *mean)
 
 					/* Add ridge factor - epsilon goes from zero to one/n*/
 
-					epsilon = 1.0/(double)num_obs;
 
 					for(k=0; k < num_reg_cat_cont + 1; k++)
 					{
@@ -5856,14 +5851,14 @@ double *mean)
 					{
 						for(k=0; k < num_reg_cat_cont + 1; k++)
 						{
-							epsilon += 1.0/(double) num_obs;
 							XTKX[k][k] += epsilon;
+							nepsilon += epsilon;
 						}
 					} while (fabs(mat_det(XTKX)) == 0.0);
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+					XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 				}
 
@@ -6018,8 +6013,6 @@ double *mean)
 
 					/* Add ridge factor - epsilon goes from zero to one/n*/
 
-					epsilon = 1.0/(double)num_obs;
-
 					for(k=0; k < num_reg_cat_cont + 1; k++)
 					{
 						XTKX[k][k] += epsilon;
@@ -6031,14 +6024,14 @@ double *mean)
 					{
 						for(k=0; k < num_reg_cat_cont + 1; k++)
 						{
-							epsilon += 1.0/(double) num_obs;
 							XTKX[k][k] += epsilon;
+							nepsilon += epsilon;
 						}
 					} while (fabs(mat_det(XTKX)) == 0.0);
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+					XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 				}
 
@@ -6193,8 +6186,6 @@ double *mean)
 
 					/* Add ridge factor - epsilon goes from zero to one/n*/
 
-					epsilon = 1.0/(double)num_obs;
-
 					for(k=0; k < num_reg_cat_cont + 1; k++)
 					{
 						XTKX[k][k] += epsilon;
@@ -6206,14 +6197,14 @@ double *mean)
 					{
 						for(k=0; k < num_reg_cat_cont + 1; k++)
 						{
-							epsilon += 1.0/(double) num_obs;
 							XTKX[k][k] += epsilon;
+							nepsilon += epsilon;
 						}
 					} while (fabs(mat_det(XTKX)) == 0.0);
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+					XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 				}
 
@@ -6334,7 +6325,7 @@ double **gradient)
 
 	int num_reg_cat_cont;
 
-	#ifdef MPI2
+	#ifdef MPI
 	int stride = ceil((double) num_obs_eval / (double) iNum_Processors);
 	if(stride < 1) stride = 1;
 	#endif
@@ -6348,7 +6339,7 @@ double **gradient)
 		num_reg_cat_cont = num_reg_continuous;
 	}
 
-	#ifndef MPI2
+	#ifndef MPI
 
 	if(int_compute_gradient == 1)
 	{
@@ -6878,7 +6869,7 @@ double **gradient)
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-							XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+              XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -7056,7 +7047,7 @@ double **gradient)
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-							XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+              XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -7236,7 +7227,7 @@ double **gradient)
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-							XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+              XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -7617,7 +7608,7 @@ double **gradient)
 
 						XTKXINV = mat_inv( XTKX, XTKXINV );
 						/* Add epsilon times local constant estimator to first element of XTKY */
-						XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+            XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 					}
 
@@ -7985,7 +7976,7 @@ double **gradient)
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-							XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+							XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -8158,7 +8149,7 @@ double **gradient)
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-							XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+							XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -8331,7 +8322,7 @@ double **gradient)
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-							XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+							XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -8539,7 +8530,7 @@ double **gradient)
 
 						XTKXINV = mat_inv( XTKX, XTKXINV );
 						/* Add epsilon times local constant estimator to first element of XTKY */
-						XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+						XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 					}
 
@@ -8561,7 +8552,7 @@ double **gradient)
 	}
 	#endif
 
-	#ifdef MPI2
+	#ifdef MPI
 
 	if(int_compute_gradient == 1)
 	{
@@ -9078,7 +9069,7 @@ double **gradient)
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-							XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+							XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -9255,7 +9246,7 @@ double **gradient)
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-							XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+							XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -9433,7 +9424,7 @@ double **gradient)
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-							XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+							XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -9805,7 +9796,7 @@ double **gradient)
 
 						XTKXINV = mat_inv( XTKX, XTKXINV );
 						/* Add epsilon times local constant estimator to first element of XTKY */
-						XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+						XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 					}
 
@@ -10167,7 +10158,7 @@ double **gradient)
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-							XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+							XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -10340,7 +10331,7 @@ double **gradient)
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-							XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+							XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -10513,7 +10504,7 @@ double **gradient)
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-							XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+							XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -10719,7 +10710,7 @@ double **gradient)
 
 						XTKXINV = mat_inv( XTKX, XTKXINV );
 						/* Add epsilon times local constant estimator to first element of XTKY */
-						XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+						XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 					}
 
@@ -10835,7 +10826,7 @@ double *log_likelihood)
 
 	/* Allocate memory for objects */
 
-	#ifdef MPI2
+	#ifdef MPI
 	double log_likelihood_MPI;
 	int stride = ceil((double) num_obs_eval / (double) iNum_Processors);
 	if(stride < 1) stride = 1;
@@ -10876,12 +10867,12 @@ double *log_likelihood)
 		matrix_bandwidth_reg,
 		lambda) == 1)
 	{
-		#ifndef MPI2
+		#ifndef MPI
 		printf("\n** Error: invalid bandwidth.");
 		printf("\nProgram Terminated.\n");
 		exit(EXIT_FAILURE);
 		#endif
-		#ifdef MPI2
+		#ifdef MPI
 		if(my_rank == 0)
 		{
 			printf("\n** Error: invalid bandwidth.");
@@ -10901,7 +10892,7 @@ double *log_likelihood)
 		&INT_KERNEL_P,
 		&K_INT_KERNEL_P);
 
-	#ifndef MPI2
+	#ifndef MPI
 
 	/* Initialize log likelihood */
 
@@ -11179,7 +11170,7 @@ double *log_likelihood)
 	}
 	#endif
 
-	#ifdef MPI2
+	#ifdef MPI
 
 	/* Initialize log likelihood */
 
@@ -11537,7 +11528,7 @@ int itmax)
 	double **matrix_bandwidth_var = NULL;
 	double **matrix_bandwidth_reg = NULL;
 
-	#ifdef MPI2
+	#ifdef MPI
 	int stride = ceil((double) num_obs_eval / (double) iNum_Processors);
 	if(stride < 1) stride = 1;
 	#endif
@@ -11579,12 +11570,12 @@ int itmax)
 		matrix_bandwidth_reg,
 		lambda) == 1)
 	{
-		#ifndef MPI2
+		#ifndef MPI
 		printf("\n** Error: invalid bandwidth.");
 		printf("\nProgram Terminated.\n");
 		exit(EXIT_FAILURE);
 		#endif
-		#ifdef MPI2
+		#ifdef MPI
 		if(my_rank == 0)
 		{
 			printf("\n** Error: invalid bandwidth.");
@@ -11596,7 +11587,7 @@ int itmax)
 		#endif
 	}
 
-	#ifndef MPI2
+	#ifndef MPI
 
 	/* Conduct the estimation */
 
@@ -11796,7 +11787,7 @@ int itmax)
 	}
 	#endif
 
-	#ifdef MPI2
+	#ifdef MPI
 
 	/* Conduct the estimation */
 
@@ -12073,7 +12064,7 @@ int itmax)
 	double **matrix_bandwidth_var = NULL;
 	double **matrix_bandwidth_reg = NULL;
 
-	#ifdef MPI2
+	#ifdef MPI
 	int stride = ceil((double) num_obs_eval / (double) iNum_Processors);
 	if(stride < 1) stride = 1;
 	#endif
@@ -12121,7 +12112,7 @@ int itmax)
 		return(1);
 	}
 
-	#ifndef MPI2
+	#ifndef MPI
 
   /* First stab could be brute force copy no saving */
 
@@ -12326,7 +12317,7 @@ int itmax)
 	}
 	#endif
 
-	#ifdef MPI2
+	#ifdef MPI
 
 	/* Conduct the estimation */
 
@@ -13098,7 +13089,7 @@ double *log_likelihood)
 
 	double log_DBL_MIN = log(DBL_MIN);
 
-	#ifdef MPI2
+	#ifdef MPI
 	double log_likelihood_MPI;
 	int stride = ceil((double) num_obs_eval / (double) iNum_Processors);
 	if(stride < 1) stride = 1;
@@ -13145,12 +13136,12 @@ double *log_likelihood)
 		matrix_bandwidth_reg,
 		lambda) == 1)
 	{
-		#ifndef MPI2
+		#ifndef MPI
 		printf("\n** Error: invalid bandwidth.");
 		printf("\nProgram Terminated.\n");
 		exit(EXIT_FAILURE);
 		#endif
-		#ifdef MPI2
+		#ifdef MPI
 		if(my_rank == 0)
 		{
 			printf("\n** Error: invalid bandwidth.");
@@ -13172,7 +13163,7 @@ double *log_likelihood)
 		&INT_KERNEL_PM_HALF,
 		&DIFF_KER_PPM);
 
-	#ifndef MPI2
+	#ifndef MPI
 
 	/* Initialize log likelihood */
 
@@ -13611,7 +13602,7 @@ double *log_likelihood)
 	}
 	#endif
 
-	#ifdef MPI2
+	#ifdef MPI
 
 	/* Initialize log likelihood */
 
@@ -14137,12 +14128,12 @@ double **pdf_deriv_stderr)
 	double *pointer_me;
 	double *pointer_g;
 
-	#ifdef MPI2
+	#ifdef MPI
 	int stride = ceil((double) num_obs_eval / (double) iNum_Processors);
 	if(stride < 1) stride = 1;
 	#endif
 
-	#ifndef MPI2
+	#ifndef MPI
 
 	pdf_eval = alloc_vecd(num_obs_eval);
 	pdf_stderr = alloc_vecd(num_obs_eval);
@@ -14350,7 +14341,7 @@ double **pdf_deriv_stderr)
 	}
 	#endif
 
-	#ifdef MPI2
+	#ifdef MPI
 
 	pdf_eval = alloc_vecd(stride*iNum_Processors);
 	pdf_stderr = alloc_vecd(stride*iNum_Processors);
@@ -14656,7 +14647,7 @@ int itmax)
 	/* Difference between int K(z)^p and int K(z-.5)K(z+.5) */
 	double DIFF_KER_PPM;
 
-	#ifdef MPI2
+	#ifdef MPI
 	int stride = ceil((double) num_obs_eval / (double) iNum_Processors);
 	if(stride < 1) stride = 1;
 	#endif
@@ -14702,12 +14693,12 @@ int itmax)
 		matrix_bandwidth_reg,
 		lambda) == 1)
 	{
-		#ifndef MPI2
+		#ifndef MPI
 		printf("\n** Error: invalid bandwidth.");
 		printf("\nProgram Terminated.\n");
 		exit(EXIT_FAILURE);
 		#endif
-		#ifdef MPI2
+		#ifdef MPI
 		if(my_rank == 0)
 		{
 			printf("\n** Error: invalid bandwidth.");
@@ -14729,7 +14720,7 @@ int itmax)
 		&INT_KERNEL_PM_HALF,
 		&DIFF_KER_PPM);
 
-	#ifndef MPI2
+	#ifndef MPI
 
 	/* Conduct the estimation */
 
@@ -15095,7 +15086,7 @@ int itmax)
 	}
 	#endif
 
-	#ifdef MPI2
+	#ifdef MPI
 
 	/* Conduct the estimation */
 
@@ -15547,12 +15538,12 @@ int itmax)
 	double *pointer_me;
 	double *pointer_g;
 
-	#ifdef MPI2
+	#ifdef MPI
 	int stride = ceil((double) num_obs_eval / (double) iNum_Processors);
 	if(stride < 1) stride = 1;
 	#endif
 
-	#ifndef MPI2
+	#ifndef MPI
 
 	cdf_eval = alloc_vecd(num_obs_eval);
 	cdf_stderr = alloc_vecd(num_obs_eval);
@@ -15764,7 +15755,7 @@ int itmax)
 	}
 	#endif
 
-	#ifdef MPI2
+	#ifdef MPI
 
 	cdf_eval = alloc_vecd(stride*iNum_Processors);
 	cdf_stderr = alloc_vecd(stride*iNum_Processors);
@@ -16042,7 +16033,7 @@ double *cv)
 
 	/* Allocate memory for objects */
 
-	#ifdef MPI2
+	#ifdef MPI
 	double cv_MPI;
 	int stride = ceil((double) num_obs / (double) iNum_Processors);
 	if(stride < 1) stride = 1;
@@ -16081,7 +16072,7 @@ double *cv)
 		return(1);
 	}
 
-	#ifndef MPI2
+	#ifndef MPI
 
 	/* Initialize cv function */
 
@@ -16291,7 +16282,7 @@ double *cv)
 	}
 	#endif
 
-	#ifdef MPI2
+	#ifdef MPI
 
 	/* Initialize cv function */
 
@@ -16572,7 +16563,7 @@ double *cv)
 	double *pointer_k_x_kj;
 	double *pointer_k_convol_y;
 
-	#ifdef MPI2
+	#ifdef MPI
 	double cv_MPI;
 	int stride = ceil((double) num_obs / (double) iNum_Processors);
 	if(stride < 1) stride = 1;
@@ -16612,7 +16603,7 @@ double *cv)
 		return(1);
 	}
 
-	#ifndef MPI2
+	#ifndef MPI
 
 	/* Initialize cv function */
 
@@ -17177,7 +17168,7 @@ double *cv)
 	}
 	#endif
 
-	#ifdef MPI2
+	#ifdef MPI
 
 	/* Initialize cv function */
 
@@ -17812,7 +17803,7 @@ double zero)
 	double **matrix_bandwidth_var = NULL;
 	double **matrix_bandwidth_reg = NULL;
 
-	#ifdef MPI2
+	#ifdef MPI
 	int stride = ceil((double) num_obs_eval / (double) iNum_Processors);
 	if(stride < 1) stride = 1;
 	#endif
@@ -17855,12 +17846,12 @@ double zero)
 			matrix_bandwidth_reg,
 			lambda) == 1)
 		{
-			#ifndef MPI2
+			#ifndef MPI
 			printf("\n** Error: invalid bandwidth.");
 			printf("\nProgram Terminated.\n");
 			exit(EXIT_FAILURE);
 			#endif
-			#ifdef MPI2
+			#ifdef MPI
 			if(my_rank == 0)
 			{
 				printf("\n** Error: invalid bandwidth.");
@@ -17874,7 +17865,7 @@ double zero)
 
 	}
 
-	#ifndef MPI2
+	#ifndef MPI
 
 	matrix_y = alloc_matd(2,2);
 
@@ -18102,7 +18093,7 @@ double zero)
 	free_mat(matrix_y, 2);
 	#endif
 
-	#ifdef MPI2
+	#ifdef MPI
 
 	matrix_y = alloc_matd(2,2);
 
@@ -18402,7 +18393,8 @@ int *num_categories)
 	int k;
 	int l;
 
-	double epsilon;
+	const double epsilon = 1.0/num_obs;
+  double nepsilon;
 
 	double prod_kernel;
 
@@ -18431,13 +18423,13 @@ int *num_categories)
 	double aic_c = 0.0;
 	double sigmasq = 0.0;
 
-	#ifdef MPI2
+	#ifdef MPI
 	double trace_H_MPI = 0.0;
 	int stride = ceil((double) num_obs / (double) iNum_Processors);
 	if(stride < 1) stride = 1;
 	mean = alloc_vecd(stride*iNum_Processors);
 	#endif
-	#ifndef MPI2
+	#ifndef MPI
 	mean = alloc_vecd(num_obs);
 	#endif
 
@@ -18455,7 +18447,7 @@ int *num_categories)
 	lambda = alloc_vecd(num_reg_unordered+num_reg_ordered);
 	matrix_bandwidth = alloc_matd(num_obs,num_reg_continuous);
 
-	#ifndef MPI2
+	#ifndef MPI
 
 	/* Conduct the estimation */
 
@@ -18877,8 +18869,6 @@ int *num_categories)
 
 					/* Add ridge factor - epsilon goes from zero to one/n*/
 
-					epsilon = 1.0/(double)num_obs;
-
 					for(k=0; k < num_reg_cat_cont + 1; k++)
 					{
 						XTKX[k][k] += epsilon;
@@ -18890,14 +18880,14 @@ int *num_categories)
 					{
 						for(k=0; k < num_reg_cat_cont + 1; k++)
 						{
-							epsilon += 1.0/(double) num_obs;
 							XTKX[k][k] += epsilon;
+							nepsilon += epsilon;
 						}
 					} while (fabs(mat_det(XTKX)) == 0.0);
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+					XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 				}
 
@@ -19054,8 +19044,6 @@ int *num_categories)
 
 					/* Add ridge factor - epsilon goes from zero to one/n*/
 
-					epsilon = 1.0/(double)num_obs;
-
 					for(k=0; k < num_reg_cat_cont + 1; k++)
 					{
 						XTKX[k][k] += epsilon;
@@ -19067,14 +19055,14 @@ int *num_categories)
 					{
 						for(k=0; k < num_reg_cat_cont + 1; k++)
 						{
-							epsilon += 1.0/(double) num_obs;
 							XTKX[k][k] += epsilon;
+							nepsilon += epsilon;
 						}
 					} while (fabs(mat_det(XTKX)) == 0.0);
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+					XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 				}
 
@@ -19231,8 +19219,6 @@ int *num_categories)
 
 					/* Add ridge factor - epsilon goes from zero to one/n*/
 
-					epsilon = 1.0/(double)num_obs;
-
 					for(k=0; k < num_reg_cat_cont + 1; k++)
 					{
 						XTKX[k][k] += epsilon;
@@ -19244,14 +19230,14 @@ int *num_categories)
 					{
 						for(k=0; k < num_reg_cat_cont + 1; k++)
 						{
-							epsilon += 1.0/(double) num_obs;
 							XTKX[k][k] += epsilon;
+							nepsilon += epsilon;
 						}
 					} while (fabs(mat_det(XTKX)) == 0.0);
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+					XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 				}
 
@@ -19271,7 +19257,7 @@ int *num_categories)
 	}
 	#endif
 
-	#ifdef MPI2
+	#ifdef MPI
 
 	/* Conduct the estimation - MPI-enabled */
 
@@ -19695,8 +19681,6 @@ int *num_categories)
 
 					/* Add ridge factor - epsilon goes from zero to one/n*/
 
-					epsilon = 1.0/(double)num_obs;
-
 					for(k=0; k < num_reg_cat_cont + 1; k++)
 					{
 						XTKX[k][k] += epsilon;
@@ -19708,14 +19692,14 @@ int *num_categories)
 					{
 						for(k=0; k < num_reg_cat_cont + 1; k++)
 						{
-							epsilon += 1.0/(double) num_obs;
 							XTKX[k][k] += epsilon;
+							nepsilon += epsilon;
 						}
 					} while (fabs(mat_det(XTKX)) == 0.0);
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+					XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 				}
 
@@ -19870,8 +19854,6 @@ int *num_categories)
 
 					/* Add ridge factor - epsilon goes from zero to one/n*/
 
-					epsilon = 1.0/(double)num_obs;
-
 					for(k=0; k < num_reg_cat_cont + 1; k++)
 					{
 						XTKX[k][k] += epsilon;
@@ -19883,14 +19865,14 @@ int *num_categories)
 					{
 						for(k=0; k < num_reg_cat_cont + 1; k++)
 						{
-							epsilon += 1.0/(double) num_obs;
 							XTKX[k][k] += epsilon;
+							nepsilon += epsilon;
 						}
 					} while (fabs(mat_det(XTKX)) == 0.0);
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+					XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 				}
 
@@ -20045,8 +20027,6 @@ int *num_categories)
 
 					/* Add ridge factor - epsilon goes from zero to one/n*/
 
-					epsilon = 1.0/(double)num_obs;
-
 					for(k=0; k < num_reg_cat_cont + 1; k++)
 					{
 						XTKX[k][k] += epsilon;
@@ -20058,14 +20038,14 @@ int *num_categories)
 					{
 						for(k=0; k < num_reg_cat_cont + 1; k++)
 						{
-							epsilon += 1.0/(double) num_obs;
 							XTKX[k][k] += epsilon;
+							nepsilon += epsilon;
 						}
 					} while (fabs(mat_det(XTKX)) == 0.0);
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+					XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 				}
 
@@ -20171,7 +20151,7 @@ double *tau)
 	MATRIX  XTKY;
 	MATRIX  DELTA;
 
-	#ifdef MPI2
+	#ifdef MPI
 	int stride = ceil((double) num_obs_train / (double) iNum_Processors);
 	if(stride < 1) stride = 1;
 	#endif
@@ -20183,7 +20163,7 @@ double *tau)
 	XTKY = mat_creat( 2, 1, UNDEFINED );
 	DELTA = mat_creat( 2, 1, UNDEFINED );
 
-	#ifndef MPI2
+	#ifndef MPI
 
 	lambda = alloc_vecd(num_reg_unordered+num_reg_ordered);
 
@@ -20218,12 +20198,12 @@ double *tau)
 		matrix_bandwidth,
 		lambda) == 1)
 	{
-		#ifndef MPI2
+		#ifndef MPI
 		printf("\n** Error: invalid bandwidth.");
 		printf("\nProgram Terminated.\n");
 		exit(EXIT_FAILURE);
 		#endif
-		#ifdef MPI2
+		#ifdef MPI
 		if(my_rank == 0)
 		{
 			printf("\n** Error: invalid bandwidth.");
@@ -20323,7 +20303,7 @@ double *tau)
 
 				XTKXINV = mat_inv( XTKX, XTKXINV );
 				/* Add epsilon times local constant estimator to first element of XTKY */
-				XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+				XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 			}
 
@@ -20449,7 +20429,7 @@ double *tau)
 	}
 	#endif
 
-	#ifdef MPI2
+	#ifdef MPI
 
 	lambda = alloc_vecd(num_reg_unordered+num_reg_ordered);
 
@@ -20572,7 +20552,7 @@ double *tau)
 
 				XTKXINV = mat_inv( XTKX, XTKXINV );
 				/* Add epsilon times local constant estimator to first element of XTKY */
-				XTKY[0][0] += epsilon*XTKY[0][0]/XTKX[0][0];
+				XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 			}
 
 			/*			XTKXINV = mat_inv( XTKX, XTKXINV );*/
@@ -20789,7 +20769,7 @@ double **gradient_categorical)
 
 	double *iord;
 
-	#ifdef MPI2
+	#ifdef MPI
 	num_obs_eval_alloc = MAX(ceil((double) num_obs_eval / (double) iNum_Processors),1)*iNum_Processors;
 	#else
 	num_obs_eval_alloc = num_obs_eval;
