@@ -134,9 +134,7 @@ double cv_func_regression_categorical_ls(double *vector_scale_factor){
     }
 
 /* Compute the cross-validation function */
-/* Tristen's computationally efficient code is not MPI aware it would
-   appear - would be wonderful if he could add this */
-/*    if((BANDWIDTH_reg_extern == BW_FIXED)||(int_ll_extern == LL_LC)){ 
+    if((BANDWIDTH_reg_extern == BW_FIXED)||(int_ll_extern == LL_LC)){ 
       return(np_kernel_estimate_regression_categorical_ls_aic(
         int_ll_extern,
         RBWM_CVLS,
@@ -154,9 +152,9 @@ double cv_func_regression_categorical_ls(double *vector_scale_factor){
         vector_Y_extern,
         &vector_scale_factor[1],
         num_categories_extern));
-        } else {*/
+    } else {
       return(cv_func_regression_categorical_ls_nn(vector_scale_factor));
-      /*    }*/
+    }
 }
 
 double cv_func_regression_categorical_ls_nn(double *vector_scale_factor)

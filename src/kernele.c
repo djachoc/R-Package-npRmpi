@@ -5673,11 +5673,14 @@ double *mean)
 			num_reg_unordered,
 			num_reg_ordered,
 			vector_scale_factor,
-			matrix_X_continuous,			 /* Not used */
-			matrix_X_continuous,			 /* Not used */
+			/* Not used */
+			matrix_X_continuous,
+			/* Not used */
 			matrix_X_continuous,
 			matrix_X_continuous,
-			matrix_bandwidth,					 /* Not used */
+			matrix_X_continuous,
+			/* Not used */
+			matrix_bandwidth,
 			matrix_bandwidth,
 			lambda)==1)
 		{
@@ -5830,7 +5833,7 @@ double *mean)
 				else
 				{
 
-					if(int_DEBUG == 1)
+					if((my_rank == 0)&&(int_DEBUG == 1))
 					{
 						printf("\r                                                                                        ");
 						printf("\r** XTKX[%d] is singular: adding ridge factor in kernel_estimate_regression_categorical_leave_one_out()",j);
@@ -5865,6 +5868,7 @@ double *mean)
 				}
 
 				DELTA =  mat_mul( XTKXINV, XTKY, DELTA);
+
 				mean[j-my_rank*stride] =  DELTA[0][0];
 
 			}

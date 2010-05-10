@@ -1963,6 +1963,7 @@ int *num_categories){
         for(l = 0; l < num_reg_ordered; l++)
           TORD[l][0] = matrix_X_ordered[l][j];
       
+
         num_var_continuous_extern = nrc2; // rows in the y_mat
         num_var_ordered_extern = nrc2; // rows in weights
 
