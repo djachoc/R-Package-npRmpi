@@ -44,7 +44,7 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 +                           nmulti=1,
 +                           data=wage1))
    user  system elapsed 
- 32.762   0.013  32.815 
+ 34.604   0.016  34.667 
 > 
 > summary(bw)
 
@@ -93,4 +93,4 @@ No. Unordered Categorical Explanatory Vars.: 3
 > 
 > proc.time()
    user  system elapsed 
- 33.395   0.051  33.479 
+ 35.271   0.063  35.372 
