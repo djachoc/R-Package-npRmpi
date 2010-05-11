@@ -3,12 +3,6 @@ all:
 	R CMD BATCH --vanilla npudens_serial.R
 	mpirun -np 2 R CMD BATCH --no-save npudens_npRmpi.R
 
-	R CMD BATCH --vanilla npcdensml_serial.R
-	mpirun -np 2 R CMD BATCH --no-save npcdensml_npRmpi.R
-
-	R CMD BATCH --vanilla npcdensls_serial.R
-	mpirun -np 2 R CMD BATCH --no-save npcdensls_npRmpi.R
-
 	R CMD BATCH --vanilla npregll_serial.R
 	mpirun -np 2 R CMD BATCH --no-save npregll_npRmpi.R
 
@@ -20,6 +14,12 @@ all:
 
 	R CMD BATCH --vanilla npscoef_serial.R
 	mpirun -np 2 R CMD BATCH --no-save npscoef_npRmpi.R
+
+	R CMD BATCH --vanilla npcdensml_serial.R
+	mpirun -np 2 R CMD BATCH --no-save npcdensml_npRmpi.R
+
+	R CMD BATCH --vanilla npcdensls_serial.R
+	mpirun -np 2 R CMD BATCH --no-save npcdensls_npRmpi.R
 
 npudens:
 

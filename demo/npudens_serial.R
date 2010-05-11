@@ -9,7 +9,7 @@ options(np.messages=FALSE)
 ## Generate some data
 
 set.seed(42)
-x <- rnorm(1000)
+x <- rnorm(2500)
 
 ## A simple example with likelihood cross-validation
 

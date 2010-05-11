@@ -2434,7 +2434,8 @@ double *SIGN)
 	int k;
 	int l = INT_MAX;
 
-	double epsilon;
+	const double epsilon = 1.0/num_obs;
+  double nepsilon;
 
 	double prod_kernel;
 
@@ -3024,8 +3025,6 @@ double *SIGN)
 
 					/* Add ridge factor - epsilon goes from zero to one/n*/
 
-					epsilon = 1.0/(double)num_obs_train;
-
 					for(k=0; k < num_reg_cat_cont + 1; k++)
 					{
 						XTKX[k][k] += epsilon;
@@ -3037,14 +3036,14 @@ double *SIGN)
 					{
 						for(k=0; k < num_reg_cat_cont + 1; k++)
 						{
-							epsilon += 1.0/(double) num_obs_train;
 							XTKX[k][k] += epsilon;
+							nepsilon += epsilon;
 						}
 					} while (fabs(mat_det(XTKX)) == 0.0);
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+					XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 				}
 
@@ -3237,8 +3236,6 @@ double *SIGN)
 
 					/* Add ridge factor - epsilon goes from zero to one/n*/
 
-					epsilon = 1.0/(double)num_obs_train;
-
 					for(k=0; k < num_reg_cat_cont + 1; k++)
 					{
 						XTKX[k][k] += epsilon;
@@ -3250,14 +3247,14 @@ double *SIGN)
 					{
 						for(k=0; k < num_reg_cat_cont + 1; k++)
 						{
-							epsilon += 1.0/(double) num_obs_train;
 							XTKX[k][k] += epsilon;
+							nepsilon += epsilon;
 						}
 					} while (fabs(mat_det(XTKX)) == 0.0);
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+					XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 				}
 
@@ -3452,8 +3449,6 @@ double *SIGN)
 
 					/* Add ridge factor - epsilon goes from zero to one/n*/
 
-					epsilon = 1.0/(double)num_obs_train;
-
 					for(k=0; k < num_reg_cat_cont + 1; k++)
 					{
 						XTKX[k][k] += epsilon;
@@ -3465,14 +3460,14 @@ double *SIGN)
 					{
 						for(k=0; k < num_reg_cat_cont + 1; k++)
 						{
-							epsilon += 1.0/(double) num_obs_train;
 							XTKX[k][k] += epsilon;
+							nepsilon += epsilon;
 						}
 					} while (fabs(mat_det(XTKX)) == 0.0);
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+					XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 				}
 
@@ -3988,8 +3983,6 @@ double *SIGN)
 
 					/* Add ridge factor - epsilon goes from zero to one/n*/
 
-					epsilon = 1.0/(double)num_obs_train;
-
 					for(k=0; k < num_reg_cat_cont + 1; k++)
 					{
 						XTKX[k][k] += epsilon;
@@ -4001,14 +3994,14 @@ double *SIGN)
 					{
 						for(k=0; k < num_reg_cat_cont + 1; k++)
 						{
-							epsilon += 1.0/(double) num_obs_train;
 							XTKX[k][k] += epsilon;
+							nepsilon += epsilon;
 						}
 					} while (fabs(mat_det(XTKX)) == 0.0);
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+					XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 				}
 
@@ -4201,8 +4194,6 @@ double *SIGN)
 
 					/* Add ridge factor - epsilon goes from zero to one/n*/
 
-					epsilon = 1.0/(double)num_obs_train;
-
 					for(k=0; k < num_reg_cat_cont + 1; k++)
 					{
 						XTKX[k][k] += epsilon;
@@ -4214,14 +4205,14 @@ double *SIGN)
 					{
 						for(k=0; k < num_reg_cat_cont + 1; k++)
 						{
-							epsilon += 1.0/(double) num_obs_train;
 							XTKX[k][k] += epsilon;
+							nepsilon += epsilon;
 						}
 					} while (fabs(mat_det(XTKX)) == 0.0);
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+					XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 				}
 
@@ -4416,8 +4407,6 @@ double *SIGN)
 
 					/* Add ridge factor - epsilon goes from zero to one/n*/
 
-					epsilon = 1.0/(double)num_obs_train;
-
 					for(k=0; k < num_reg_cat_cont + 1; k++)
 					{
 						XTKX[k][k] += epsilon;
@@ -4429,14 +4418,14 @@ double *SIGN)
 					{
 						for(k=0; k < num_reg_cat_cont + 1; k++)
 						{
-							epsilon += 1.0/(double) num_obs_train;
 							XTKX[k][k] += epsilon;
+							nepsilon += epsilon;
 						}
 					} while (fabs(mat_det(XTKX)) == 0.0);
 
 					XTKXINV = mat_inv( XTKX, XTKXINV );
 					/* Add epsilon times local constant estimator to first element of XTKY */
-					XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+					XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 				}
 
@@ -6281,7 +6270,8 @@ double **gradient)
 	int tmp_k;
 	int l;
 
-	double epsilon;
+	const double epsilon = 1.0/num_obs;
+  double nepsilon;
 
 	double prod_kernel;
 
@@ -6849,8 +6839,6 @@ double **gradient)
 
 							/* Add ridge factor - epsilon goes from zero to one/n*/
 
-							epsilon = 1.0/(double)num_obs_train;
-
 							for(k=0; k < num_reg_cat_cont + 1; k++)
 							{
 								XTKX[k][k] += epsilon;
@@ -6862,14 +6850,14 @@ double **gradient)
 							{
 								for(k=0; k < num_reg_cat_cont + 1; k++)
 								{
-									epsilon += 1.0/(double) num_obs_train;
 									XTKX[k][k] += epsilon;
+									nepsilon += epsilon;
 								}
 							} while (fabs(mat_det(XTKX)) == 0.0);
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-              XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+              XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -7027,8 +7015,6 @@ double **gradient)
 							}
 							/* Add ridge factor - epsilon goes from zero to one/n*/
 
-							epsilon = 1.0/(double)num_obs_train;
-
 							for(k=0; k < num_reg_cat_cont + 1; k++)
 							{
 								XTKX[k][k] += epsilon;
@@ -7040,14 +7026,14 @@ double **gradient)
 							{
 								for(k=0; k < num_reg_cat_cont + 1; k++)
 								{
-									epsilon += 1.0/(double) num_obs_train;
 									XTKX[k][k] += epsilon;
+									nepsilon += epsilon;
 								}
 							} while (fabs(mat_det(XTKX)) == 0.0);
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-              XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+              XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -7207,8 +7193,6 @@ double **gradient)
 
 							/* Add ridge factor - epsilon goes from zero to one/n*/
 
-							epsilon = 1.0/(double)num_obs_train;
-
 							for(k=0; k < num_reg_cat_cont + 1; k++)
 							{
 								XTKX[k][k] += epsilon;
@@ -7220,14 +7204,14 @@ double **gradient)
 							{
 								for(k=0; k < num_reg_cat_cont + 1; k++)
 								{
-									epsilon += 1.0/(double) num_obs_train;
 									XTKX[k][k] += epsilon;
+									nepsilon += epsilon;
 								}
 							} while (fabs(mat_det(XTKX)) == 0.0);
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-              XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+              XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -7588,8 +7572,6 @@ double **gradient)
 
 						/* Add ridge factor - epsilon goes from zero to one/n*/
 
-						epsilon = 1.0/(double)num_obs_train;
-
 						for(k=0; k < num_reg_cat_cont + 1; k++)
 						{
 							XTKX[k][k] += epsilon;
@@ -7601,14 +7583,14 @@ double **gradient)
 						{
 							for(k=0; k < num_reg_cat_cont + 1; k++)
 							{
-								epsilon += 1.0/(double) num_obs_train;
 								XTKX[k][k] += epsilon;
+								nepsilon += epsilon;
 							}
 						} while (fabs(mat_det(XTKX)) == 0.0);
 
 						XTKXINV = mat_inv( XTKX, XTKXINV );
 						/* Add epsilon times local constant estimator to first element of XTKY */
-            XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+            XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 					}
 
@@ -7956,8 +7938,6 @@ double **gradient)
 
 							/* Add ridge factor - epsilon goes from zero to one/n*/
 
-							epsilon = 1.0/(double)num_obs_train;
-
 							for(k=0; k < num_reg_cat_cont + 1; k++)
 							{
 								XTKX[k][k] += epsilon;
@@ -7969,14 +7949,14 @@ double **gradient)
 							{
 								for(k=0; k < num_reg_cat_cont + 1; k++)
 								{
-									epsilon += 1.0/(double) num_obs_train;
 									XTKX[k][k] += epsilon;
+									nepsilon += epsilon;
 								}
 							} while (fabs(mat_det(XTKX)) == 0.0);
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-							XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+							XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -8129,8 +8109,6 @@ double **gradient)
 
 							/* Add ridge factor - epsilon goes from zero to one/n*/
 
-							epsilon = 1.0/(double)num_obs_train;
-
 							for(k=0; k < num_reg_cat_cont + 1; k++)
 							{
 								XTKX[k][k] += epsilon;
@@ -8142,14 +8120,14 @@ double **gradient)
 							{
 								for(k=0; k < num_reg_cat_cont + 1; k++)
 								{
-									epsilon += 1.0/(double) num_obs_train;
 									XTKX[k][k] += epsilon;
+									nepsilon += epsilon;
 								}
 							} while (fabs(mat_det(XTKX)) == 0.0);
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-							XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+							XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -8302,8 +8280,6 @@ double **gradient)
 
 							/* Add ridge factor - epsilon goes from zero to one/n*/
 
-							epsilon = 1.0/(double)num_obs_train;
-
 							for(k=0; k < num_reg_cat_cont + 1; k++)
 							{
 								XTKX[k][k] += epsilon;
@@ -8315,14 +8291,14 @@ double **gradient)
 							{
 								for(k=0; k < num_reg_cat_cont + 1; k++)
 								{
-									epsilon += 1.0/(double) num_obs_train;
 									XTKX[k][k] += epsilon;
+									nepsilon += epsilon;
 								}
 							} while (fabs(mat_det(XTKX)) == 0.0);
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-							XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+							XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -8510,8 +8486,6 @@ double **gradient)
 
 						/* Add ridge factor - epsilon goes from zero to one/n*/
 
-						epsilon = 1.0/(double)num_obs_train;
-
 						for(k=0; k < num_reg_cat_cont + 1; k++)
 						{
 							XTKX[k][k] += epsilon;
@@ -8523,14 +8497,14 @@ double **gradient)
 						{
 							for(k=0; k < num_reg_cat_cont + 1; k++)
 							{
-								epsilon += 1.0/(double) num_obs_train;
 								XTKX[k][k] += epsilon;
+								nepsilon += epsilon;
 							}
 						} while (fabs(mat_det(XTKX)) == 0.0);
 
 						XTKXINV = mat_inv( XTKX, XTKXINV );
 						/* Add epsilon times local constant estimator to first element of XTKY */
-						XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+						XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 					}
 
@@ -9049,8 +9023,6 @@ double **gradient)
 
 							/* Add ridge factor - epsilon goes from zero to one/n*/
 
-							epsilon = 1.0/(double)num_obs_train;
-
 							for(k=0; k < num_reg_cat_cont + 1; k++)
 							{
 								XTKX[k][k] += epsilon;
@@ -9062,14 +9034,14 @@ double **gradient)
 							{
 								for(k=0; k < num_reg_cat_cont + 1; k++)
 								{
-									epsilon += 1.0/(double) num_obs_train;
 									XTKX[k][k] += epsilon;
+									nepsilon += epsilon;
 								}
 							} while (fabs(mat_det(XTKX)) == 0.0);
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-							XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+							XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -9226,8 +9198,6 @@ double **gradient)
 
 							/* Add ridge factor - epsilon goes from zero to one/n*/
 
-							epsilon = 1.0/(double)num_obs_train;
-
 							for(k=0; k < num_reg_cat_cont + 1; k++)
 							{
 								XTKX[k][k] += epsilon;
@@ -9239,14 +9209,14 @@ double **gradient)
 							{
 								for(k=0; k < num_reg_cat_cont + 1; k++)
 								{
-									epsilon += 1.0/(double) num_obs_train;
 									XTKX[k][k] += epsilon;
+									nepsilon += epsilon;
 								}
 							} while (fabs(mat_det(XTKX)) == 0.0);
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-							XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+							XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -9404,8 +9374,6 @@ double **gradient)
 
 							/* Add ridge factor - epsilon goes from zero to one/n*/
 
-							epsilon = 1.0/(double)num_obs_train;
-
 							for(k=0; k < num_reg_cat_cont + 1; k++)
 							{
 								XTKX[k][k] += epsilon;
@@ -9417,14 +9385,14 @@ double **gradient)
 							{
 								for(k=0; k < num_reg_cat_cont + 1; k++)
 								{
-									epsilon += 1.0/(double) num_obs_train;
 									XTKX[k][k] += epsilon;
+									nepsilon += epsilon;
 								}
 							} while (fabs(mat_det(XTKX)) == 0.0);
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-							XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+							XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -9776,8 +9744,6 @@ double **gradient)
 
 						/* Add ridge factor - epsilon goes from zero to one/n*/
 
-						epsilon = 1.0/(double)num_obs_train;
-
 						for(k=0; k < num_reg_cat_cont + 1; k++)
 						{
 							XTKX[k][k] += epsilon;
@@ -9789,14 +9755,14 @@ double **gradient)
 						{
 							for(k=0; k < num_reg_cat_cont + 1; k++)
 							{
-								epsilon += 1.0/(double) num_obs_train;
 								XTKX[k][k] += epsilon;
+								nepsilon += epsilon;
 							}
 						} while (fabs(mat_det(XTKX)) == 0.0);
 
 						XTKXINV = mat_inv( XTKX, XTKXINV );
 						/* Add epsilon times local constant estimator to first element of XTKY */
-						XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+						XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 					}
 
@@ -10138,8 +10104,6 @@ double **gradient)
 
 							/* Add ridge factor - epsilon goes from zero to one/n*/
 
-							epsilon = 1.0/(double)num_obs_train;
-
 							for(k=0; k < num_reg_cat_cont + 1; k++)
 							{
 								XTKX[k][k] += epsilon;
@@ -10151,14 +10115,14 @@ double **gradient)
 							{
 								for(k=0; k < num_reg_cat_cont + 1; k++)
 								{
-									epsilon += 1.0/(double) num_obs_train;
 									XTKX[k][k] += epsilon;
+									nepsilon += epsilon;
 								}
 							} while (fabs(mat_det(XTKX)) == 0.0);
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-							XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+							XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -10311,8 +10275,6 @@ double **gradient)
 
 							/* Add ridge factor - epsilon goes from zero to one/n*/
 
-							epsilon = 1.0/(double)num_obs_train;
-
 							for(k=0; k < num_reg_cat_cont + 1; k++)
 							{
 								XTKX[k][k] += epsilon;
@@ -10324,14 +10286,14 @@ double **gradient)
 							{
 								for(k=0; k < num_reg_cat_cont + 1; k++)
 								{
-									epsilon += 1.0/(double) num_obs_train;
 									XTKX[k][k] += epsilon;
+									nepsilon += epsilon;
 								}
 							} while (fabs(mat_det(XTKX)) == 0.0);
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-							XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+							XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -10484,8 +10446,6 @@ double **gradient)
 
 							/* Add ridge factor - epsilon goes from zero to one/n*/
 
-							epsilon = 1.0/(double)num_obs_train;
-
 							for(k=0; k < num_reg_cat_cont + 1; k++)
 							{
 								XTKX[k][k] += epsilon;
@@ -10497,14 +10457,14 @@ double **gradient)
 							{
 								for(k=0; k < num_reg_cat_cont + 1; k++)
 								{
-									epsilon += 1.0/(double) num_obs_train;
 									XTKX[k][k] += epsilon;
+									nepsilon += epsilon;
 								}
 							} while (fabs(mat_det(XTKX)) == 0.0);
 
 							XTKXINV = mat_inv( XTKX, XTKXINV );
 							/* Add epsilon times local constant estimator to first element of XTKY */
-							XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+							XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 						}
 
@@ -10690,8 +10650,6 @@ double **gradient)
 
 						/* Add ridge factor - epsilon goes from zero to one/n*/
 
-						epsilon = 1.0/(double)num_obs_train;
-
 						for(k=0; k < num_reg_cat_cont + 1; k++)
 						{
 							XTKX[k][k] += epsilon;
@@ -10703,14 +10661,14 @@ double **gradient)
 						{
 							for(k=0; k < num_reg_cat_cont + 1; k++)
 							{
-								epsilon += 1.0/(double) num_obs_train;
 								XTKX[k][k] += epsilon;
+								nepsilon += epsilon;
 							}
 						} while (fabs(mat_det(XTKX)) == 0.0);
 
 						XTKXINV = mat_inv( XTKX, XTKXINV );
 						/* Add epsilon times local constant estimator to first element of XTKY */
-						XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+						XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 					}
 
@@ -20101,7 +20059,6 @@ int *num_categories)
 
 }
 
-
 int kernel_estimate_ate_categorical_leave_one_out(
 int KERNEL_reg,
 int KERNEL_unordered_reg,
@@ -20133,7 +20090,8 @@ double *tau)
 	int k;
 	int l;
 
-	double epsilon;
+	const double epsilon = 1.0/num_obs;
+  double nepsilon;
 
 	double prod_kernel;
 
@@ -20283,8 +20241,6 @@ double *tau)
 
 				/* Add ridge factor - epsilon goes from zero to one/n*/
 
-				epsilon = 1.0/(double)num_obs_train;
-
 				for(k=0; k < 2; k++)
 				{
 					XTKX[k][k] += epsilon;
@@ -20296,14 +20252,14 @@ double *tau)
 				{
 					for(k=0; k <2; k++)
 					{
-						epsilon += 1.0/(double) num_obs_train;
 						XTKX[k][k] += epsilon;
+						nepsilon += epsilon;
 					}
 				} while (fabs(mat_det(XTKX)) == 0.0);
 
 				XTKXINV = mat_inv( XTKX, XTKXINV );
 				/* Add epsilon times local constant estimator to first element of XTKY */
-				XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+				XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 
 			}
 
@@ -20532,8 +20488,6 @@ double *tau)
 
 				/* Add ridge factor - epsilon goes from zero to one/n*/
 
-				epsilon = 1.0/(double)num_obs_train;
-
 				for(k=0; k < 2; k++)
 				{
 					XTKX[k][k] += epsilon;
@@ -20545,14 +20499,14 @@ double *tau)
 				{
 					for(k=0; k < 2; k++)
 					{
-						epsilon += 1.0/(double) num_obs_train;
 						XTKX[k][k] += epsilon;
+						nepsilon += epsilon;
 					}
 				} while (fabs(mat_det(XTKX)) == 0.0);
 
 				XTKXINV = mat_inv( XTKX, XTKXINV );
 				/* Add epsilon times local constant estimator to first element of XTKY */
-				XTKY[0][0] += epsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
+				XTKY[0][0] += nepsilon*XTKY[0][0]/(MAX(DBL_MIN,XTKX[0][0]));
 			}
 
 			/*			XTKXINV = mat_inv( XTKX, XTKXINV );*/

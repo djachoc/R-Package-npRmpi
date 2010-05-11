@@ -56,11 +56,10 @@ slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2
 +                                         tenure,
 +                                         regtype="lc",
 +                                         bwmethod="cv.aic",
-+                                         nmulti=1,
 +                                         data=wage1),
 +                           caller.execute=TRUE))
    user  system elapsed 
- 41.416   0.055  44.571 
+224.620   1.535 235.382 
 > 
 > summary(bw)
 
@@ -70,14 +69,14 @@ Regression Type: Local-Constant
 Bandwidth Selection Method: Expected Kullback-Leibler Cross-Validation
 Formula: lwage ~ married + female + nonwhite + educ + exper + tenure
 Bandwidth Type: Fixed
-Objective Function Value: -0.7779482 (achieved on multistart 1)
+Objective Function Value: -0.8032561 (achieved on multistart 4)
 
-Exp. Var. Name: married  Bandwidth: 0.25       Lambda Max: 0.5      
-Exp. Var. Name: female   Bandwidth: 0.25       Lambda Max: 0.5      
-Exp. Var. Name: nonwhite Bandwidth: 0.25       Lambda Max: 0.5      
-Exp. Var. Name: educ     Bandwidth: 1.644756 Scale Factor: 2.71512  
-Exp. Var. Name: exper    Bandwidth: 4.22416  Scale Factor: 0.7617346
-Exp. Var. Name: tenure   Bandwidth: 8.176016 Scale Factor: 3.856216 
+Exp. Var. Name: married  Bandwidth: 0.2046013    Lambda Max: 0.5      
+Exp. Var. Name: female   Bandwidth: 0.07953368   Lambda Max: 0.5      
+Exp. Var. Name: nonwhite Bandwidth: 0.3090114    Lambda Max: 0.5      
+Exp. Var. Name: educ     Bandwidth: 1.713151   Scale Factor: 2.828026 
+Exp. Var. Name: exper    Bandwidth: 4.541125   Scale Factor: 0.8188922
+Exp. Var. Name: tenure   Bandwidth: 9.237593   Scale Factor: 4.356908 
 
 Continuous Kernel Type: Second-Order Gaussian
 No. Continuous Explanatory Vars.: 3
@@ -92,13 +91,13 @@ No. Unordered Categorical Explanatory Vars.: 3
 > summary(model)
 
 Regression Data: 526 training points, in 6 variable(s)
-              married female nonwhite     educ   exper   tenure
-Bandwidth(s):    0.25   0.25     0.25 1.644756 4.22416 8.176016
+                married     female  nonwhite     educ    exper   tenure
+Bandwidth(s): 0.2046013 0.07953368 0.3090114 1.713151 4.541125 9.237593
 
 Kernel Regression Estimator: Local-Constant
 Bandwidth Type: Fixed
-Residual standard error: 0.1333591
-R-squared: 0.5605358
+Residual standard error: 0.1292833
+R-squared: 0.5635591
 
 Continuous Kernel Type: Second-Order Gaussian
 No. Continuous Explanatory Vars.: 3

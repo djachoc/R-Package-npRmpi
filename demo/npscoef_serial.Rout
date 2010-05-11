@@ -41,7 +41,7 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > 
 > system.time(bw <- npscoefbw(y~x|z))
    user  system elapsed 
- 12.317   0.021  12.455 
+ 12.945   0.025  13.065 
 > 
 > summary(bw)
 
@@ -81,4 +81,4 @@ No. Continuous Explanatory Vars.: 1
 > 
 > proc.time()
    user  system elapsed 
- 13.971   0.058  14.140 
+ 14.707   0.069  14.933 
