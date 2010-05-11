@@ -20,8 +20,8 @@ Type 'q()' to quit R.
 Loading required package: boot
 Loading required package: cubature
 Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8) + Rmpi 0.5-8
-master (rank 0, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
-slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
+master (rank 0, comm 1) of size 2 is running on: pc-racine2 
+slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2 
 > ## Make sure you have the .Rprofile file from npRmpi/inst/ in your
 > ## current directory or home directory. It is necessary.
 > 
@@ -55,68 +55,5 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 +                                           exper+
 +                                           tenure,
 +                                           bwmethod="cv.ls",
-+                                           nmulti=1,
 +                                           data=wage1),
 +                           caller.execute=TRUE))
-   user  system elapsed 
-553.808   3.186 580.393 
-> 
-> summary(bw)
-
-Conditional density data (526 observations, 7 variable(s))
-(1 dependent variable(s), and 6 explanatory variable(s))
-
-Bandwidth Selection Method: Least Squares Cross-Validation
-Formula: lwage ~ married + female + nonwhite + educ + exper + tenure
-Bandwidth Type: Fixed
-Objective Function Value: -3.586283e+13 (achieved on multistart 1)
-
-Exp. Var. Name: married  Bandwidth: 0.3260366   Lambda Max: 0.5     
-Exp. Var. Name: female   Bandwidth: 0.2399864   Lambda Max: 0.5     
-Exp. Var. Name: nonwhite Bandwidth: 0.3194618   Lambda Max: 0.5     
-Exp. Var. Name: educ     Bandwidth: 3.451477  Scale Factor: 5.094524
-Exp. Var. Name: exper    Bandwidth: 47052799  Scale Factor: 7586819 
-Exp. Var. Name: tenure   Bandwidth: 15.61908  Scale Factor: 6.586976 
-
-Dep. Var. Name: lwage    Bandwidth: 2.026627e-16 Scale Factor: 8.343775e-16
-
-Continuous Kernel Type: Second-Order Gaussian
-No. Continuous Explanatory Vars.: 3
-No. Continuous Dependent Vars.: 1
-
-Unordered Categorical Kernel Type: Aitchison and Aitken
-No. Unordered Categorical Explanatory Vars.: 3
-
-> 
-> mpi.bcast.cmd(model <- npcdens(bws=bw),
-+               caller.execute=TRUE)
-> 
-> summary(model)
-
-Conditional Density Data: 526 training points, in 7 variable(s)
-(1 dependent variable(s), and 6 explanatory variable(s))
-
-                               lwage
-Dep. Var. Bandwidth(s): 2.026627e-16
-                          married    female  nonwhite     educ    exper
-Exp. Var. Bandwidth(s): 0.3260366 0.2399864 0.3194618 3.451477 47052799
-                          tenure
-Exp. Var. Bandwidth(s): 15.61908
-
-Bandwidth Type: Fixed
-Log Likelihood: 16371.64
-
-Continuous Kernel Type: Second-Order Gaussian
-No. Continuous Explanatory Vars.: 3
-No. Continuous Dependent Vars.: 1
-
-Unordered Categorical Kernel Type: Aitchison and Aitken
-No. Unordered Categorical Explanatory Vars.: 3
-
-> 
-> ## Clean up properly then quit()
-> 
-> mpi.close.Rslaves()
-[1] 1
-> 
-> mpi.quit()

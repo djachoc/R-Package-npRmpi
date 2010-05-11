@@ -18,7 +18,7 @@ mpi.bcast.cmd(options(np.messages=FALSE),
               caller.execute=TRUE)
 
 ## Generate some data and broadcast it to all slaves (it will be known
-## to the master node so no need to broadcast it)
+## to the master node)
 
 set.seed(42)
 x <- rnorm(2500)
