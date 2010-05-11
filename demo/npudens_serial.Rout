@@ -31,24 +31,24 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > ## Generate some data
 > 
 > set.seed(42)
-> x <- rnorm(2500)
+> x <- rnorm(1000)
 > 
 > ## A simple example with likelihood cross-validation
 > 
 > system.time(bw <- npudensbw(~x))
    user  system elapsed 
- 24.020   0.008  24.062 
+  5.910   0.002   5.916 
 > 
 > summary(bw)
 
-Data (2500 observations, 1 variable(s)):
+Data (1000 observations, 1 variable(s)):
 
 Bandwidth Selection Method: Maximum Likelihood Cross-Validation
 Formula: ~x
 Bandwidth Type: Fixed
-Objective Function Value: 1.416243 (achieved on multistart 1)
+Objective Function Value: 1.428198 (achieved on multistart 1)
 
-Var. Name: x Bandwidth: 0.2155757 Scale Factor: 1.050824
+Var. Name: x Bandwidth: 0.2826971 Scale Factor: 1.133431
 
 Continuous Kernel Type: Second-Order Gaussian
 No. Continuous Vars.: 1
@@ -57,4 +57,4 @@ No. Continuous Vars.: 1
 > 
 > proc.time()
    user  system elapsed 
- 24.455   0.042  24.526 
+  6.371   0.042   6.414 

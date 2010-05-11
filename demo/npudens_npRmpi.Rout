@@ -20,8 +20,8 @@ Type 'q()' to quit R.
 Loading required package: boot
 Loading required package: cubature
 Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8) + Rmpi 0.5-8
-master (rank 0, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
-slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
+master (rank 0, comm 1) of size 2 is running on: pc-racine2 
+slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2 
 > ## Make sure you have the .Rprofile file from npRmpi/inst/ in your
 > ## current directory or home directory. It is necessary.
 > 
@@ -45,7 +45,7 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > ## to the master node so no need to broadcast it)
 > 
 > set.seed(42)
-> x <- rnorm(2500)
+> x <- rnorm(1000)
 > mpi.bcast.Robj2slave(x)
 > 
 > ## A simple example with likelihood cross-validation
@@ -53,18 +53,18 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > system.time(mpi.bcast.cmd(bw <- npudensbw(~x),
 +                           caller.execute=TRUE))
    user  system elapsed 
- 14.743   0.843  15.938 
+  5.964   0.007   6.027 
 > 
 > summary(bw)
 
-Data (2500 observations, 1 variable(s)):
+Data (1000 observations, 1 variable(s)):
 
 Bandwidth Selection Method: Maximum Likelihood Cross-Validation
 Formula: ~x
 Bandwidth Type: Fixed
-Objective Function Value: 1.416243 (achieved on multistart 1)
+Objective Function Value: 1.428198 (achieved on multistart 1)
 
-Var. Name: x Bandwidth: 0.2155757 Scale Factor: 1.050824
+Var. Name: x Bandwidth: 0.2826971 Scale Factor: 1.133431
 
 Continuous Kernel Type: Second-Order Gaussian
 No. Continuous Vars.: 1

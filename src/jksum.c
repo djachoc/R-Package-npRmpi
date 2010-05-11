@@ -1995,7 +1995,7 @@ int *num_categories){
                                vsf,
                                num_categories,
                                NULL,
-                               kwm+j*nrcc22);
+                               kwm+j*nrcc22); // weighted sum
         // need to use reference weight to fix weight sum
         for(int jj = j+1; jj < num_obs; jj++){
           const double RW = kwm[jj*nrcc22+nrc1]*(XTKX[0][-1]-XTKX[0][jj-j-1]);

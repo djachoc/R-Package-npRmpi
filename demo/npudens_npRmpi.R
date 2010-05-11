@@ -21,7 +21,7 @@ mpi.bcast.cmd(options(np.messages=FALSE),
 ## to the master node so no need to broadcast it)
 
 set.seed(42)
-x <- rnorm(2500)
+x <- rnorm(1000)
 mpi.bcast.Robj2slave(x)
 
 ## A simple example with likelihood cross-validation
