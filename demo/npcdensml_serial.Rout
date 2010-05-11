@@ -39,3 +39,6 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 +                             exper+
 +                             tenure,
 +                             data=wage1))
+
+Timing stopped at: 477.973 0.273 479.339 
+Execution halted

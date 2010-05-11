@@ -2434,7 +2434,7 @@ double *SIGN)
 	int k;
 	int l = INT_MAX;
 
-	const double epsilon = 1.0/num_obs;
+	const double epsilon = 1.0/num_obs_train;
   double nepsilon;
 
 	double prod_kernel;
@@ -6270,7 +6270,7 @@ double **gradient)
 	int tmp_k;
 	int l;
 
-	const double epsilon = 1.0/num_obs;
+	const double epsilon = 1.0/num_obs_train;
   double nepsilon;
 
 	double prod_kernel;
@@ -20090,7 +20090,7 @@ double *tau)
 	int k;
 	int l;
 
-	const double epsilon = 1.0/num_obs;
+	const double epsilon = 1.0/num_obs_train;
   double nepsilon;
 
 	double prod_kernel;
