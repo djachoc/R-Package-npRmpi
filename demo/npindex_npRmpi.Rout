@@ -60,21 +60,21 @@ slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2
 > system.time(mpi.bcast.cmd(bw <- npindexbw(formula=y~x1+x2),
 +                           caller.execute=TRUE))
    user  system elapsed 
-  4.051   0.052   4.249 
+  4.365   0.045   4.600 
 > 
 > summary(bw)
 
 Single Index Model
 Regression data (1000 observations, 2 variable(s)):
 
-      x1        x2
-Beta:  1 -0.944812
-Bandwidth:  0.1724932
+      x1         x2
+Beta:  1 -0.9273824
+Bandwidth:  0.1780774
 Optimisation Method:  Nelder-Mead
 Regression Type: Local-Constant
 Bandwidth Selection Method: Ichimura
 Formula: y ~ x1 + x2
-Objective Function Value: 0.971478 (achieved on multistart 1)
+Objective Function Value: 0.9714591 (achieved on multistart 2)
 
 Continuous Kernel Type: Second-Order Gaussian
 No. Continuous Explanatory Vars.: 1
@@ -88,13 +88,13 @@ No. Continuous Explanatory Vars.: 1
 Single Index Model
 Regression Data: 1000 training points, in 2 variable(s)
 
-      x1        x2
-Beta:  1 -0.944812
-Bandwidth: 0.1724932
+      x1         x2
+Beta:  1 -0.9273824
+Bandwidth: 0.1780774
 Kernel Regression Estimator: Local-Constant
 
-Residual standard error: 0.954653
-R-squared: 0.4272527
+Residual standard error: 0.9548781
+R-squared: 0.4271518
 
 Continuous Kernel Type: Second-Order Gaussian
 No. Continuous Explanatory Vars.: 1

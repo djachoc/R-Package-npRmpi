@@ -39,6 +39,62 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 +                             exper+
 +                             tenure,
 +                             data=wage1))
+   user  system elapsed 
+498.423   0.233 499.037 
+> 
+> summary(bw)
 
-Timing stopped at: 477.973 0.273 479.339 
-Execution halted
+Conditional density data (526 observations, 7 variable(s))
+(1 dependent variable(s), and 6 explanatory variable(s))
+
+Bandwidth Selection Method: Maximum Likelihood Cross-Validation
+Formula: lwage ~ married + female + nonwhite + educ + exper + tenure
+Bandwidth Type: Fixed
+Objective Function Value: 0.5060847 (achieved on multistart 3)
+
+Exp. Var. Name: married  Bandwidth: 0.2904984      Lambda Max: 0.5      
+Exp. Var. Name: female   Bandwidth: 4.153571e-16   Lambda Max: 0.5      
+Exp. Var. Name: nonwhite Bandwidth: 0.3068632      Lambda Max: 0.5      
+Exp. Var. Name: educ     Bandwidth: 1.455456     Scale Factor: 2.148314 
+Exp. Var. Name: exper    Bandwidth: 4.259578     Scale Factor: 0.6868167
+Exp. Var. Name: tenure   Bandwidth: 12.85462     Scale Factor: 5.421127  
+
+Dep. Var. Name: lwage    Bandwidth: 0.1901536 Scale Factor: 0.7828764
+
+Continuous Kernel Type: Second-Order Gaussian
+No. Continuous Explanatory Vars.: 3
+No. Continuous Dependent Vars.: 1
+
+Unordered Categorical Kernel Type: Aitchison and Aitken
+No. Unordered Categorical Explanatory Vars.: 3
+
+> 
+> model <- npcdens(bws=bw)
+> 
+> summary(model)
+
+Conditional Density Data: 526 training points, in 7 variable(s)
+(1 dependent variable(s), and 6 explanatory variable(s))
+
+                            lwage
+Dep. Var. Bandwidth(s): 0.1901536
+                          married       female  nonwhite     educ    exper
+Exp. Var. Bandwidth(s): 0.2904984 4.153571e-16 0.3068632 1.455456 4.259578
+                          tenure
+Exp. Var. Bandwidth(s): 12.85462
+
+Bandwidth Type: Fixed
+Log Likelihood: -116.0387
+
+Continuous Kernel Type: Second-Order Gaussian
+No. Continuous Explanatory Vars.: 3
+No. Continuous Dependent Vars.: 1
+
+Unordered Categorical Kernel Type: Aitchison and Aitken
+No. Unordered Categorical Explanatory Vars.: 3
+
+> 
+> 
+> proc.time()
+   user  system elapsed 
+498.978   0.278 499.632 

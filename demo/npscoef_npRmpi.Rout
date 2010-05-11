@@ -60,7 +60,7 @@ slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2
 > system.time(mpi.bcast.cmd(bw <- npscoefbw(y~x|z),
 +                           caller.execute=TRUE))
    user  system elapsed 
- 11.665   0.095  12.292 
+ 11.647   0.090  12.306 
 > 
 > summary(bw)
 

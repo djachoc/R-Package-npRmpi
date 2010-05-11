@@ -37,7 +37,7 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > 
 > system.time(bw <- npudensbw(~x))
    user  system elapsed 
- 25.295   0.014  25.366 
+ 25.297   0.017  25.367 
 > 
 > summary(bw)
 
@@ -57,4 +57,4 @@ No. Continuous Vars.: 1
 > 
 > proc.time()
    user  system elapsed 
- 25.756   0.056  25.862 
+ 25.759   0.057  25.862 
