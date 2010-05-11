@@ -57,3 +57,65 @@ slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2
 +                                           bwmethod="cv.ls",
 +                                           data=wage1),
 +                           caller.execute=TRUE))
+    user   system  elapsed 
+3865.071   38.817 4600.380 
+> 
+> summary(bw)
+
+Conditional density data (526 observations, 7 variable(s))
+(1 dependent variable(s), and 6 explanatory variable(s))
+
+Bandwidth Selection Method: Least Squares Cross-Validation
+Formula: lwage ~ married + female + nonwhite + educ + exper + tenure
+Bandwidth Type: Fixed
+Objective Function Value: -1.455350e+14 (achieved on multistart 5)
+
+Exp. Var. Name: married  Bandwidth: 0.3990337   Lambda Max: 0.5     
+Exp. Var. Name: female   Bandwidth: 0.2059818   Lambda Max: 0.5     
+Exp. Var. Name: nonwhite Bandwidth: 0.1194076   Lambda Max: 0.5     
+Exp. Var. Name: educ     Bandwidth: 3.852244  Scale Factor: 5.686072
+Exp. Var. Name: exper    Bandwidth: 63066889  Scale Factor: 10168940
+Exp. Var. Name: tenure   Bandwidth: 16.97751  Scale Factor: 7.159858 
+
+Dep. Var. Name: lwage    Bandwidth: 4.978611e-17 Scale Factor: 2.049731e-16
+
+Continuous Kernel Type: Second-Order Gaussian
+No. Continuous Explanatory Vars.: 3
+No. Continuous Dependent Vars.: 1
+
+Unordered Categorical Kernel Type: Aitchison and Aitken
+No. Unordered Categorical Explanatory Vars.: 3
+
+> 
+> mpi.bcast.cmd(model <- npcdens(bws=bw),
++               caller.execute=TRUE)
+> 
+> summary(model)
+
+Conditional Density Data: 526 training points, in 7 variable(s)
+(1 dependent variable(s), and 6 explanatory variable(s))
+
+                               lwage
+Dep. Var. Bandwidth(s): 4.978611e-17
+                          married    female  nonwhite     educ    exper
+Exp. Var. Bandwidth(s): 0.3990337 0.2059818 0.1194076 3.852244 63066889
+                          tenure
+Exp. Var. Bandwidth(s): 16.97751
+
+Bandwidth Type: Fixed
+Log Likelihood: 17101.72
+
+Continuous Kernel Type: Second-Order Gaussian
+No. Continuous Explanatory Vars.: 3
+No. Continuous Dependent Vars.: 1
+
+Unordered Categorical Kernel Type: Aitchison and Aitken
+No. Unordered Categorical Explanatory Vars.: 3
+
+> 
+> ## Clean up properly then quit()
+> 
+> mpi.close.Rslaves()
+[1] 1
+> 
+> mpi.quit()
