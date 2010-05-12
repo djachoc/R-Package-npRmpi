@@ -42,6 +42,11 @@ all:
 	grep "time = " npconmode*.Rout
 	grep Objective npconmode*.Rout
 
+	R CMD BATCH --vanilla npcmstest_serial.R
+	mpirun -np 2 R CMD BATCH --no-save npcmstest_npRmpi.R
+	grep "time = " npcmstest*.Rout
+	grep "Test Statistic" npcmstest*.Rout
+
 npudens:
 
 	mpirun -np 2 R CMD BATCH --no-save npudens_npRmpi.R
@@ -69,6 +74,13 @@ npconmode:
 	R CMD BATCH --vanilla npconmode_serial.R
 	grep "time = " npconmode*.Rout
 	grep Objective npconmode*.Rout
+
+npcmstest:
+
+	mpirun -np 2 R CMD BATCH --no-save npcmstest_npRmpi.R
+	R CMD BATCH --vanilla npcmstest_serial.R
+	grep "time = " npcmstest*.Rout
+	grep "Test Statistic" npcmstest*.Rout
 
 npregll:
 
