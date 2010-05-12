@@ -24,16 +24,16 @@ mpi.bcast.Robj2slave(wage1)
 
 ## A regression example (local linear)
 
-system.time(mpi.bcast.cmd(bw <- npregbw(lwage~married+
-                                        female+
-                                        nonwhite+                
-                                        educ+
-                                        exper+
-                                        tenure,
-                                        regtype="ll",
-                                        bwmethod="cv.aic",
-                                        data=wage1),
-                          caller.execute=TRUE))
+t <- system.time(mpi.bcast.cmd(bw <- npregbw(lwage~married+
+                                             female+
+                                             nonwhite+                
+                                             educ+
+                                             exper+
+                                             tenure,
+                                             regtype="ll",
+                                             bwmethod="cv.aic",
+                                             data=wage1),
+                               caller.execute=TRUE))
 
 summary(bw)
 
@@ -45,5 +45,7 @@ summary(model)
 ## Clean up properly then quit()
 
 mpi.close.Rslaves()
+
+cat("Elapsed time =", t[3], "\n")
 
 mpi.quit()

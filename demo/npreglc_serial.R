@@ -11,19 +11,21 @@ attach(wage1)
 
 ## A regression example (local constant)
 
-system.time(bw <- npregbw(lwage~married+
-                          female+
-                          nonwhite+                
-                          educ+
-                          exper+
-                          tenure,
-                          regtype="lc",
-                          bwmethod="cv.aic",
-                          data=wage1))
+t <- system.time(bw <- npregbw(lwage~married+
+                               female+
+                               nonwhite+                
+                               educ+
+                               exper+
+                               tenure,
+                               regtype="lc",
+                               bwmethod="cv.aic",
+                               data=wage1))
 
 summary(bw)
 
 model <- npreg(bws=bw)
 
 summary(model)
+
+cat("Elapsed time =", t[3], "\n")
 

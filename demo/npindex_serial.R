@@ -17,10 +17,13 @@ y <- x1 - x2 + rnorm(n)
 
 ## A single index model example
 
-system.time(bw <- npindexbw(formula=y~x1+x2))
+t <- system.time(bw <- npindexbw(formula=y~x1+x2))
 
 summary(bw)
 
 model <- npindex(bws=bw, gradients=TRUE)
 
 summary(model)
+
+cat("Elapsed time =", t[3], "\n")
+

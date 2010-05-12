@@ -39,9 +39,7 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > 
 > ## A single index model example
 > 
-> system.time(bw <- npindexbw(formula=y~x1+x2))
-   user  system elapsed 
-  7.313   0.010   7.329 
+> t <- system.time(bw <- npindexbw(formula=y~x1+x2))
 > 
 > summary(bw)
 
@@ -80,6 +78,10 @@ Continuous Kernel Type: Second-Order Gaussian
 No. Continuous Explanatory Vars.: 1
 
 > 
+> cat("Elapsed time =", t[3], "\n")
+Elapsed time = 7.564 
+> 
+> 
 > proc.time()
    user  system elapsed 
-  7.919   0.051   7.969 
+  8.153   0.051   8.227 

@@ -13,7 +13,8 @@ x <- rnorm(2500)
 
 ## A simple example with likelihood cross-validation
 
-system.time(bw <- npudensbw(~x))
+t <- system.time(bw <- npudensbw(~x))
 
 summary(bw)
 
+cat("Elapsed time =", t[3], "\n")

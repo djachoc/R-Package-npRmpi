@@ -24,14 +24,14 @@ mpi.bcast.Robj2slave(wage1)
 
 ## A conditional density estimation example. 
 
-system.time(mpi.bcast.cmd(bw <- npcdensbw(lwage~married+
-                                          female+
-                                          nonwhite+                
-                                          educ+
-                                          exper+
-                                          tenure,
-                                          data=wage1),
-                          caller.execute=TRUE))
+t <- system.time(mpi.bcast.cmd(bw <- npcdensbw(lwage~married+
+                                               female+
+                                               nonwhite+                
+                                               educ+
+                                               exper+
+                                               tenure,
+                                               data=wage1),
+                               caller.execute=TRUE))
 
 summary(bw)
 
@@ -43,5 +43,7 @@ summary(model)
 ## Clean up properly then quit()
 
 mpi.close.Rslaves()
+
+cat("Elapsed time =", t[3], "\n")
 
 mpi.quit()

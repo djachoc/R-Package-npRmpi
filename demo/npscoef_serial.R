@@ -17,10 +17,13 @@ y <- x*exp(z)*(1.0+rnorm(n,sd = 0.2))
 
 ## A smooth coefficient model example
 
-system.time(bw <- npscoefbw(y~x|z))
+t <- system.time(bw <- npscoefbw(y~x|z))
 
 summary(bw)
 
 model <- npscoef(bws=bw, gradients=TRUE)
 
 summary(model)
+
+cat("Elapsed time =", t[3], "\n")
+

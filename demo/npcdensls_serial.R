@@ -10,18 +10,20 @@ data(wage1)
 
 ## A simple example with least-squares cross-validation
 
-system.time(bw <- npcdensbw(lwage~married+
-                            female+
-                            nonwhite+                
-                            educ+
-                            exper+
-                            tenure,
-                            bwmethod="cv.ls",
-                            data=wage1))
+t <- system.time(bw <- npcdensbw(lwage~married+
+                                 female+
+                                 nonwhite+                
+                                 educ+
+                                 exper+
+                                 tenure,
+                                 bwmethod="cv.ls",
+                                 data=wage1))
 
 summary(bw)
 
 model <- npcdens(bws=bw)
 
 summary(model)
+
+cat("Elapsed time =", t[3], "\n")
 

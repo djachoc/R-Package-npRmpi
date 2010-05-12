@@ -33,8 +33,8 @@ mpi.bcast.Robj2slave(y)
 
 ## A single index model example
 
-system.time(mpi.bcast.cmd(bw <- npindexbw(formula=y~x1+x2),
-                          caller.execute=TRUE))
+t <- system.time(mpi.bcast.cmd(bw <- npindexbw(formula=y~x1+x2),
+                               caller.execute=TRUE))
 
 summary(bw)
 
@@ -46,5 +46,7 @@ summary(model)
 ## Clean up properly then quit()
 
 mpi.close.Rslaves()
+
+cat("Elapsed time =", t[3], "\n")
 
 mpi.quit()

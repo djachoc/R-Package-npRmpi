@@ -57,10 +57,8 @@ slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2
 > 
 > ## A smooth coefficient model example
 > 
-> system.time(mpi.bcast.cmd(bw <- npscoefbw(y~x|z),
-+                           caller.execute=TRUE))
-   user  system elapsed 
- 11.647   0.090  12.306 
+> t <- system.time(mpi.bcast.cmd(bw <- npscoefbw(y~x|z),
++                                caller.execute=TRUE))
 > 
 > summary(bw)
 
@@ -103,5 +101,8 @@ No. Continuous Explanatory Vars.: 1
 > 
 > mpi.close.Rslaves()
 [1] 1
+> 
+> cat("Elapsed time =", t[3], "\n")
+Elapsed time = 12.984 
 > 
 > mpi.quit()

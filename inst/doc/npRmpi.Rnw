@@ -83,7 +83,10 @@ interface', a popular parallel programming library that is an
 international standard), and we combine the \pkg{R np} and \pkg{Rmpi}
 packages to form the \pkg{npRmpi} package (this requires some
 modification to some of the underlying \pkg{Rmpi} code which is why we
-cannot simply load the \pkg{Rmpi} package itself).
+cannot simply load the \pkg{Rmpi} package itself).\footnote{This
+  package incorporates the Rmpi package (Hao Yu <hyu@stats.uwo.ca>)
+  with minor modifications and we are extremely grateful to Hao Yu for
+  his contributions to the R community.}
 
 All of the functions in \pkg{np} can exploit the presence of multiple
 processors, and run time is in general linear in the number of
