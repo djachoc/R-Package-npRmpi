@@ -48,3 +48,23 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > X <- data.frame(factor(oecd), factor(year), initgdp, popgro, inv, humancap)
 > 
 > t <- system.time(output <- npcmstest(model = model, xdat = X, ydat = growth))
+> 
+> output
+
+Consistent Model Specification Test
+Parametric null model: lm(formula = growth ~ oecd + factor(year) + initgdp + I(initgdp^2) +     I(initgdp^3) + I(initgdp^4) + popgro + inv + humancap + I(humancap^2) +     I(humancap^3) - 1, x = TRUE, y = TRUE)
+Number of regressors: 6
+IID Bootstrap (399 replications)
+
+Test Statistic ‘Jn’: 3.831149	P Value: < 2.22e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Null of correct specification is rejected at the 0.1% level
+
+> 
+> cat("Elapsed time =", t[3], "\n")
+Elapsed time = 618.137 
+> 
+> proc.time()
+   user  system elapsed 
+594.480   1.473 619.273 

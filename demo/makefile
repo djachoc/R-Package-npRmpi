@@ -47,6 +47,10 @@ all:
 	grep "time = " npcmstest*.Rout
 	grep "Test Statistic" npcmstest*.Rout
 
+	R CMD BATCH --vanilla npsigtest_serial.R
+	mpirun -np 2 R CMD BATCH --no-save npsigtest_npRmpi.R
+	grep "time = " npsigtest*.Rout
+
 npudens:
 
 	mpirun -np 2 R CMD BATCH --no-save npudens_npRmpi.R
@@ -81,6 +85,12 @@ npcmstest:
 	R CMD BATCH --vanilla npcmstest_serial.R
 	grep "time = " npcmstest*.Rout
 	grep "Test Statistic" npcmstest*.Rout
+
+npsigtest:
+
+	mpirun -np 2 R CMD BATCH --no-save npsigtest_npRmpi.R
+	R CMD BATCH --vanilla npsigtest_serial.R
+	grep "time = " npsigtest*.Rout
 
 npregll:
 

@@ -1,0 +1,48 @@
+
+R version 2.11.0 (2010-04-22)
+Copyright (C) 2010 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ## This is the serial version of npcmstest_npRmpi.R for comparison
+> ## purposes (bandwidth ought to be identical, timing may
+> ## differ). Study the differences between this file and its MPI
+> ## counterpart for insight about your own problems.
+> 
+> library(np)
+Loading required package: boot
+Loading required package: cubature
+Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
+> options(np.messages=FALSE)
+> 
+> set.seed(42)
+> 
+> ## Significance testing with z irrelevant
+> 
+> n <- 500
+> z <- factor(rbinom(n,1,.5))
+> x1 <- rnorm(n)
+> x2 <- runif(n,-2,2)
+> y <- x1 + x2 + rnorm(n)
+> 
+> model <- npreg(y~z+x1+x2,
++                regtype="ll",
++                bwmethod="cv.aic")
+> 
+> t <- system.time(npsigtest(model))
+
+Timing stopped at: 47.966 0.08 48.837 
+Execution halted
