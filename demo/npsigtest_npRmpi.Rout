@@ -60,3 +60,35 @@ slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2
 +                              regtype="ll",
 +                              bwmethod="cv.aic"),
 +               caller.execute=TRUE)
+> 
+> t <- system.time(mpi.bcast.cmd(output <- npsigtest(model),
++                                caller.execute=TRUE ))
+> 
+> output
+
+Kernel Regression Significance Test
+Type I Test with IID Bootstrap (399 replications)
+Explanatory variables tested for significance:
+z (1), x1 (2), x2 (3)
+
+                      z       x1        x2
+Bandwidth(s): 0.2116178 6.166085 0.9550355
+
+Significance Tests
+P Value: 
+z  0.095238 . 
+x1 < 2e-16 *** 
+x2 < 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+> 
+> ## Clean up properly then quit()
+> 
+> mpi.close.Rslaves()
+[1] 1
+> 
+> cat("Elapsed time =", t[3], "\n")
+Elapsed time = 76.222 
+> 
+> mpi.quit()

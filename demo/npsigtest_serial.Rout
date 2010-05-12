@@ -41,8 +41,3 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > model <- npreg(y~z+x1+x2,
 +                regtype="ll",
 +                bwmethod="cv.aic")
-> 
-> t <- system.time(npsigtest(model))
-
-Timing stopped at: 47.966 0.08 48.837 
-Execution halted

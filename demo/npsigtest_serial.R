@@ -20,6 +20,8 @@ model <- npreg(y~z+x1+x2,
                regtype="ll",
                bwmethod="cv.aic")
 
-t <- system.time(npsigtest(model))
+t <- system.time(output <- npsigtest(model))
+
+output
 
 cat("Elapsed time =", t[3], "\n")

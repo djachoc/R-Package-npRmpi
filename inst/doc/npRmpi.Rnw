@@ -89,9 +89,13 @@ cannot simply load the \pkg{Rmpi} package itself).\footnote{This
   his contributions to the R community.}
 
 All of the functions in \pkg{np} can exploit the presence of multiple
-processors, and run time is in general linear in the number of
-processors present such that two processors will complete the job in
-one half the amount of time that one processor could. Given the
+processors, and for large files run time is in general linear in the
+number of processors present such that two processors will complete
+the job in one half the amount of time that one processor
+could.\footnote{There is minor overhead involved with message passing,
+  and for small samples the overhead can be substantial as the ratio
+  of message passing to computing kernel estimators increases - this
+  will be negligable for sufficiently large samples.}  Given the
 availability of commodity cluster computers and the presence of
 multiple cores in desktop and laptop machines, leveraging the
 \pkg{npRmpi} package for large data sets may present a feasible
@@ -291,15 +295,19 @@ package that can exploit the presence of multiple processors and the
 computational run time associated with kernel methods. Run time is
 linear in the number of processors available, so two processors will
 complete a job in roughly one half the time of one processor, ten in
-one tenth and so forth. Though installation of a working
-\proglang{MPI} implementation requires some familiarity with computer
-systems, local expertise exists for many and help is to be found
-there. That being said, the Mac OS X operating system comes stock with
-a fully functioning version of Open \proglang{MPI} so there is zero
-additional effort required for the user in order to get up and running
-in this environment. Finally, any feedback for improvements for this
-document, reporting of errors and bugs and so forth is always
-encouraged and much appreciated.
+one tenth and so forth.\footnote{There is minor overhead involved with
+  message passing, and for small samples the overhead can be
+  substantial as the ratio of message passing to computing kernel
+  estimators increases - this will be negligable for sufficiently
+  large samples.} Though installation of a working \proglang{MPI}
+implementation requires some familiarity with computer systems, local
+expertise exists for many and help is to be found there. That being
+said, the Mac OS X operating system comes stock with a fully
+functioning version of Open \proglang{MPI} so there is zero additional
+effort required for the user in order to get up and running in this
+environment. Finally, any feedback for improvements for this document,
+reporting of errors and bugs and so forth is always encouraged and
+much appreciated.
 
 \bibliography{npRmpi}
 
