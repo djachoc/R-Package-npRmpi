@@ -16,11 +16,11 @@ x1 <- rnorm(n)
 x2 <- runif(n,-2,2)
 y <- x1 + x2 + rnorm(n)
 
-model <- npreg(y~z+x1+x2,
-               regtype="ll",
-               bwmethod="cv.aic")
+t <- system.time(model <- npreg(y~z+x1+x2,
+                                    regtype="ll",
+                                    bwmethod="cv.aic"))
 
-t <- system.time(output <- npsigtest(model))
+t <- t + system.time(output <- npsigtest(model))
 
 output
 

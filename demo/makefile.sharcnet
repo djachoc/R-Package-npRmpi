@@ -1,0 +1,89 @@
+all:
+
+	sqsub -o tmp.out -r 1h -q serial R CMD BATCH --vanilla npudens_serial.R
+	sqsub -o tmp.out -r 1h -q mpi -n 2 R CMD BATCH --no-save npudens_npRmpi.R
+
+	sqsub -o tmp.out -r 1h -q serial R CMD BATCH --vanilla npregll_serial.R
+	sqsub -o tmp.out -r 1h -q mpi -n 2 R CMD BATCH --no-save npregll_npRmpi.R
+
+	sqsub -o tmp.out -r 1h -q serial R CMD BATCH --vanilla npreglc_serial.R
+	sqsub -o tmp.out -r 1h -q mpi -n 2 R CMD BATCH --no-save npreglc_npRmpi.R
+
+	sqsub -o tmp.out -r 1h -q serial R CMD BATCH --vanilla npindex_serial.R
+	sqsub -o tmp.out -r 1h -q mpi -n 2 R CMD BATCH --no-save npindex_npRmpi.R
+
+	sqsub -o tmp.out -r 1h -q serial R CMD BATCH --vanilla npscoef_serial.R
+	sqsub -o tmp.out -r 1h -q mpi -n 2 R CMD BATCH --no-save npscoef_npRmpi.R
+
+	sqsub -o tmp.out -r 1h -q serial R CMD BATCH --vanilla npcdensml_serial.R
+	sqsub -o tmp.out -r 1h -q mpi -n 2 R CMD BATCH --no-save npcdensml_npRmpi.R
+
+	sqsub -o tmp.out -r 1h -q serial R CMD BATCH --vanilla npcdensls_serial.R
+	sqsub -o tmp.out -r 1h -q mpi -n 2 R CMD BATCH --no-save npcdensls_npRmpi.R
+
+	sqsub -o tmp.out -r 1h -q serial R CMD BATCH --vanilla npconmode_serial.R
+	sqsub -o tmp.out -r 1h -q mpi -n 2 R CMD BATCH --no-save npconmode_npRmpi.R
+
+	sqsub -o tmp.out -r 1h -q serial R CMD BATCH --vanilla npcmstest_serial.R
+	sqsub -o tmp.out -r 1h -q mpi -n 2 R CMD BATCH --no-save npcmstest_npRmpi.R
+
+	sqsub -o tmp.out -r 1h -q serial R CMD BATCH --vanilla npsigtest_serial.R
+	sqsub -o tmp.out -r 1h -q mpi -n 2 R CMD BATCH --no-save npsigtest_npRmpi.R
+
+	sqsub -o tmp.out -r 1h -q serial R CMD BATCH --vanilla npsdeptest_serial.R
+	sqsub -o tmp.out -r 1h -q mpi -n 2 R CMD BATCH --no-save npsdeptest_npRmpi.R
+
+npudens:
+
+	sqsub -o tmp.out -r 1h -q mpi -n 2 R CMD BATCH --no-save npudens_npRmpi.R
+	sqsub -o tmp.out -r 1h -q serial R CMD BATCH --vanilla npudens_serial.R
+
+npcdensml:
+
+	sqsub -o tmp.out -r 1h -q mpi -n 2 R CMD BATCH --no-save npcdensml_npRmpi.R
+	sqsub -o tmp.out -r 1h -q serial R CMD BATCH --vanilla npcdensml_serial.R
+
+npcdensls:
+
+	sqsub -o tmp.out -r 1h -q mpi -n 2 R CMD BATCH --no-save npcdensls_npRmpi.R
+	sqsub -o tmp.out -r 1h -q serial R CMD BATCH --vanilla npcdensls_serial.R
+
+npconmode:
+
+	sqsub -o tmp.out -r 1h -q mpi -n 2 R CMD BATCH --no-save npconmode_npRmpi.R
+	sqsub -o tmp.out -r 1h -q serial R CMD BATCH --vanilla npconmode_serial.R
+
+npcmstest:
+
+	sqsub -o tmp.out -r 1h -q mpi -n 2 R CMD BATCH --no-save npcmstest_npRmpi.R
+	sqsub -o tmp.out -r 1h -q serial R CMD BATCH --vanilla npcmstest_serial.R
+
+npsigtest:
+
+	sqsub -o tmp.out -r 1h -q mpi -n 2 R CMD BATCH --no-save npsigtest_npRmpi.R
+	sqsub -o tmp.out -r 1h -q serial R CMD BATCH --vanilla npsigtest_serial.R
+
+npsdeptest:
+
+	sqsub -o tmp.out -r 1h -q mpi -n 2 R CMD BATCH --no-save npsdeptest_npRmpi.R
+	sqsub -o tmp.out -r 1h -q serial R CMD BATCH --vanilla npsdeptest_serial.R
+
+npregll:
+
+	sqsub -o tmp.out -r 1h -q mpi -n 2 R CMD BATCH --no-save npregll_npRmpi.R
+	sqsub -o tmp.out -r 1h -q serial R CMD BATCH --vanilla npregll_serial.R
+
+npreglc:
+
+	sqsub -o tmp.out -r 1h -q mpi -n 2 R CMD BATCH --no-save npreglc_npRmpi.R
+	sqsub -o tmp.out -r 1h -q serial R CMD BATCH --vanilla npreglc_serial.R
+
+npindex:
+
+	sqsub -o tmp.out -r 1h -q mpi -n 2 R CMD BATCH --no-save npindex_npRmpi.R
+	sqsub -o tmp.out -r 1h -q serial R CMD BATCH --vanilla npindex_serial.R
+
+npscoef:
+
+	sqsub -o tmp.out -r 1h -q mpi -n 2 R CMD BATCH --no-save npscoef_npRmpi.R
+	sqsub -o tmp.out -r 1h -q serial R CMD BATCH --vanilla npscoef_serial.R

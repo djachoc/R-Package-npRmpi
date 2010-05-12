@@ -20,7 +20,7 @@ mpi.bcast.cmd(options(np.messages=FALSE),
 ## Generate some data and broadcast it to all slaves (it will be known
 ## to the master node so no need to broadcast it)
 
-n <- 1000
+n <- 2500
 
 set.seed(42)
 x1 <- runif(n, min=-1, max=1)
@@ -38,8 +38,8 @@ t <- system.time(mpi.bcast.cmd(bw <- npindexbw(formula=y~x1+x2),
 
 summary(bw)
 
-mpi.bcast.cmd(model <- npindex(bws=bw, gradients=TRUE),
-              caller.execute=TRUE)
+t <- t + system.time(mpi.bcast.cmd(model <- npindex(bws=bw, gradients=TRUE),
+                                   caller.execute=TRUE))
 
 summary(model)
 

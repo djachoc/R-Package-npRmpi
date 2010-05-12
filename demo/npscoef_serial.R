@@ -8,7 +8,7 @@ options(np.messages=FALSE)
 
 ## Generate some data
 
-n <- 1000
+n <- 2500
 
 set.seed(42)
 x <- runif(n)
@@ -21,7 +21,7 @@ t <- system.time(bw <- npscoefbw(y~x|z))
 
 summary(bw)
 
-model <- npscoef(bws=bw, gradients=TRUE)
+t <- t + system.time(model <- npscoef(bws=bw, gradients=TRUE))
 
 summary(model)
 

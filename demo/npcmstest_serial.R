@@ -25,7 +25,9 @@ model <- lm(growth ~ oecd +
 
 X <- data.frame(factor(oecd), factor(year), initgdp, popgro, inv, humancap)
 
-t <- system.time(output <- npcmstest(model = model, xdat = X, ydat = growth))
+t <- system.time(output <- npcmstest(model = model,
+                                     xdat = X,
+                                     ydat = growth))
 
 output
 

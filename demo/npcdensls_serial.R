@@ -21,7 +21,7 @@ t <- system.time(bw <- npcdensbw(lwage~married+
 
 summary(bw)
 
-model <- npcdens(bws=bw)
+t <- t + system.time(model <- npcdens(bws=bw))
 
 summary(model)
 

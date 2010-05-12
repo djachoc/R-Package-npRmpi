@@ -22,7 +22,7 @@ t <- system.time(bw <- npcdensbw(factor(low)~factor(smoke)+
 
 summary(bw)
 
-model <- npconmode(bws=bw)
+t <- t + system.time(model <- npconmode(bws=bw))
 
 summary(model)
 

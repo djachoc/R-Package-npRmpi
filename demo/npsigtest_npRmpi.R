@@ -32,12 +32,12 @@ mpi.bcast.Robj2slave(x1)
 mpi.bcast.Robj2slave(x2)
 mpi.bcast.Robj2slave(y)
 
-mpi.bcast.cmd(model <- npreg(y~z+x1+x2,
-                             regtype="ll",
-                             bwmethod="cv.aic"),
-              caller.execute=TRUE)
+t <- system.time(mpi.bcast.cmd(model <- npreg(y~z+x1+x2,
+                                                  regtype="ll",
+                                                  bwmethod="cv.aic"),
+                                   caller.execute=TRUE))
 
-t <- system.time(mpi.bcast.cmd(output <- npsigtest(model),
+t <- t + system.time(mpi.bcast.cmd(output <- npsigtest(model),
                                caller.execute=TRUE ))
 
 output

@@ -23,7 +23,7 @@ t <- system.time(bw <- npregbw(lwage~married+
             
 summary(bw)
 
-model <- npreg(bws=bw)
+t <- t + system.time(model <- npreg(bws=bw))
 
 summary(model)
 

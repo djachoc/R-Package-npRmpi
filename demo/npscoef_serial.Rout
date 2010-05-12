@@ -30,7 +30,7 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > 
 > ## Generate some data
 > 
-> n <- 1000
+> n <- 2500
 > 
 > set.seed(42)
 > x <- runif(n)
@@ -44,43 +44,43 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > summary(bw)
 
 Smooth Coefficient Regression
-Regression Data (1000 observations, 1 variable(s)):
+Regression Data (2500 observations, 1 variable(s)):
 
 Optimisation Method:  Nelder-Mead
 Bandwidth Selection Method: Least Squares Cross-Validation
 Formula: y ~ x | z
 Bandwidth Type: Fixed
-Objective Function Value: 0.0870352 (achieved on multistart 1)
+Objective Function Value: 0.1045424 (achieved on multistart 1)
 
-Exp. Var. Name: z Bandwidth: 0.03407073 Scale Factor: 0.1145079
+Exp. Var. Name: z Bandwidth: 0.07730362 Scale Factor: 0.3198359
 
 Continuous Kernel Type: Second-Order Gaussian
 No. Continuous Explanatory Vars.: 1
 
 > 
-> model <- npscoef(bws=bw, gradients=TRUE)
+> t <- t + system.time(model <- npscoef(bws=bw, gradients=TRUE))
 > 
 > summary(model)
 
 Smooth Coefficient Model
-Regression data: 1000 training points, in 1 variable(s)
+Regression data: 2500 training points, in 1 variable(s)
 
                        z
-Bandwidth(s): 0.03407073
+Bandwidth(s): 0.07730362
 
 Bandwidth Type: Fixed
 
-Residual standard error: 0.06969264
-R-squared: 0.9544807
+Residual standard error: 0.1006043
+R-squared: 0.9378356
 
 Continuous Kernel Type: Second-Order Gaussian
 No. Continuous Explanatory Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 13.063 
+Elapsed time = 38.585 
 > 
 > 
 > proc.time()
    user  system elapsed 
- 14.748   0.060  15.352 
+ 38.820   0.142  39.197 

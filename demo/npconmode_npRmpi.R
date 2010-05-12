@@ -39,8 +39,8 @@ t <- system.time(mpi.bcast.cmd(bw <- npcdensbw(factor(low)~factor(smoke)+
 
 summary(bw)
 
-mpi.bcast.cmd(model <- npconmode(bws=bw),
-              caller.execute=TRUE)
+t <- t + system.time(mpi.bcast.cmd(model <- npconmode(bws=bw),
+                                   caller.execute=TRUE))
 
 summary(model)
 

@@ -41,7 +41,9 @@ X <- data.frame(factor(oecd), factor(year), initgdp, popgro, inv, humancap)
 mpi.bcast.Robj2slave(model)
 mpi.bcast.Robj2slave(X)
 
-t <- system.time(mpi.bcast.cmd(output <- npcmstest(model = model, xdat = X, ydat = growth),
+t <- system.time(mpi.bcast.cmd(output <- npcmstest(model = model,
+                                                   xdat = X,
+                                                   ydat = growth),
                                caller.execute=TRUE))
 
 output

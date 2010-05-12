@@ -30,7 +30,7 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > 
 > ## Generate some data
 > 
-> n <- 1000
+> n <- 2500
 > 
 > set.seed(42)
 > x1 <- runif(n, min=-1, max=1)
@@ -44,44 +44,44 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > summary(bw)
 
 Single Index Model
-Regression data (1000 observations, 2 variable(s)):
+Regression data (2500 observations, 2 variable(s)):
 
-      x1        x2
-Beta:  1 -0.944812
-Bandwidth:  0.1724932
+      x1         x2
+Beta:  1 -0.9818075
+Bandwidth:  0.1806315
 Optimisation Method:  Nelder-Mead
 Regression Type: Local-Constant
 Bandwidth Selection Method: Ichimura
 Formula: y ~ x1 + x2
-Objective Function Value: 0.971478 (achieved on multistart 1)
+Objective Function Value: 1.036736 (achieved on multistart 2)
 
 Continuous Kernel Type: Second-Order Gaussian
 No. Continuous Explanatory Vars.: 1
 
 > 
-> model <- npindex(bws=bw, gradients=TRUE)
+> t <- t + system.time(model <- npindex(bws=bw, gradients=TRUE))
 > 
 > summary(model)
 
 Single Index Model
-Regression Data: 1000 training points, in 2 variable(s)
+Regression Data: 2500 training points, in 2 variable(s)
 
-      x1        x2
-Beta:  1 -0.944812
-Bandwidth: 0.1724932
+      x1         x2
+Beta:  1 -0.9818075
+Bandwidth: 0.1806315
 Kernel Regression Estimator: Local-Constant
 
-Residual standard error: 0.954653
-R-squared: 0.4272527
+Residual standard error: 1.029781
+R-squared: 0.4058966
 
 Continuous Kernel Type: Second-Order Gaussian
 No. Continuous Explanatory Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 7.564 
+Elapsed time = 35.932 
 > 
 > 
 > proc.time()
    user  system elapsed 
-  8.153   0.051   8.227 
+ 35.605   0.123  36.550 
