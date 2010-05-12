@@ -1,0 +1,24 @@
+all:
+
+	sqsub -o npudens_serial.out -r 2h -q serial R CMD BATCH --no-save npudens_serial.R
+
+	sqsub -o npregll_serial.out -r 2h -q serial R CMD BATCH --no-save npregll_serial.R
+
+	sqsub -o npreglc_serial.out -r 2h -q serial R CMD BATCH --no-save npreglc_serial.R
+
+	sqsub -o npindex_serial.out -r 2h -q serial R CMD BATCH --no-save npindex_serial.R
+
+	sqsub -o npscoef_serial.out -r 2h -q serial R CMD BATCH --no-save npscoef_serial.R
+
+	sqsub -o npcdensml_serial.out -r 2h -q serial R CMD BATCH --no-save npcdensml_serial.R
+
+	sqsub -o npcdensls_serial.out -r 2h -q serial R CMD BATCH --no-save npcdensls_serial.R
+
+	sqsub -o npconmode_serial.out -r 2h -q serial R CMD BATCH --no-save npconmode_serial.R
+
+	sqsub -o npcmstest_serial.out -r 2h -q serial R CMD BATCH --no-save npcmstest_serial.R
+
+	sqsub -o npsigtest_serial.out -r 2h -q serial R CMD BATCH --no-save npsigtest_serial.R
+
+	sqsub -o npsdeptest_serial.out -r 2h -q serial R CMD BATCH --no-save npsdeptest_serial.R
+

@@ -35,7 +35,7 @@ t <- system.time(mpi.bcast.cmd(bw <- npcdensbw(lwage~married+
 
 summary(bw)
 
-t <- t + system.time(mmpi.bcast.cmd(model <- npcdens(bws=bw),
+t <- t + system.time(mpi.bcast.cmd(model <- npcdens(bws=bw),
                                     caller.execute=TRUE))
 
 summary(model)
