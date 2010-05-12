@@ -1,4 +1,4 @@
-## This is the serial version of npudens_npRmpi.R for comparison
+## This is the serial version of npconmode_npRmpi.R for comparison
 ## purposes (bandwidth ought to be identical, timing may
 ## differ). Study the differences between this file and its MPI
 ## counterpart for insight about your own problems.
