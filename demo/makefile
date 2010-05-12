@@ -51,6 +51,11 @@ all:
 	mpirun -np 2 R CMD BATCH --no-save npsigtest_npRmpi.R
 	grep "time = " npsigtest*.Rout
 
+	R CMD BATCH --vanilla npsdeptest_serial.R
+	mpirun -np 2 R CMD BATCH --no-save npsdeptest_npRmpi.R
+	grep "time = " 
+	grep "Test Statistic" npsdeptest*.Rout
+
 npudens:
 
 	mpirun -np 2 R CMD BATCH --no-save npudens_npRmpi.R
@@ -91,6 +96,13 @@ npsigtest:
 	mpirun -np 2 R CMD BATCH --no-save npsigtest_npRmpi.R
 	R CMD BATCH --vanilla npsigtest_serial.R
 	grep "time = " npsigtest*.Rout
+
+npsdeptest:
+
+	mpirun -np 2 R CMD BATCH --no-save npsdeptest_npRmpi.R
+	R CMD BATCH --vanilla npsdeptest_serial.R
+	grep "time = " npsdeptest*.Rout
+	grep "Test Statistic" npsdeptest*.Rout
 
 npregll:
 

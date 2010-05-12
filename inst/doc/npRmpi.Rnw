@@ -95,7 +95,7 @@ the job in one half the amount of time that one processor
 could.\footnote{There is minor overhead involved with message passing,
   and for small samples the overhead can be substantial as the ratio
   of message passing to computing kernel estimators increases - this
-  will be negligable for sufficiently large samples.}  Given the
+  will be negligible for sufficiently large samples.}  Given the
 availability of commodity cluster computers and the presence of
 multiple cores in desktop and laptop machines, leveraging the
 \pkg{npRmpi} package for large data sets may present a feasible
@@ -298,7 +298,7 @@ complete a job in roughly one half the time of one processor, ten in
 one tenth and so forth.\footnote{There is minor overhead involved with
   message passing, and for small samples the overhead can be
   substantial as the ratio of message passing to computing kernel
-  estimators increases - this will be negligable for sufficiently
+  estimators increases - this will be negligible for sufficiently
   large samples.} Though installation of a working \proglang{MPI}
 implementation requires some familiarity with computer systems, local
 expertise exists for many and help is to be found there. That being

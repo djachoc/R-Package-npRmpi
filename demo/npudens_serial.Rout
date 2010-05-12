@@ -37,4 +37,5 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > 
 > t <- system.time(bw <- npudensbw(~x))
 
+Timing stopped at: 3.125 0.008 3.209 
 Execution halted
