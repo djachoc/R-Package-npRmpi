@@ -65,11 +65,11 @@
 \section{Overview}
 
 A common and understandable complaint often levied against
-nonparametric kernel methods is the large amount of computation time
+nonparametric kernel methods concerns the amount of computation time
 required for data-driven bandwidth selection when one has a large data
 set. There is a certain irony at play here since nonparametric methods
-are ideally suited to situations involving large data sets, however
-computationally speaking, their analysis may lie beyond the reach of
+are ideally suited to situations involving large data sets, however,
+computationally speaking their analysis may lie beyond the reach of
 many users.  Some background may be in order. My co-authors and I
 favor data-driven methods of bandwidth selection such as
 cross-validation, among others. These bandwidth selection methods have
@@ -79,7 +79,7 @@ increase run time by a factor of four).
 
 The solution adopted in the \pkg{npRmpi} package is to run the code in
 a parallel computing environment and exploit the presence of multiple
-processors if available. The underlying \proglang{C} code for \pkg{np}
+processors when available. The underlying \proglang{C} code for \pkg{np}
 is \proglang{MPI}-aware (\proglang{MPI} denotes the `message passing
 interface', a popular parallel programming library that is an
 international standard), and we merge the \pkg{R np} and \pkg{Rmpi}
@@ -97,8 +97,8 @@ number of processors present in that two processors will complete the
 job in one half the amount of time that one processor
 could.\footnote{There is minor overhead involved with message passing,
   and for small samples the overhead can be substantial when the ratio
-  of message passing to computing kernel estimators increases - this
-  will be negligible for sufficiently large samples.}  Given the
+  of message passing to computing the kernel estimator increases -
+  this will be negligible for sufficiently large samples.}  Given the
 availability of commodity cluster computers and the presence of
 multiple cores in desktop and laptop machines, leveraging the
 \pkg{npRmpi} package for large data sets may present a feasible
@@ -107,13 +107,13 @@ nonparametric kernel methods.
 
 The code has been tested in the Mac OS X and Linux environments which
 allow the user to compile \proglang{R} packages on the fly. Users
-running MS Windows will have to consult their tech support personnel
+running MS Windows will have to consult local tech support personnel
 and may also wish to consult the \pkg{Rmpi} package and web site for
 assistance here. I cannot assist with installation issues beyond what
 is provided in this document and trust the reader will forgive me for
 this.
 
-\section{Differences between np and npRmpi}
+\section{Differences Between np and npRmpi}
 
 There are only a few visible differences between running code in
 serial versus parallel environments. Typically you run your parallel
@@ -121,7 +121,8 @@ code in batch mode so the first step would be to get your code running
 in batch mode using the \pkg{np} package (obviously on a subset of
 your data for large datasets). Once you have properly functioning
 code, you will next add some `hooks' necessary for \proglang{MPI} to
-run, and finally you will run the job using either \code{mpirun} or,
+run (see Section \ref{sec example} below for a detailed example), and
+finally you will run the job using either \code{mpirun} or,
 indirectly, via a batch scheduler on your cluster such as \code{sqsub}
 (kindly consult your local support personnel for assistance on using
 batch queueing systems on your local cluster).
@@ -132,10 +133,10 @@ Installation will depend on your hardware and software configuration
 and will vary widely across platforms. If you are not familiar with
 parallel computing you are strongly advised to seek local advice.
 
-That being said, if you have Open \proglang{MPI} and \proglang{MPI2}
-properly installed on your system, installation could be as simple as
-downloading the \pkg{npRmpi} tarball and, from a command shell,
-running
+That being said, if you have current versions of \proglang{R} and Open
+\proglang{MPI} properly installed on your system, installation of the
+\pkg{npRmpi} package could be as simple as downloading the
+\pkg{npRmpi} tarball and, from a command shell, running
 
 \begin{verbatim}
 R CMD INSTALL npRmpi_foo.tar.gz 
@@ -163,24 +164,37 @@ running parallel programs.
 
 \subsection{Parallel MPI Program Batch Execution}
 
-To run the \proglang{MPI} version install the \pkg{npRmpi} program,
-copy the \code{Rprofile} file in \code{npRmpi/inst} to the current
-directory and name it \code{.Rprofile} (or copy it to your home
-directory and again name it \code{.Rprofile}). Then to run the job
-using two processors on an Open \proglang{MPI} system you will enter
-something like
+To run a parallel \pkg{np} job having successfully installed the
+\pkg{npRmpi} program, copy the \code{Rprofile} file in
+\code{npRmpi/inst} to the current directory and name it
+\code{.Rprofile} (or copy it to your home directory and again name it
+\code{.Rprofile}).\footnote{You will need to download the \pkg{npRmpi}
+  source code and unpack it in order to get Rprofile from the
+  npRmpi/inst directory.} Then to run the job using two processors on
+an Open \proglang{MPI} system you will enter something like
 
 \begin{verbatim}
 mpirun -np 2 R CMD BATCH npudens_npRmpi.R
 \end{verbatim}
 
 You can compare run times and any other differences by examining the
-files \verb+npudens_serial.Rout+ and
-\verb+npudens_npRmpi.Rout+. Clearly you could do this with a subset of
-your data for large problems to judge the extent to which the parallel
-code reduces run time.
+files \verb+npudens_serial.Rout+ and \verb+npudens_npRmpi.Rout+ (see
+Section \ref{sec run time} below for some illustrative
+examples). Clearly you could do this with a subset of your data for
+large problems to judge the extent to which the parallel code reduces
+run time.
 
-\subsection{Essential Program Elements}
+If you have a batch scheduler installed on your cluster you might
+instead enter something like
+
+\begin{verbatim}
+sqsub -q mpi -n 2 R CMD BATCH npudens_npRmpi.R
+\end{verbatim}
+
+Again, kindly consult local tech support personnel for issues
+concerning the use of batch systems and cluster computing.
+
+\subsection{Essential Program Elements}\label{sec example}
 
 Here is a simple illustrative example of a serial batch program that
 you would typically run using the \pkg{np} package.
@@ -304,9 +318,9 @@ linear in the number of processors available, so two processors will
 complete a job in roughly one half the time of one processor, ten in
 one tenth and so forth.\footnote{There is minor overhead involved with
   message passing, and for small samples the overhead can be
-  substantial as the ratio of message passing to computing kernel
-  estimators increases - this will be negligible for sufficiently
-  large samples.} Though installation of a working \proglang{MPI}
+  substantial as the ratio of message passing to computing the kernel
+  estimator increases - this will be negligible for sufficiently large
+  samples.} Though installation of a working \proglang{MPI}
 implementation requires some familiarity with computer systems, local
 expertise exists for many and help is to be found there. That being
 said, the Mac OS X operating system comes stock with a fully
@@ -320,7 +334,7 @@ much appreciated.
 
 \appendix
 
-\section{Illustrative Timed Runs}
+\section{Illustrative Timed Runs}\label{sec run time}
 
 The times reported in Table \ref{run table} were generated using R
 2.11 and Open MPI 1.2.8 on a 2008 vintage MacBook running Snow Leopard
@@ -346,13 +360,13 @@ processors.
 \begin{tabular}{lrrr}
 Function & Secs(1) & Secs(2) & Ratio\cr
 \hline
-npcdensls & 111.5 & 125.0 & 0.89\cr
-npcdensml & 27.3 & 48.8 & 0.56\cr
+npcdens (cv.ls) & 111.5 & 125.0 & 0.89\cr
+npcdens (cv.ml) & 27.3 & 48.8 & 0.56\cr
 npcmstest & 332.3 & 592.4 & 0.56\cr
 npconmode & 38.2 & 91.1 & 0.42\cr
 npindex & 18.6 & 35.1 & 0.53\cr
-npreglc & 221.9 & 346.2 & 0.64\cr
-npregll & 205.9 & 441.4 & 0.47\cr
+npreg (lc) & 221.9 & 346.2 & 0.64\cr
+npreg (ll) & 205.9 & 441.4 & 0.47\cr
 npscoef & 31.6 & 38.3 & 0.82\cr
 npsdeptest & 154.3 & 254.5 & 0.61\cr
 npsigtest & 88.3 & 156.2 & 0.56\cr
