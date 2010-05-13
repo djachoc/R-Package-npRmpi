@@ -47,7 +47,9 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > 
 > X <- data.frame(factor(oecd), factor(year), initgdp, popgro, inv, humancap)
 > 
-> t <- system.time(output <- npcmstest(model = model, xdat = X, ydat = growth))
+> t <- system.time(output <- npcmstest(model = model,
++                                      xdat = X,
++                                      ydat = growth))
 > 
 > output
 
@@ -63,8 +65,8 @@ Null of correct specification is rejected at the 0.1% level
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 618.137 
+Elapsed time = 592.417 
 > 
 > proc.time()
    user  system elapsed 
-594.480   1.473 619.273 
+592.006   0.343 593.002 

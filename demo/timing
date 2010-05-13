@@ -1,0 +1,17 @@
+#!/bin/sh
+
+grep "time = " *npRmpi.Rout | awk -F_ '{print $1}' > names.tmp
+grep "time = " *npRmpi.Rout | awk -F= '{print $2}' > npRmpi.tmp
+grep "time = " *serial.Rout | awk -F= '{print $2}' > serial.tmp
+
+paste names.tmp npRmpi.tmp serial.tmp | awk '{printf("%s: np=1: %.1f, np=2: %.1f, ratio=%.2f\n", $1, $2, $3, $2/$3)}' > timing.dat
+
+echo '\begin{tabular}{lrrr}' > timing.tex
+echo 'Function & Secs(1) & Secs(2) & Ratio\cr' >> timing.tex
+echo '\hline' >> timing.tex
+paste names.tmp npRmpi.tmp serial.tmp | awk '{printf("%s & %.1f & %.1f & %.2f\\cr\n", $1, $2, $3, $2/$3)}' >> timing.tex
+echo '\hline' >> timing.tex
+echo '\end{tabular}' >> timing.tex
+
+rm *.tmp
+cat timing.dat

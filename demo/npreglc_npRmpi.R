@@ -2,7 +2,7 @@
 ## current directory or home directory. It is necessary.
 
 ## To run this on systems with OPENMPI installed and working, try
-## mpirun -np 2 R CMD BATCH npreg_npRmpi. Check the time in the output
+## mpirun -np 2 R CMD BATCH npreglc_npRmpi. Check the time in the output
 ## file foo.Rout (the name of this file with extension .Rout), then
 ## try with, say, 4 processors and compare run time.
 
@@ -24,9 +24,8 @@ mpi.bcast.Robj2slave(wage1)
 
 ## A regression example (local constant)
 
-t <- system.time(mpi.bcast.cmd(bw <- npregbw(lwage~married+
-                                             female+
-                                             nonwhite+                
+t <- system.time(mpi.bcast.cmd(bw <- npregbw(lwage~female+
+                                             married+
                                              educ+
                                              exper+
                                              tenure,

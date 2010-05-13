@@ -124,7 +124,7 @@ code, you will next add some `hooks' necessary for \proglang{MPI} to
 run, and finally you will run the job using either \code{mpirun} or,
 indirectly, via a batch scheduler on your cluster such as \code{sqsub}
 (kindly consult your local support personnel for assistance on using
-batch queuing systems on your local cluster).
+batch queueing systems on your local cluster).
 
 \subsection*{Installation}
 
@@ -317,5 +317,64 @@ reporting of errors and bugs and so forth is always encouraged and
 much appreciated.
 
 \bibliography{npRmpi}
+
+\appendix
+
+\section{Illustrative Timed Runs}
+
+The times reported in Table \ref{run table} were generated using R
+2.11 and Open MPI 1.2.8 on a 2008 vintage MacBook running Snow Leopard
+10.6.3 on a 2.4 GHz Intel Core 2 Duo (a completely stock
+installation). Code was first run in serial mode using the np package
+version 0.30-8 then in parallel mode with 2 processors using the
+npRmpi package version 0.30-8. Elapsed time for the np functions is
+provided (seconds) as is the ratio of the elapsed time for the
+parallel run to the serial run.
+
+Note that many of these illustrative examples use smallish sample
+sizes hence the run time with 2 processors will not be 1/2 that with 1
+processor due to overhead. But for larger samples (i.e. the ones you
+actually need parallel computing for, not these toy illustrations) you
+ought to see an improvement that is linear in the number of
+processors.
+
+\begin{table}
+\begin{center}
+  \caption{\label{run table}Illustrative timed runs (seconds) with 1
+    processor (serial, np package) and 2 processors (parallel, npRmpi
+    package).}
+\begin{tabular}{lrrr}
+Function & Secs(1) & Secs(2) & Ratio\cr
+\hline
+npcdensls & 111.5 & 125.0 & 0.89\cr
+npcdensml & 27.3 & 48.8 & 0.56\cr
+npcmstest & 332.3 & 592.4 & 0.56\cr
+npconmode & 38.2 & 91.1 & 0.42\cr
+npindex & 18.6 & 35.1 & 0.53\cr
+npreglc & 221.9 & 346.2 & 0.64\cr
+npregll & 205.9 & 441.4 & 0.47\cr
+npscoef & 31.6 & 38.3 & 0.82\cr
+npsdeptest & 154.3 & 254.5 & 0.61\cr
+npsigtest & 88.3 & 156.2 & 0.56\cr
+npudens & 14.8 & 25.3 & 0.59\cr
+\hline
+\end{tabular}
+
+\end{center}
+\end{table}
+
+
+\section{Known Issues}
+
+\begin{enumerate}
+  
+\item It would be wise to cast all variables when read into
+  \proglang{R} (always good practice) and not do so using the formula
+  interface. 
+  
+  Casting responses (i.e.~stuff to the left of the \verb+~+) works in
+  the serial version but does not appear to work for \verb+npcdensbw+.
+  
+\end{enumerate}
 
 \end{document}

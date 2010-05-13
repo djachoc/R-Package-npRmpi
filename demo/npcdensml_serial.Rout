@@ -28,74 +28,64 @@ Loading required package: cubature
 Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > options(np.messages=FALSE)
 > 
-> data(wage1)
+> library(MASS)
+> set.seed(42)
+> n <- 1000
+> rho <- 0.25
+> mu <- c(0,0)
+> Sigma <- matrix(c(1,rho,rho,1),2,2)
+> data <- mvrnorm(n=n, mu, Sigma)
+> y <- data[,1]
+> x <- data[,2]
 > 
-> ## A simple example with likelihood cross-validation
+> ## A simple example with least-squares cross-validation
 > 
-> t <- system.time(bw <- npcdensbw(lwage~married+
-+                                  female+
-+                                  nonwhite+                
-+                                  educ+
-+                                  exper+
-+                                  tenure,
-+                                  data=wage1))
+> t <- system.time(bw <- npcdensbw(y~x,
++                                  bwmethod="cv.ml"))
 > 
 > summary(bw)
 
-Conditional density data (526 observations, 7 variable(s))
-(1 dependent variable(s), and 6 explanatory variable(s))
+Conditional density data (1000 observations, 2 variable(s))
+(1 dependent variable(s), and 1 explanatory variable(s))
 
 Bandwidth Selection Method: Maximum Likelihood Cross-Validation
-Formula: lwage ~ married + female + nonwhite + educ + exper + tenure
+Formula: y ~ x
 Bandwidth Type: Fixed
-Objective Function Value: 0.5060847 (achieved on multistart 3)
+Objective Function Value: 1.399431 (achieved on multistart 1)
 
-Exp. Var. Name: married  Bandwidth: 0.2904984      Lambda Max: 0.5      
-Exp. Var. Name: female   Bandwidth: 4.153571e-16   Lambda Max: 0.5      
-Exp. Var. Name: nonwhite Bandwidth: 0.3068632      Lambda Max: 0.5      
-Exp. Var. Name: educ     Bandwidth: 1.455456     Scale Factor: 2.148314 
-Exp. Var. Name: exper    Bandwidth: 4.259578     Scale Factor: 0.6868167
-Exp. Var. Name: tenure   Bandwidth: 12.85462     Scale Factor: 5.421127  
+Exp. Var. Name: x Bandwidth: 0.6168227 Scale Factor: 1.967139 
 
-Dep. Var. Name: lwage    Bandwidth: 0.1901536 Scale Factor: 0.7828764
+Dep. Var. Name: y Bandwidth: 0.3316314 Scale Factor: 1.082349
 
 Continuous Kernel Type: Second-Order Gaussian
-No. Continuous Explanatory Vars.: 3
+No. Continuous Explanatory Vars.: 1
 No. Continuous Dependent Vars.: 1
-
-Unordered Categorical Kernel Type: Aitchison and Aitken
-No. Unordered Categorical Explanatory Vars.: 3
 
 > 
 > t <- t + system.time(model <- npcdens(bws=bw))
 > 
 > summary(model)
 
-Conditional Density Data: 526 training points, in 7 variable(s)
-(1 dependent variable(s), and 6 explanatory variable(s))
+Conditional Density Data: 1000 training points, in 2 variable(s)
+(1 dependent variable(s), and 1 explanatory variable(s))
 
-                            lwage
-Dep. Var. Bandwidth(s): 0.1901536
-                          married       female  nonwhite     educ    exper
-Exp. Var. Bandwidth(s): 0.2904984 4.153571e-16 0.3068632 1.455456 4.259578
-                          tenure
-Exp. Var. Bandwidth(s): 12.85462
+                                y
+Dep. Var. Bandwidth(s): 0.3316314
+                                x
+Exp. Var. Bandwidth(s): 0.6168227
 
 Bandwidth Type: Fixed
-Log Likelihood: -116.0387
+Log Likelihood: -1376.740
 
 Continuous Kernel Type: Second-Order Gaussian
-No. Continuous Explanatory Vars.: 3
+No. Continuous Explanatory Vars.: 1
 No. Continuous Dependent Vars.: 1
-
-Unordered Categorical Kernel Type: Aitchison and Aitken
-No. Unordered Categorical Explanatory Vars.: 3
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 479.338 
+Elapsed time = 48.839 
 > 
 > 
 > proc.time()
    user  system elapsed 
-478.925   0.187 479.880 
+ 49.320   0.064  49.429 

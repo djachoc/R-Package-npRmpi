@@ -17,7 +17,7 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> ## This is the serial version of npudens_npRmpi.R for comparison
+> ## This is the serial version of npsdeptest_npRmpi.R for comparison
 > ## purposes (bandwidth ought to be identical, timing may
 > ## differ). Study the differences between this file and its MPI
 > ## counterpart for insight about your own problems.
@@ -71,8 +71,8 @@ Null of independence is rejected at lag 2 at the 0.1% level
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 265.031 
+Elapsed time = 254.539 
 > 
 > proc.time()
    user  system elapsed 
-256.678   0.658 266.346 
+254.516   0.227 255.038 

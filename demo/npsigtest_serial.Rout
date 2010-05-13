@@ -64,8 +64,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 153.641 
+Elapsed time = 156.236 
 > 
 > proc.time()
    user  system elapsed 
-153.394   0.172 154.161 
+156.306   0.155 156.761 

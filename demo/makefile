@@ -42,7 +42,7 @@ all:
 	grep "time = " npsigtest*.Rout
 
 	mpirun -np $(np) R CMD BATCH --no-save npsdeptest_npRmpi.R
-	grep "time = " 
+	grep "time = " npsdeptest*.Rout
 	grep "Test Statistic" npsdeptest*.Rout
 
 npudens:

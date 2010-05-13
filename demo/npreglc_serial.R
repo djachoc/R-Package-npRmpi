@@ -1,4 +1,4 @@
-## This is the serial version of npreg_npRmpi.R for comparison
+## This is the serial version of npreglc_npRmpi.R for comparison
 ## purposes (bandwidth ought to be identical, timing may
 ## differ). Study the differences between this file and its MPI
 ## counterpart for insight about your own problems.
@@ -11,9 +11,8 @@ attach(wage1)
 
 ## A regression example (local constant)
 
-t <- system.time(bw <- npregbw(lwage~married+
-                               female+
-                               nonwhite+                
+t <- system.time(bw <- npregbw(lwage~female+
+                               married+
                                educ+
                                exper+
                                tenure,

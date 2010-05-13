@@ -20,8 +20,8 @@ Type 'q()' to quit R.
 Loading required package: boot
 Loading required package: cubature
 Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8) + Rmpi 0.5-8
-master (rank 0, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
-slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
+master (rank 0, comm 1) of size 2 is running on: pc-racine2 
+slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2 
 > ## Make sure you have the .Rprofile file from npRmpi/inst/ in your
 > ## current directory or home directory. It is necessary.
 > 
@@ -43,71 +43,63 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > 
 > ## Load your data and broadcast it to all slave nodes
 > 
-> data(wage1)
-> mpi.bcast.Robj2slave(wage1)
+> library(MASS)
+> set.seed(42)
+> n <- 1000
+> rho <- 0.25
+> mu <- c(0,0)
+> Sigma <- matrix(c(1,rho,rho,1),2,2)
+> data <- mvrnorm(n=n, mu, Sigma)
+> y <- data[,1]
+> x <- data[,2]
+> 
+> mpi.bcast.Robj2slave(x)
+> mpi.bcast.Robj2slave(y)
 > 
 > ## A conditional density estimation example. 
 > 
-> t <- system.time(mpi.bcast.cmd(bw <- npcdensbw(lwage~married+
-+                                                female+
-+                                                nonwhite+                
-+                                                educ+
-+                                                exper+
-+                                                tenure,
-+                                                data=wage1),
+> t <- system.time(mpi.bcast.cmd(bw <- npcdensbw(y~x,
++                                                bwmethod="cv.ml"),
 +                                caller.execute=TRUE))
 > 
 > summary(bw)
 
-Conditional density data (526 observations, 7 variable(s))
-(1 dependent variable(s), and 6 explanatory variable(s))
+Conditional density data (1000 observations, 2 variable(s))
+(1 dependent variable(s), and 1 explanatory variable(s))
 
 Bandwidth Selection Method: Maximum Likelihood Cross-Validation
-Formula: lwage ~ married + female + nonwhite + educ + exper + tenure
+Formula: y ~ x
 Bandwidth Type: Fixed
-Objective Function Value: 0.5061207 (achieved on multistart 3)
+Objective Function Value: 1.399431 (achieved on multistart 1)
 
-Exp. Var. Name: married  Bandwidth: 0.2762003     Lambda Max: 0.5      
-Exp. Var. Name: female   Bandwidth: 8.54869e-16   Lambda Max: 0.5      
-Exp. Var. Name: nonwhite Bandwidth: 0.3058096     Lambda Max: 0.5      
-Exp. Var. Name: educ     Bandwidth: 1.459786    Scale Factor: 2.154704 
-Exp. Var. Name: exper    Bandwidth: 4.289273    Scale Factor: 0.6916047
-Exp. Var. Name: tenure   Bandwidth: 12.80741    Scale Factor: 5.401222  
+Exp. Var. Name: x Bandwidth: 0.616823 Scale Factor: 1.967140 
 
-Dep. Var. Name: lwage    Bandwidth: 0.1902472 Scale Factor: 0.7832618
+Dep. Var. Name: y Bandwidth: 0.3316313 Scale Factor: 1.082349
 
 Continuous Kernel Type: Second-Order Gaussian
-No. Continuous Explanatory Vars.: 3
+No. Continuous Explanatory Vars.: 1
 No. Continuous Dependent Vars.: 1
-
-Unordered Categorical Kernel Type: Aitchison and Aitken
-No. Unordered Categorical Explanatory Vars.: 3
 
 > 
 > t <- t + system.time(mpi.bcast.cmd(model <- npcdens(bws=bw),
-+                                     caller.execute=TRUE))
++                                    caller.execute=TRUE))
 > 
 > summary(model)
 
-Conditional Density Data: 526 training points, in 7 variable(s)
-(1 dependent variable(s), and 6 explanatory variable(s))
+Conditional Density Data: 1000 training points, in 2 variable(s)
+(1 dependent variable(s), and 1 explanatory variable(s))
 
-                            lwage
-Dep. Var. Bandwidth(s): 0.1902472
-                          married      female  nonwhite     educ    exper
-Exp. Var. Bandwidth(s): 0.2762003 8.54869e-16 0.3058096 1.459786 4.289273
-                          tenure
-Exp. Var. Bandwidth(s): 12.80741
+                                y
+Dep. Var. Bandwidth(s): 0.3316313
+                               x
+Exp. Var. Bandwidth(s): 0.616823
 
 Bandwidth Type: Fixed
-Log Likelihood: -115.2185
+Log Likelihood: -1376.740
 
 Continuous Kernel Type: Second-Order Gaussian
-No. Continuous Explanatory Vars.: 3
+No. Continuous Explanatory Vars.: 1
 No. Continuous Dependent Vars.: 1
-
-Unordered Categorical Kernel Type: Aitchison and Aitken
-No. Unordered Categorical Explanatory Vars.: 3
 
 > 
 > ## Clean up properly then quit()
@@ -116,6 +108,6 @@ No. Unordered Categorical Explanatory Vars.: 3
 [1] 1
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 251.761 
+Elapsed time = 27.272 
 > 
 > mpi.quit()
