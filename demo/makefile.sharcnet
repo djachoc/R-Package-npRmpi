@@ -1,24 +1,24 @@
 all:
 
-	sqsub -o npudens_npRmpi.out -r 2h -q mpi -n 2 R CMD BATCH --no-save npudens_npRmpi.R
+	sqsub -o npudens_npRmpi.out -r 2h -q mpi -n $(n) R CMD BATCH --no-save ../R/npudens_npRmpi.R
 
-	sqsub -o npregll_npRmpi.out -r 2h -q mpi -n 2 R CMD BATCH --no-save npregll_npRmpi.R
+	sqsub -o npregll_npRmpi.out -r 2h -q mpi -n $(n) R CMD BATCH --no-save ../R/npregll_npRmpi.R
 
-	sqsub -o npreglc_npRmpi.out -r 2h -q mpi -n 2 R CMD BATCH --no-save npreglc_npRmpi.R
+	sqsub -o npreglc_npRmpi.out -r 2h -q mpi -n $(n) R CMD BATCH --no-save ../R/npreglc_npRmpi.R
 
-	sqsub -o npindex_npRmpi.out -r 2h -q mpi -n 2 R CMD BATCH --no-save npindex_npRmpi.R
+	sqsub -o npindex_npRmpi.out -r 2h -q mpi -n $(n) R CMD BATCH --no-save ../R/npindex_npRmpi.R
 
-	sqsub -o npscoef_npRmpi.out -r 2h -q mpi -n 2 R CMD BATCH --no-save npscoef_npRmpi.R
+	sqsub -o npscoef_npRmpi.out -r 2h -q mpi -n $(n) R CMD BATCH --no-save ../R/npscoef_npRmpi.R
 
-	sqsub -o npcdensml_npRmpi.out -r 2h -q mpi -n 2 R CMD BATCH --no-save npcdensml_npRmpi.R
+	sqsub -o npcdensml_npRmpi.out -r 2h -q mpi -n $(n) R CMD BATCH --no-save ../R/npcdensml_npRmpi.R
 
-	sqsub -o npcdensls_npRmpi.out -r 2h -q mpi -n 2 R CMD BATCH --no-save npcdensls_npRmpi.R
+	sqsub -o npcdensls_npRmpi.out -r 2h -q mpi -n $(n) R CMD BATCH --no-save ../R/npcdensls_npRmpi.R
 
-	sqsub -o npconmode_npRmpi.out -r 2h -q mpi -n 2 R CMD BATCH --no-save npconmode_npRmpi.R
+	sqsub -o npconmode_npRmpi.out -r 2h -q mpi -n $(n) R CMD BATCH --no-save ../R/npconmode_npRmpi.R
 
-	sqsub -o npcmstest_npRmpi.out -r 2h -q mpi -n 2 R CMD BATCH --no-save npcmstest_npRmpi.R
+	sqsub -o npcmstest_npRmpi.out -r 2h -q mpi -n $(n) R CMD BATCH --no-save ../R/npcmstest_npRmpi.R
 
-	sqsub -o npsigtest_npRmpi.out -r 2h -q mpi -n 2 R CMD BATCH --no-save npsigtest_npRmpi.R
+	sqsub -o npsigtest_npRmpi.out -r 2h -q mpi -n $(n) R CMD BATCH --no-save ../R/npsigtest_npRmpi.R
 
-	sqsub -o npsdeptest_npRmpi.out -r 2h -q mpi -n 2 R CMD BATCH --no-save npsdeptest_npRmpi.R
+	sqsub -o npsdeptest_npRmpi.out -r 2h -q mpi -n $(n) R CMD BATCH --no-save ../R/npsdeptest_npRmpi.R
 

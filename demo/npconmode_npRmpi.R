@@ -17,23 +17,28 @@ mpi.bcast.cmd(np.mpi.initialize(),
 mpi.bcast.cmd(options(np.messages=FALSE),
               caller.execute=TRUE)
 
-## Generate some data and broadcast it to all slaves (it will be known
-## to the master node)
+library(MASS)
+data(birthwt)
 
-## A conditional mode example
-
-library("MASS")
-data("birthwt")
+birthwt$low <- factor(birthwt$low)
+birthwt$smoke <- factor(birthwt$smoke)
+birthwt$race <- factor(birthwt$race)
+birthwt$ht <- factor(birthwt$ht)
+birthwt$ui <- factor(birthwt$ui)
+birthwt$ftv <- ordered(birthwt$ftv)
 
 mpi.bcast.Robj2slave(birthwt)
 
-t <- system.time(mpi.bcast.cmd(bw <- npcdensbw(factor(low)~factor(smoke)+ 
-                                               factor(race)+ 
-                                               factor(ht)+ 
-                                               factor(ui)+    
-                                               ordered(ftv)+  
+## A conditional mode example
+
+t <- system.time(mpi.bcast.cmd(bw <- npcdensbw(low~
+                                               smoke+ 
+                                               race+ 
+                                               ht+ 
+                                               ui+    
+                                               ftv+  
                                                age+           
-                                               lwt,           
+                                               lwt,
                                                data=birthwt),
                                caller.execute=TRUE))
 
@@ -42,7 +47,8 @@ summary(bw)
 t <- t + system.time(mpi.bcast.cmd(model <- npconmode(bws=bw),
                                    caller.execute=TRUE))
 
-summary(model)
+
+## Clean up properly then quit()
 
 mpi.close.Rslaves()
 

@@ -33,17 +33,15 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > 
 > ## A regression example (local constant)
 > 
-> system.time(bw <- npregbw(lwage~married+
-+                           female+
-+                           nonwhite+                
-+                           educ+
-+                           exper+
-+                           tenure,
-+                           regtype="lc",
-+                           bwmethod="cv.aic",
-+                           data=wage1))
-   user  system elapsed 
-274.112   0.061 274.306 
+> t <- system.time(bw <- npregbw(lwage~married+
++                                female+
++                                nonwhite+                
++                                educ+
++                                exper+
++                                tenure,
++                                regtype="lc",
++                                bwmethod="cv.aic",
++                                data=wage1))
 > 
 > summary(bw)
 
@@ -69,7 +67,7 @@ Unordered Categorical Kernel Type: Aitchison and Aitken
 No. Unordered Categorical Explanatory Vars.: 3
 
 > 
-> model <- npreg(bws=bw)
+> t <- t + system.time(model <- npreg(bws=bw))
 > 
 > summary(model)
 
@@ -89,7 +87,10 @@ Unordered Categorical Kernel Type: Aitchison and Aitken
 No. Unordered Categorical Explanatory Vars.: 3
 
 > 
+> cat("Elapsed time =", t[3], "\n")
+Elapsed time = 275.318 
+> 
 > 
 > proc.time()
    user  system elapsed 
-274.746   0.101 274.998 
+274.880   0.212 275.879 

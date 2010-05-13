@@ -63,4 +63,4 @@ mpirun -np 2 R CMD BATCH npudens_npRmpi.R
 You can compare run times and any other differences by examining the
 files npudens_serial.Rout and npudens_npRmpi.Rout. Clearly you could
 do this with a subset of your data for large problems to judge the
-extent to which the parallel code reduces run time.
+extent to which the parallel code reduces run time. 

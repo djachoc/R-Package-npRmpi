@@ -32,15 +32,13 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > 
 > ## A simple example with likelihood cross-validation
 > 
-> system.time(bw <- npcdensbw(lwage~married+
-+                             female+
-+                             nonwhite+                
-+                             educ+
-+                             exper+
-+                             tenure,
-+                             data=wage1))
-   user  system elapsed 
-473.372   0.103 473.798 
+> t <- system.time(bw <- npcdensbw(lwage~married+
++                                  female+
++                                  nonwhite+                
++                                  educ+
++                                  exper+
++                                  tenure,
++                                  data=wage1))
 > 
 > summary(bw)
 
@@ -69,7 +67,7 @@ Unordered Categorical Kernel Type: Aitchison and Aitken
 No. Unordered Categorical Explanatory Vars.: 3
 
 > 
-> model <- npcdens(bws=bw)
+> t <- t + system.time(model <- npcdens(bws=bw))
 > 
 > summary(model)
 
@@ -94,7 +92,10 @@ Unordered Categorical Kernel Type: Aitchison and Aitken
 No. Unordered Categorical Explanatory Vars.: 3
 
 > 
+> cat("Elapsed time =", t[3], "\n")
+Elapsed time = 479.338 
+> 
 > 
 > proc.time()
    user  system elapsed 
-473.899   0.143 474.692 
+478.925   0.187 479.880 

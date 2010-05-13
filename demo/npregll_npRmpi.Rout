@@ -48,18 +48,16 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > 
 > ## A regression example (local linear)
 > 
-> system.time(mpi.bcast.cmd(bw <- npregbw(lwage~married+
-+                                         female+
-+                                         nonwhite+                
-+                                         educ+
-+                                         exper+
-+                                         tenure,
-+                                         regtype="ll",
-+                                         bwmethod="cv.aic",
-+                                         data=wage1),
-+                           caller.execute=TRUE))
-   user  system elapsed 
-192.824   1.313 199.276 
+> t <- system.time(mpi.bcast.cmd(bw <- npregbw(lwage~married+
++                                              female+
++                                              nonwhite+                
++                                              educ+
++                                              exper+
++                                              tenure,
++                                              regtype="ll",
++                                              bwmethod="cv.aic",
++                                              data=wage1),
++                                caller.execute=TRUE))
 > 
 > summary(bw)
 
@@ -85,8 +83,8 @@ Unordered Categorical Kernel Type: Aitchison and Aitken
 No. Unordered Categorical Explanatory Vars.: 3
 
 > 
-> mpi.bcast.cmd(model <- npreg(bws=bw),
-+               caller.execute=TRUE)
+> t <- t + system.time(mpi.bcast.cmd(model <- npreg(bws=bw),
++                                    caller.execute=TRUE))
 > 
 > summary(model)
 
@@ -110,5 +108,8 @@ No. Unordered Categorical Explanatory Vars.: 3
 > 
 > mpi.close.Rslaves()
 [1] 1
+> 
+> cat("Elapsed time =", t[3], "\n")
+Elapsed time = 207.828 
 > 
 > mpi.quit()

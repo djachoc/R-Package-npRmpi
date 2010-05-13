@@ -1,0 +1,38 @@
+#!/bin/sh
+
+mkdir serial
+cd serial
+make -f ../R/makefile.serial.sharcnet
+cd ../
+
+mkdir n_2
+cd n_2
+make -f ../R/makefile.sharcnet n=2
+cd ../
+
+mkdir n_2
+cd n_2
+make -f ../R/makefile.sharcnet n=2
+cd ../
+
+mkdir n_4
+cd n_4
+make -f ../R/makefile.sharcnet n=4
+cd ../
+
+mkdir n_6
+cd n_6
+make -f ../R/makefile.sharcnet n=6
+cd ../
+
+mkdir n_8
+cd n_8
+make -f ../R/makefile.sharcnet n=8
+cd ../
+
+mkdir n_10
+cd n_10
+make -f ../R/makefile.sharcnet n=10
+cd ../
+
+

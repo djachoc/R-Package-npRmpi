@@ -1,0 +1,71 @@
+all:
+
+	R CMD BATCH --vanilla npudens_serial.R
+
+	R CMD BATCH --vanilla npregll_serial.R
+
+	R CMD BATCH --vanilla npreglc_serial.R
+
+	R CMD BATCH --vanilla npindex_serial.R
+
+	R CMD BATCH --vanilla npscoef_serial.R
+
+	R CMD BATCH --vanilla npcdensml_serial.R
+
+	R CMD BATCH --vanilla npcdensls_serial.R
+
+	R CMD BATCH --vanilla npconmode_serial.R
+
+	R CMD BATCH --vanilla npcmstest_serial.R
+
+	R CMD BATCH --vanilla npsigtest_serial.R
+
+	R CMD BATCH --vanilla npsdeptest_serial.R
+
+npudens:
+
+	R CMD BATCH --vanilla npudens_serial.R
+
+npcdensml:
+
+	R CMD BATCH --vanilla npcdensml_serial.R
+
+npcdensls:
+
+	R CMD BATCH --vanilla npcdensls_serial.R
+
+npconmode:
+
+	R CMD BATCH --vanilla npconmode_serial.R
+
+npcmstest:
+
+	R CMD BATCH --vanilla npcmstest_serial.R
+
+npsigtest:
+
+	R CMD BATCH --vanilla npsigtest_serial.R
+
+npsdeptest:
+
+	R CMD BATCH --vanilla npsdeptest_serial.R
+
+npregll:
+
+	R CMD BATCH --vanilla npregll_serial.R
+
+npreglc:
+
+	R CMD BATCH --vanilla npreglc_serial.R
+
+npindex:
+
+	R CMD BATCH --vanilla npindex_serial.R
+
+npscoef:
+
+	R CMD BATCH --vanilla npscoef_serial.R
+
+clean:
+
+	rm *.out *.Rout *~

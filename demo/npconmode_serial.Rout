@@ -17,7 +17,7 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> ## This is the serial version of npudens_npRmpi.R for comparison
+> ## This is the serial version of npconmode_npRmpi.R for comparison
 > ## purposes (bandwidth ought to be identical, timing may
 > ## differ). Study the differences between this file and its MPI
 > ## counterpart for insight about your own problems.
@@ -28,18 +28,26 @@ Loading required package: cubature
 Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > options(np.messages=FALSE)
 > 
-> library("MASS")
-> data("birthwt")
+> library(MASS)
+> data(birthwt)
+> 
+> birthwt$low <- factor(birthwt$low)
+> birthwt$smoke <- factor(birthwt$smoke)
+> birthwt$race <- factor(birthwt$race)
+> birthwt$ht <- factor(birthwt$ht)
+> birthwt$ui <- factor(birthwt$ui)
+> birthwt$ftv <- ordered(birthwt$ftv)
 > 
 > ## A conditional mode example
 > 
-> t <- system.time(bw <- npcdensbw(factor(low)~factor(smoke)+ 
-+                                  factor(race)+ 
-+                                  factor(ht)+ 
-+                                  factor(ui)+    
-+                                  ordered(ftv)+  
+> t <- system.time(bw <- npcdensbw(low~
++                                  smoke+ 
++                                  race+ 
++                                  ht+ 
++                                  ui+    
++                                  ftv+  
 +                                  age+           
-+                                  lwt,           
++                                  lwt,
 +                                  data=birthwt))
 > 
 > summary(bw)
@@ -48,20 +56,19 @@ Conditional density data (189 observations, 8 variable(s))
 (1 dependent variable(s), and 7 explanatory variable(s))
 
 Bandwidth Selection Method: Maximum Likelihood Cross-Validation
-Formula: factor(low) ~ factor(smoke) + factor(race) + factor(ht) + factor(ui) + 
-    ordered(ftv) + age + lwt
+Formula: low ~ smoke + race + ht + ui + ftv + age + lwt
 Bandwidth Type: Fixed
 Objective Function Value: 0.5675563 (achieved on multistart 3)
 
-Exp. Var. Name: factor(smoke) Bandwidth: 0.4446024    Lambda Max: 0.5      
-Exp. Var. Name: factor(race)  Bandwidth: 0.6666667    Lambda Max: 0.6666667
-Exp. Var. Name: factor(ht)    Bandwidth: 0.02522040   Lambda Max: 0.5      
-Exp. Var. Name: factor(ui)    Bandwidth: 0.04118838   Lambda Max: 0.5      
-Exp. Var. Name: ordered(ftv)  Bandwidth: 0.72146      Lambda Max: 1        
-Exp. Var. Name: age           Bandwidth: 5.486306   Scale Factor: 2.532781 
-Exp. Var. Name: lwt           Bandwidth: 5.445919   Scale Factor: 0.5866317 
+Exp. Var. Name: smoke Bandwidth: 0.4446024    Lambda Max: 0.5      
+Exp. Var. Name: race  Bandwidth: 0.6666667    Lambda Max: 0.6666667
+Exp. Var. Name: ht    Bandwidth: 0.02522040   Lambda Max: 0.5      
+Exp. Var. Name: ui    Bandwidth: 0.04118838   Lambda Max: 0.5      
+Exp. Var. Name: ftv   Bandwidth: 0.72146      Lambda Max: 1        
+Exp. Var. Name: age   Bandwidth: 5.486306   Scale Factor: 2.532781 
+Exp. Var. Name: lwt   Bandwidth: 5.445919   Scale Factor: 0.5866317 
 
-Dep. Var. Name: factor(low)   Bandwidth: 0.03365099   Lambda Max: 0.5
+Dep. Var. Name: low   Bandwidth: 0.03365099   Lambda Max: 0.5
 
 Continuous Kernel Type: Second-Order Gaussian
 No. Continuous Explanatory Vars.: 2
@@ -74,19 +81,19 @@ Ordered Categorical Kernel Type: Wang and Van Ryzin
 No. Ordered Categorical Explanatory Vars.: 1
 
 > 
-> model <- npconmode(bws=bw)
+> t <- t + system.time(model <- npconmode(bws=bw))
 > 
 > summary(model)
 
 Conditional Mode data: 189 training points, in 8 variable(s)
 (1 dependent variable(s), and 7 explanatory variable(s))
 
-                        factor(low)
-Dep. Var. Bandwidth(s):  0.03365099
-                        factor(smoke) factor(race) factor(ht) factor(ui)
-Exp. Var. Bandwidth(s):     0.4446024    0.6666667 0.02522040 0.04118838
-                        ordered(ftv)      age      lwt
-Exp. Var. Bandwidth(s):      0.72146 5.486306 5.445919
+                               low
+Dep. Var. Bandwidth(s): 0.03365099
+                            smoke      race         ht         ui     ftv
+Exp. Var. Bandwidth(s): 0.4446024 0.6666667 0.02522040 0.04118838 0.72146
+                             age      lwt
+Exp. Var. Bandwidth(s): 5.486306 5.445919
 
 Bandwidth Type: Fixed
 
@@ -115,8 +122,8 @@ No. Ordered Categorical Explanatory Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 92.797 
+Elapsed time = 90.996 
 > 
 > proc.time()
    user  system elapsed 
- 91.360   0.206  94.034 
+ 91.254   0.106  91.606 

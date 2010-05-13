@@ -48,16 +48,14 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > 
 > ## A conditional density estimation example. 
 > 
-> system.time(mpi.bcast.cmd(bw <- npcdensbw(lwage~married+
-+                                           female+
-+                                           nonwhite+                
-+                                           educ+
-+                                           exper+
-+                                           tenure,
-+                                           data=wage1),
-+                           caller.execute=TRUE))
-   user  system elapsed 
-246.016   1.523 254.028 
+> t <- system.time(mpi.bcast.cmd(bw <- npcdensbw(lwage~married+
++                                                female+
++                                                nonwhite+                
++                                                educ+
++                                                exper+
++                                                tenure,
++                                                data=wage1),
++                                caller.execute=TRUE))
 > 
 > summary(bw)
 
@@ -86,8 +84,8 @@ Unordered Categorical Kernel Type: Aitchison and Aitken
 No. Unordered Categorical Explanatory Vars.: 3
 
 > 
-> mpi.bcast.cmd(model <- npcdens(bws=bw),
-+               caller.execute=TRUE)
+> t <- t + system.time(mpi.bcast.cmd(model <- npcdens(bws=bw),
++                                     caller.execute=TRUE))
 > 
 > summary(model)
 
@@ -116,5 +114,8 @@ No. Unordered Categorical Explanatory Vars.: 3
 > 
 > mpi.close.Rslaves()
 [1] 1
+> 
+> cat("Elapsed time =", t[3], "\n")
+Elapsed time = 251.761 
 > 
 > mpi.quit()
