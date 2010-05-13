@@ -1,6 +1,8 @@
 all:
 
-	R CMD BATCH --vanilla npudens_serial.R
+	R CMD BATCH --vanilla npudensml_serial.R
+
+	R CMD BATCH --vanilla npudensls_serial.R
 
 	R CMD BATCH --vanilla npregll_serial.R
 
@@ -24,9 +26,13 @@ all:
 
 	R CMD BATCH --vanilla npsdeptest_serial.R
 
-npudens:
+npudensml:
 
-	R CMD BATCH --vanilla npudens_serial.R
+	R CMD BATCH --vanilla npudensml_serial.R
+
+npudensls:
+
+	R CMD BATCH --vanilla npudensls_serial.R
 
 npcdensml:
 

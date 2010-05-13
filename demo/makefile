@@ -1,8 +1,12 @@
 all:
 
-	mpirun -np $(np) R CMD BATCH --no-save npudens_npRmpi.R
-	grep "time = " npudens*.Rout
-	grep Objective npudens*.Rout
+	mpirun -np $(np) R CMD BATCH --no-save npudensml_npRmpi.R
+	grep "time = " npudensml*.Rout
+	grep Objective npudensml*.Rout
+
+	mpirun -np $(np) R CMD BATCH --no-save npudensls_npRmpi.R
+	grep "time = " npudensls*.Rout
+	grep Objective npudensls*.Rout
 
 	mpirun -np $(np) R CMD BATCH --no-save npregll_npRmpi.R
 	grep "time = " npregll*.Rout
@@ -49,11 +53,17 @@ all:
 	grep "time = " npsdeptest*.Rout
 	grep "Test Statistic" npsdeptest*.Rout
 
-npudens:
+npudensml:
 
-	mpirun -np $(np) R CMD BATCH --no-save npudens_npRmpi.R
-	grep "time = " npudens*.Rout
-	grep Objective npudens*.Rout
+	mpirun -np $(np) R CMD BATCH --no-save npudensml_npRmpi.R
+	grep "time = " npudensml*.Rout
+	grep Objective npudensml*.Rout
+
+npudensls:
+
+	mpirun -np $(np) R CMD BATCH --no-save npudensls_npRmpi.R
+	grep "time = " npudensls*.Rout
+	grep Objective npudensls*.Rout
 
 npcdensml:
 

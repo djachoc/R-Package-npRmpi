@@ -17,7 +17,7 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> ## This is the serial version of npudens_npRmpi.R for comparison
+> ## This is the serial version of npudensls_npRmpi.R for comparison
 > ## purposes (bandwidth ought to be identical, timing may
 > ## differ). Study the differences between this file and its MPI
 > ## counterpart for insight about your own problems.
@@ -35,26 +35,27 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > 
 > ## A simple example with likelihood cross-validation
 > 
-> t <- system.time(bw <- npudensbw(~x))
+> t <- system.time(bw <- npudensbw(~x,
++                                  bwmethod="cv.ls"))
 > 
 > summary(bw)
 
 Data (2500 observations, 1 variable(s)):
 
-Bandwidth Selection Method: Maximum Likelihood Cross-Validation
+Bandwidth Selection Method: Least Squares Cross-Validation
 Formula: ~x
 Bandwidth Type: Fixed
-Objective Function Value: 1.416243 (achieved on multistart 1)
+Objective Function Value: -0.2842138 (achieved on multistart 1)
 
-Var. Name: x Bandwidth: 0.2155757 Scale Factor: 1.050824
+Var. Name: x Bandwidth: 0.1732034 Scale Factor: 0.8442797
 
 Continuous Kernel Type: Second-Order Gaussian
 No. Continuous Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 25.319 
+Elapsed time = 57.782 
 > 
 > proc.time()
    user  system elapsed 
- 25.762   0.054  25.816 
+ 58.125   0.054  58.245 
