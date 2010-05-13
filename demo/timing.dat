@@ -1,0 +1,12 @@
+npcdensls: np=1: 111.5, np=2: 125.0, ratio=0.89
+npcdensml: np=1: 27.3, np=2: 48.8, ratio=0.56
+npcmstest: np=1: 332.3, np=2: 592.4, ratio=0.56
+npconmode: np=1: 38.2, np=2: 91.1, ratio=0.42
+npindexich: np=1: 18.1, np=2: 35.0, ratio=0.52
+npindexks: np=1: 27.2, np=2: 61.7, ratio=0.44
+npreglc: np=1: 221.9, np=2: 346.2, ratio=0.64
+npregll: np=1: 205.9, np=2: 441.4, ratio=0.47
+npscoef: np=1: 31.6, np=2: 38.3, ratio=0.82
+npsdeptest: np=1: 154.3, np=2: 254.5, ratio=0.61
+npsigtest: np=1: 88.3, np=2: 156.2, ratio=0.56
+npudens: np=1: 14.1, np=2: 25.3, ratio=0.56

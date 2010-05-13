@@ -14,9 +14,13 @@ all:
 	grep Objective npreglc*.Rout
 	grep squared npreglc*.Rout
 
-	mpirun -np $(np) R CMD BATCH --no-save npindex_npRmpi.R
-	grep "time = " npindex*.Rout
-	grep Objective npindex*.Rout
+	mpirun -np $(np) R CMD BATCH --no-save npindexich_npRmpi.R
+	grep "time = " npindexich*.Rout
+	grep Objective npindexich*.Rout
+
+	mpirun -np $(np) R CMD BATCH --no-save npindexks_npRmpi.R
+	grep "time = " npindexks*.Rout
+	grep Objective npindexks*.Rout
 
 	mpirun -np $(np) R CMD BATCH --no-save npscoef_npRmpi.R
 	grep "time = " npscoef*.Rout
@@ -100,11 +104,17 @@ npreglc:
 	grep Objective npreglc*.Rout
 	grep squared npreglc*.Rout
 
-npindex:
+npindexich:
 
-	mpirun -np $(np) R CMD BATCH --no-save npindex_npRmpi.R
-	grep "time = " npindex*.Rout
-	grep Objective npindex*.Rout
+	mpirun -np $(np) R CMD BATCH --no-save npindexich_npRmpi.R
+	grep "time = " npindexich*.Rout
+	grep Objective npindexich*.Rout
+
+npindexks:
+
+	mpirun -np $(np) R CMD BATCH --no-save npindexks_npRmpi.R
+	grep "time = " npindexks*.Rout
+	grep Objective npindexks*.Rout
 
 npscoef:
 

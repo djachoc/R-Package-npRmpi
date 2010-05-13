@@ -6,7 +6,9 @@ all:
 
 	R CMD BATCH --vanilla npreglc_serial.R
 
-	R CMD BATCH --vanilla npindex_serial.R
+	R CMD BATCH --vanilla npindexich_serial.R
+
+	R CMD BATCH --vanilla npindexks_serial.R
 
 	R CMD BATCH --vanilla npscoef_serial.R
 
@@ -58,9 +60,13 @@ npreglc:
 
 	R CMD BATCH --vanilla npreglc_serial.R
 
-npindex:
+npindexich:
 
-	R CMD BATCH --vanilla npindex_serial.R
+	R CMD BATCH --vanilla npindexich_serial.R
+
+npindexks:
+
+	R CMD BATCH --vanilla npindexks_serial.R
 
 npscoef:
 

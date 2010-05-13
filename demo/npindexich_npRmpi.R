@@ -2,7 +2,7 @@
 ## current directory or home directory. It is necessary.
 
 ## To run this on systems with OPENMPI installed and working, try
-## mpirun -np 2 R CMD BATCH npindex_npRmpi. Check the time in the
+## mpirun -np 2 R CMD BATCH npindexich_npRmpi. Check the time in the
 ## output file foo.Rout (the name of this file with extension .Rout),
 ## then try with, say, 4 processors and compare run time.
 
@@ -31,7 +31,7 @@ mpi.bcast.Robj2slave(x1)
 mpi.bcast.Robj2slave(x2)
 mpi.bcast.Robj2slave(y)
 
-## A single index model example
+## A single index model example (Ichimura, continuous y)
 
 t <- system.time(mpi.bcast.cmd(bw <- npindexbw(formula=y~x1+x2),
                                caller.execute=TRUE))

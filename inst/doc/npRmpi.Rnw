@@ -364,13 +364,14 @@ npcdens (cv.ls) & 111.5 & 125.0 & 0.89\cr
 npcdens (cv.ml) & 27.3 & 48.8 & 0.56\cr
 npcmstest & 332.3 & 592.4 & 0.56\cr
 npconmode & 38.2 & 91.1 & 0.42\cr
-npindex & 18.6 & 35.1 & 0.53\cr
+npindex (Ichimura) & 18.1 & 35.0 & 0.52\cr
+npindex (Klein/Spady) & 27.2 & 61.7 & 0.44\cr
 npreg (lc) & 221.9 & 346.2 & 0.64\cr
 npreg (ll) & 205.9 & 441.4 & 0.47\cr
 npscoef & 31.6 & 38.3 & 0.82\cr
 npsdeptest & 154.3 & 254.5 & 0.61\cr
 npsigtest & 88.3 & 156.2 & 0.56\cr
-npudens & 14.8 & 25.3 & 0.59\cr
+npudens & 14.1 & 25.3 & 0.56\cr
 \hline
 \end{tabular}
 
