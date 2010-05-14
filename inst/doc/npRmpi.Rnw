@@ -118,7 +118,7 @@ There are only a few visible differences between running code in
 serial versus parallel environments. Typically you run your parallel
 code in batch mode so the first step would be to get your code running
 in batch mode using the \pkg{np} package (obviously on a subset of
-your data for large datasets). Once you have properly functioning
+your data for large data sets). Once you have properly functioning
 code, you will next add some `hooks' necessary for \proglang{MPI} to
 run (see Section \ref{sec example} below for a detailed example), and
 finally you will run the job using either \code{mpirun} or,
@@ -151,8 +151,8 @@ Intel compiler suite and need to set \proglang{MPI} library paths and
 \proglang{MPI} root directories):
 
 \begin{verbatim}
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/sharcnet/openmpi/1.4.1/intel/lib
-export MPI_ROOT=/opt/sharcnet/openmpi/1.4.1/intel 
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/sharcnet/openmpi/1.4.2/intel/lib
+export MPI_ROOT=/opt/sharcnet/openmpi/1.4.2/intel 
 R CMD INSTALL npRmpi_foo.tar.gz
 \end{verbatim}
 
@@ -161,7 +161,7 @@ where again foo is the version number.
 Please seek local help for further assistance on installing and
 running parallel programs.
 
-\subsection{Parallel MPI Program Batch Execution}
+\subsection{Parallel Batch Execution}
 
 To run a parallel \pkg{np} job having successfully installed the
 \pkg{npRmpi} program, copy the \code{Rprofile} file in
@@ -169,16 +169,17 @@ To run a parallel \pkg{np} job having successfully installed the
 \code{.Rprofile} (or copy it to your home directory and again name it
 \code{.Rprofile}).\footnote{You will need to download the \pkg{npRmpi}
   source code and unpack it in order to get Rprofile from the
-  npRmpi/inst directory.} Then to run the job using two processors on
-an Open \proglang{MPI} system you will enter something like
+  npRmpi/inst directory.} Then to run the batch code in the file
+\code{npudensml_npRmpi.R} using two processors on an Open \proglang{MPI}
+system you will enter something like
 
 \begin{verbatim}
-mpirun -np 2 R CMD BATCH npudens_npRmpi.R
+mpirun -np 2 R CMD BATCH npudensml_npRmpi.R
 \end{verbatim}
 
 You can compare run times and any other differences by examining the
-files \code{npudens_serial.Rout}+ and \code{npudens_npRmpi.Rout} (see
-Section \ref{sec run time} below for some illustrative
+files \code{npudensml_serial.Rout} and \code{npudensml_npRmpi.Rout}
+(see Section \ref{sec run time} below for some illustrative
 examples). Clearly you could do this with a subset of your data for
 large problems to judge the extent to which the parallel code reduces
 run time.
@@ -187,18 +188,19 @@ If you have a batch scheduler installed on your cluster you might
 instead enter something like
 
 \begin{verbatim}
-sqsub -q mpi -n 2 R CMD BATCH npudens_npRmpi.R
+sqsub -q mpi -n 2 R CMD BATCH npudensml_npRmpi.R
 \end{verbatim}
 
 Again, kindly consult local tech support personnel for issues
-concerning the use of batch systems and cluster computing.
+concerning the use of batch queueing systems and using compute
+clusters.
 
 \subsection{Essential Program Elements}\label{sec example}
 
 Here is a simple illustrative example of a serial batch program that
 you would typically run using the \pkg{np} package.
 \begin{verbatim}
-## This is the serial version of npudens_npRmpi.R for comparison
+## This is the serial version of npudensml_npRmpi.R for comparison
 ## purposes (bandwidth ought to be identical, timing may
 ## differ). Study the differences between this file and its MPI
 ## counterpart for insight about your own problems.
@@ -260,7 +262,7 @@ Below is the same code modified to run in parallel using the
 ## current directory or home directory. It is necessary.
 
 ## To run this on systems with OPENMPI installed and working, try
-## mpirun -np 2 R CMD BATCH npudens_npRmpi. Check the time in the
+## mpirun -np 2 R CMD BATCH npudensml_npRmpi. Check the time in the
 ## output file foo.Rout (the name of this file with extension .Rout),
 ## then try with, say, 4 processors and compare run time.
 
@@ -336,11 +338,11 @@ bugs and so forth is always encouraged and much appreciated.
 \section{Illustrative Timed Runs}\label{sec run time}
 
 The times reported in Table \ref{run table} were generated using R
-2.11 and Open MPI 1.2.8 on a 2008 vintage MacBook running Snow Leopard
-10.6.3 on a 2.4 GHz Intel Core 2 Duo (a completely stock
+2.11-0 and Open MPI 1.2.8 on a 2008 vintage MacBook running Snow
+Leopard 10.6.3 on a 2.4 GHz Intel Core 2 Duo (a completely stock
 installation). Code was first run in serial mode using the np package
-version 0.30-8 then in parallel mode with 2 processors using the
-npRmpi package version 0.30-8. Elapsed time for the np functions is
+version 0.30-9 then in parallel mode with 2 processors using the
+npRmpi package version 0.30-9. Elapsed time for the np functions is
 provided (seconds) as is the ratio of the elapsed time for the
 parallel run to the serial run.
 
@@ -397,7 +399,7 @@ npunitest & 27.3 & 41.4 & 0.66\cr
   run orders of magnitude slower under \proglang{MPI} when using
   \code{method="integration"} (default). This might be related to a
   limit on the number of nested function calls in \proglang{R} and/or
-  the \pkg{cubature} pagekage as I have encountered this in a serial
+  the \pkg{cubature} package as I have encountered this in a serial
   environment in the past (solutions welcomed!). 
   
   For the time being you are advised to use the serial \pkg{np}
@@ -405,7 +407,7 @@ npunitest & 27.3 & 41.4 & 0.66\cr
   \code{method="summation"} (see \code{?npunitest} and
   \code{?npdeptest} for caveats, though these functions are quite
   efficient computationally speaking and can handle quite large
-  datasets by default via the serial implementation).
+  data sets by default via the serial implementation).
   
 \end{enumerate}
 
