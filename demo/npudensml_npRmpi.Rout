@@ -75,6 +75,6 @@ No. Continuous Vars.: 1
 [1] 1
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 13.331 
+Elapsed time = 13.673 
 > 
 > mpi.quit()

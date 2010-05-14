@@ -17,7 +17,7 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> ## This is the serial version of npreg_npRmpi.R for comparison
+> ## This is the serial version of npreglc_npRmpi.R for comparison
 > ## purposes (bandwidth ought to be identical, timing may
 > ## differ). Study the differences between this file and its MPI
 > ## counterpart for insight about your own problems.
@@ -33,9 +33,8 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > 
 > ## A regression example (local constant)
 > 
-> t <- system.time(bw <- npregbw(lwage~married+
-+                                female+
-+                                nonwhite+                
+> t <- system.time(bw <- npregbw(lwage~female+
++                                married+
 +                                educ+
 +                                exper+
 +                                tenure,
@@ -45,52 +44,51 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > 
 > summary(bw)
 
-Regression Data (526 observations, 6 variable(s)):
+Regression Data (526 observations, 5 variable(s)):
 
 Regression Type: Local-Constant
 Bandwidth Selection Method: Expected Kullback-Leibler Cross-Validation
-Formula: lwage ~ married + female + nonwhite + educ + exper + tenure
+Formula: lwage ~ female + married + educ + exper + tenure
 Bandwidth Type: Fixed
-Objective Function Value: -0.803263 (achieved on multistart 4)
+Objective Function Value: -0.800832 (achieved on multistart 1)
 
-Exp. Var. Name: married  Bandwidth: 0.2121798    Lambda Max: 0.5      
-Exp. Var. Name: female   Bandwidth: 0.07951892   Lambda Max: 0.5      
-Exp. Var. Name: nonwhite Bandwidth: 0.2916081    Lambda Max: 0.5      
-Exp. Var. Name: educ     Bandwidth: 1.713918   Scale Factor: 2.829290 
-Exp. Var. Name: exper    Bandwidth: 4.527434   Scale Factor: 0.8164234
-Exp. Var. Name: tenure   Bandwidth: 9.241745   Scale Factor: 4.358866 
+Exp. Var. Name: female  Bandwidth: 0.08107416   Lambda Max: 0.5      
+Exp. Var. Name: married Bandwidth: 0.25         Lambda Max: 0.5      
+Exp. Var. Name: educ    Bandwidth: 1.657371   Scale Factor: 2.735945 
+Exp. Var. Name: exper   Bandwidth: 4.282771   Scale Factor: 0.7723038
+Exp. Var. Name: tenure  Bandwidth: 9.018507   Scale Factor: 4.253576 
 
 Continuous Kernel Type: Second-Order Gaussian
 No. Continuous Explanatory Vars.: 3
 
 Unordered Categorical Kernel Type: Aitchison and Aitken
-No. Unordered Categorical Explanatory Vars.: 3
+No. Unordered Categorical Explanatory Vars.: 2
 
 > 
 > t <- t + system.time(model <- npreg(bws=bw))
 > 
 > summary(model)
 
-Regression Data: 526 training points, in 6 variable(s)
-                married     female  nonwhite     educ    exper   tenure
-Bandwidth(s): 0.2121798 0.07951892 0.2916081 1.713918 4.527434 9.241745
+Regression Data: 526 training points, in 5 variable(s)
+                  female married     educ    exper   tenure
+Bandwidth(s): 0.08107416    0.25 1.657371 4.282771 9.018507
 
 Kernel Regression Estimator: Local-Constant
 Bandwidth Type: Fixed
-Residual standard error: 0.1291155
-R-squared: 0.5643833
+Residual standard error: 0.1318561
+R-squared: 0.5527276
 
 Continuous Kernel Type: Second-Order Gaussian
 No. Continuous Explanatory Vars.: 3
 
 Unordered Categorical Kernel Type: Aitchison and Aitken
-No. Unordered Categorical Explanatory Vars.: 3
+No. Unordered Categorical Explanatory Vars.: 2
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 346.22 
+Elapsed time = 219.591 
 > 
 > 
 > proc.time()
    user  system elapsed 
-344.659   0.310 346.823 
+219.951   0.093 220.117 

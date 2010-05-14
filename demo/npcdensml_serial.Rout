@@ -17,7 +17,7 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> ## This is the serial version of npcdens_npRmpi.R for comparison
+> ## This is the serial version of npcdensml_npRmpi.R for comparison
 > ## purposes (bandwidth ought to be identical, timing may
 > ## differ). Study the differences between this file and its MPI
 > ## counterpart for insight about your own problems.
@@ -83,9 +83,9 @@ No. Continuous Dependent Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 48.839 
+Elapsed time = 46.31 
 > 
 > 
 > proc.time()
    user  system elapsed 
- 49.320   0.064  49.429 
+ 46.807   0.050  46.903 

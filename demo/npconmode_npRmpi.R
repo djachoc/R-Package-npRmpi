@@ -47,6 +47,7 @@ summary(bw)
 t <- t + system.time(mpi.bcast.cmd(model <- npconmode(bws=bw),
                                    caller.execute=TRUE))
 
+summary(model)
 
 ## Clean up properly then quit()
 
