@@ -32,6 +32,8 @@ all:
 
 	R CMD BATCH --vanilla npdeneqtest_serial.R
 
+	R CMD BATCH --vanilla npqreg_serial.R
+
 npudensml:
 
 	R CMD BATCH --vanilla npudensml_serial.R
@@ -75,6 +77,10 @@ npunitest:
 npdeneqtest:
 
 	R CMD BATCH --vanilla npdeneqtest_serial.R
+
+npqreg:
+
+	R CMD BATCH --vanilla npqreg_serial.R
 
 npregll:
 

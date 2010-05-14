@@ -6,6 +6,7 @@ npdeneqtest: np=1: 24.3, np=2: 43.2, ratio=0.56
 npdeptest: np=1: 38.6, np=2: 70.9, ratio=0.54
 npindexich: np=1: 19.6, np=2: 35.1, ratio=0.56
 npindexks: np=1: 27.5, np=2: 61.3, ratio=0.45
+npqreg: np=1: 53.2, np=2: 96.3, ratio=0.55
 npreglc: np=1: 140.2, np=2: 273.8, ratio=0.51
 npregll: np=1: 236.3, np=2: 388.1, ratio=0.61
 npscoef: np=1: 32.8, np=2: 38.3, ratio=0.86

@@ -367,6 +367,7 @@ npdeneqtest & 24.3 & 43.2 & 0.56\cr
 npdeptest & 38.6 & 70.9 & 0.54\cr
 npindex (Ichimura) & 19.6 & 35.1 & 0.56\cr
 npindex (Klein/Spady) & 27.5 & 61.3 & 0.45\cr
+npqreg & 53.2 & 96.3 & 0.55\cr
 npreg (lc) & 140.2 & 273.8 & 0.51\cr
 npreg (ll) & 236.3 & 388.1 & 0.61\cr
 npscoef & 32.8 & 38.3 & 0.86\cr
