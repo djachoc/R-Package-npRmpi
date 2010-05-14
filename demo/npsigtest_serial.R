@@ -6,8 +6,7 @@
 library(np)
 options(np.messages=FALSE)
 
-mpi.bcast.cmd(set.seed(42),
-              caller.execute=TRUE)
+set.seed(42)
 
 ## Significance testing with z irrelevant
 

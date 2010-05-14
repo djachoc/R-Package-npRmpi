@@ -10,8 +10,7 @@ options(np.messages=FALSE)
 
 n <- 2500
 
-mpi.bcast.cmd(set.seed(42),
-              caller.execute=TRUE)
+set.seed(42)
 
 x <- rnorm(n)
 

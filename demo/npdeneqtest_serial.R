@@ -8,8 +8,7 @@ options(np.messages=FALSE)
 
 ## Generate some data
 
-mpi.bcast.cmd(set.seed(42),
-              caller.execute=TRUE)
+set.seed(42)
 
 n <- 1000
 

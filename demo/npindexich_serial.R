@@ -10,8 +10,7 @@ options(np.messages=FALSE)
 
 n <- 2500
 
-mpi.bcast.cmd(set.seed(42),
-              caller.execute=TRUE)
+set.seed(42)
 
 x1 <- runif(n, min=-1, max=1)
 x2 <- runif(n, min=-1, max=1)
