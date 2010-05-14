@@ -20,8 +20,8 @@ Type 'q()' to quit R.
 Loading required package: boot
 Loading required package: cubature
 Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8) + Rmpi 0.5-8
-master (rank 0, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
-slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
+master (rank 0, comm 1) of size 2 is running on: pc-racine2 
+slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2 
 > ## Make sure you have the .Rprofile file from npRmpi/inst/ in your
 > ## current directory or home directory. It is necessary.
 > 
@@ -44,7 +44,8 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > ## Generate some data and broadcast it to all slaves (it will be known
 > ## to the master node)
 > 
-> set.seed(42)
+> mpi.bcast.cmd(set.seed(42),
++               caller.execute=TRUE)
 > 
 > ## A function to create a time series
 > 
@@ -79,8 +80,8 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 Consistent Metric Entropy Test for Nonlinear Dependence 
 399 Bootstrap Replications, 2 Lags
 
-Test Statistic ‘Srho[1]’: 0.1070427	P Value: < 2.22e-16 ***
-Test Statistic ‘Srho[2]’: 0.07820768	P Value: < 2.22e-16 ***
+Test Statistic 'Srho[1]': 0.1070427	P Value: < 2.22e-16 ***
+Test Statistic 'Srho[2]': 0.07820768	P Value: < 2.22e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Null of independence is rejected at lag 1 at the 0.1% level
@@ -93,6 +94,6 @@ Null of independence is rejected at lag 2 at the 0.1% level
 [1] 1
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 148.698 
+Elapsed time = 149.994 
 > 
 > mpi.quit()

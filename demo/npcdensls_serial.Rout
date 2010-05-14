@@ -29,8 +29,11 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > options(np.messages=FALSE)
 > 
 > library(MASS)
+> 
 > set.seed(42)
+> 
 > n <- 500
+> 
 > rho <- 0.25
 > mu <- c(0,0)
 > Sigma <- matrix(c(1,rho,rho,1),2,2)
@@ -83,9 +86,9 @@ No. Continuous Dependent Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 116.185 
+Elapsed time = 117.213 
 > 
 > 
 > proc.time()
    user  system elapsed 
-116.614   0.095 116.734 
+117.425   0.156 117.757 

@@ -359,21 +359,24 @@ processors.
 \begin{tabular}{lrrr}
 Function & Secs(1) & Secs(2) & Ratio\cr
 \hline
-npcdens (cv.ls) & 111.5 & 125.0 & 0.89\cr
-npcdens (cv.ml) & 27.3 & 48.8 & 0.56\cr
-npcmstest & 332.3 & 592.4 & 0.56\cr
-npconmode & 38.2 & 91.1 & 0.42\cr
-npindex (Ichimura) & 18.1 & 35.0 & 0.52\cr
-npindex (Klein/Spady) & 27.2 & 61.7 & 0.44\cr
-npreg (lc) & 221.9 & 346.2 & 0.64\cr
-npreg (ll) & 205.9 & 441.4 & 0.47\cr
-npscoef & 31.6 & 38.3 & 0.82\cr
-npsdeptest & 154.3 & 254.5 & 0.61\cr
-npsigtest & 88.3 & 156.2 & 0.56\cr
-npudens & 14.1 & 25.3 & 0.56\cr
+npcdens (cv.ls) & 105.7 & 117.2 & 0.90\cr
+npcdens (cv.ml) & 25.2 & 50.0 & 0.50\cr
+npcmstest & 317.1 & 596.8 & 0.53\cr
+npconmode & 38.1 & 91.0 & 0.42\cr
+npdeneqtest & 24.3 & 43.2 & 0.56\cr
+npdeptest & 38.6 & 70.9 & 0.54\cr
+npindex (Ichimura) & 19.6 & 35.1 & 0.56\cr
+npindex (Klein/Spady) & 27.5 & 61.3 & 0.45\cr
+npreg (lc) & 140.2 & 273.8 & 0.51\cr
+npreg (ll) & 236.3 & 388.1 & 0.61\cr
+npscoef & 32.8 & 38.3 & 0.86\cr
+npsdeptest & 150.0 & 257.7 & 0.58\cr
+npsigtest & 84.9 & 155.1 & 0.55\cr
+npudens (cv.ls) & 30.3 & 60.7 & 0.50\cr
+npudens (cv.ml) & 14.4 & 25.3 & 0.57\cr
+npunitest & 27.3 & 41.4 & 0.66\cr
 \hline
 \end{tabular}
-
 \end{center}
 \end{table}
 
@@ -391,14 +394,17 @@ npudens & 14.1 & 25.3 & 0.56\cr
   
 \item The functions \code{npunitest} and \code{npdeptest} currently
   run orders of magnitude slower under \proglang{MPI} when using
-  \code{method="integration"} (default). This appears to be related to
-  a limit on the number of nested function calls in \proglang{R}. For
-  the time being you are advised to use the serial \pkg{np} package if
-  you require this function or select \code{method="summation"} (see
-  \code{?npunitest} and \code{?npdeptest} for caveats, though these
-  functions are quite efficient computationally speaking and can
-  handle quite large datasets by default via the serial
-  implementation).
+  \code{method="integration"} (default). This might be related to a
+  limit on the number of nested function calls in \proglang{R} and/or
+  the \pkg{cubature} pagekage as I have encountered this in a serial
+  environment in the past (solutions welcomed!). 
+  
+  For the time being you are advised to use the serial \pkg{np}
+  package if you require this function or select
+  \code{method="summation"} (see \code{?npunitest} and
+  \code{?npdeptest} for caveats, though these functions are quite
+  efficient computationally speaking and can handle quite large
+  datasets by default via the serial implementation).
   
 \end{enumerate}
 

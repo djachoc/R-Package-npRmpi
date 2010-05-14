@@ -33,6 +33,7 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > n <- 2500
 > 
 > set.seed(42)
+> 
 > x <- runif(n)
 > z <- runif(n, min=-2, max=2)
 > y <- x*exp(z)*(1.0+rnorm(n,sd = 0.2))
@@ -78,9 +79,9 @@ No. Continuous Explanatory Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 36.149 
+Elapsed time = 38.305 
 > 
 > 
 > proc.time()
    user  system elapsed 
- 36.566   0.066  36.643 
+ 38.450   0.100  38.753 

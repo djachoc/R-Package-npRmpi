@@ -80,14 +80,19 @@ overhead. But for larger samples (i.e. the ones you need parallel
 computing for, not these toy illustrations) you ought to see an
 improvement that is linear in the number of processors.
 
-npcdensls: np=1: 111.5, np=2: 125.0, ratio=0.89
-npcdensml: np=1: 27.3, np=2: 48.8, ratio=0.56
-npcmstest: np=1: 332.3, np=2: 592.4, ratio=0.56
-npconmode: np=1: 38.2, np=2: 91.1, ratio=0.42
-npindex: np=1: 18.6, np=2: 35.1, ratio=0.53
-npreglc: np=1: 221.9, np=2: 346.2, ratio=0.64
-npregll: np=1: 205.9, np=2: 441.4, ratio=0.47
-npscoef: np=1: 31.6, np=2: 38.3, ratio=0.82
-npsdeptest: np=1: 154.3, np=2: 254.5, ratio=0.61
-npsigtest: np=1: 88.3, np=2: 156.2, ratio=0.56
-npudens: np=1: 14.8, np=2: 25.3, ratio=0.59
+npcdensls: np=1: 105.7, np=2: 117.2, ratio=0.90
+npcdensml: np=1: 25.2, np=2: 50.0, ratio=0.50
+npcmstest: np=1: 317.1, np=2: 596.8, ratio=0.53
+npconmode: np=1: 38.1, np=2: 91.0, ratio=0.42
+npdeneqtest: np=1: 24.3, np=2: 43.2, ratio=0.56
+npdeptest: np=1: 38.6, np=2: 70.9, ratio=0.54
+npindexich: np=1: 19.6, np=2: 35.1, ratio=0.56
+npindexks: np=1: 27.5, np=2: 61.3, ratio=0.45
+npreglc: np=1: 140.2, np=2: 273.8, ratio=0.51
+npregll: np=1: 236.3, np=2: 388.1, ratio=0.61
+npscoef: np=1: 32.8, np=2: 38.3, ratio=0.86
+npsdeptest: np=1: 150.0, np=2: 257.7, ratio=0.58
+npsigtest: np=1: 84.9, np=2: 155.1, ratio=0.55
+npudensls: np=1: 30.3, np=2: 60.7, ratio=0.50
+npudensml: np=1: 14.4, np=2: 25.3, ratio=0.57
+npunitest: np=1: 27.3, np=2: 41.4, ratio=0.66

@@ -62,8 +62,8 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 Consistent Metric Entropy Test for Nonlinear Dependence 
 399 Bootstrap Replications, 2 Lags
 
-Test Statistic ‘Srho[1]’: 0.1070427	P Value: < 2.22e-16 ***
-Test Statistic ‘Srho[2]’: 0.07820768	P Value: < 2.22e-16 ***
+Test Statistic 'Srho[1]': 0.1070427	P Value: < 2.22e-16 ***
+Test Statistic 'Srho[2]': 0.07820768	P Value: < 2.22e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Null of independence is rejected at lag 1 at the 0.1% level
@@ -71,8 +71,8 @@ Null of independence is rejected at lag 2 at the 0.1% level
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 240.671 
+Elapsed time = 257.672 
 > 
 > proc.time()
    user  system elapsed 
-240.698   0.190 241.140 
+257.590   0.224 258.089 

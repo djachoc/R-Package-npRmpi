@@ -17,7 +17,7 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> ## This is the serial version of npudensml_npRmpi.R for comparison
+> ## This is the serial version of npunitest_npRmpi.R for comparison
 > ## purposes (bandwidth ought to be identical, timing may
 > ## differ). Study the differences between this file and its MPI
 > ## counterpart for insight about your own problems.
@@ -48,15 +48,15 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 Consistent Univariate Entropy Density Equality Test
 399 Bootstrap Replications
 
-Test Statistic ‘Srho’: 0.00104913	P Value: 0.7193 
+Test Statistic 'Srho': 0.00104913	P Value: 0.7193 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Fail to reject the null of equality at the 10% level
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 39.673 
+Elapsed time = 41.447 
 > 
 > proc.time()
    user  system elapsed 
- 40.009   0.086  40.135 
+ 41.726   0.102  41.889 

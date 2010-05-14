@@ -50,15 +50,15 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 Consistent Metric Entropy Test for Dependence 
 99 Bootstrap Replications
 
-Test Statistic ‘Srho’: 0.03826348	P Value: < 2.22e-16 ***
+Test Statistic 'Srho': 0.03826348	P Value: < 2.22e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Null of independence is rejected at the 0.1% level
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 67.657 
+Elapsed time = 70.868 
 > 
 > proc.time()
    user  system elapsed 
- 67.926   0.083  68.131 
+ 69.719   0.134  71.388 

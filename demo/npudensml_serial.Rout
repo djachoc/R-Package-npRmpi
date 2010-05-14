@@ -30,8 +30,11 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > 
 > ## Generate some data
 > 
+> n <- 2500
+> 
 > set.seed(42)
-> x <- rnorm(2500)
+> 
+> x <- rnorm(n)
 > 
 > ## A simple example with likelihood cross-validation
 > 
@@ -54,8 +57,8 @@ No. Continuous Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 24.036 
+Elapsed time = 25.321 
 > 
 > proc.time()
    user  system elapsed 
- 24.450   0.042  24.497 
+ 25.791   0.137  27.629 

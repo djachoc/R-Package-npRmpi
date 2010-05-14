@@ -20,8 +20,8 @@ Type 'q()' to quit R.
 Loading required package: boot
 Loading required package: cubature
 Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8) + Rmpi 0.5-8
-master (rank 0, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
-slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
+master (rank 0, comm 1) of size 2 is running on: pc-racine2 
+slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2 
 > ## Make sure you have the .Rprofile file from npRmpi/inst/ in your
 > ## current directory or home directory. It is necessary.
 > 
@@ -46,7 +46,8 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > 
 > n <- 1000
 > 
-> set.seed(42)
+> mpi.bcast.cmd(set.seed(42),
++               caller.execute=TRUE)
 > 
 > x <- rnorm(n)
 > y <- 1 + x + rnorm(n)
@@ -69,7 +70,7 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 Consistent Metric Entropy Test for Dependence 
 99 Bootstrap Replications
 
-Test Statistic ‘Srho’: 0.03826348	P Value: < 2.22e-16 ***
+Test Statistic 'Srho': 0.03826348	P Value: < 2.22e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Null of independence is rejected at the 0.1% level
@@ -81,6 +82,6 @@ Null of independence is rejected at the 0.1% level
 [1] 1
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 36.218 
+Elapsed time = 38.562 
 > 
 > mpi.quit()

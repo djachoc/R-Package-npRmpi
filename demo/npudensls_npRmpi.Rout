@@ -20,8 +20,8 @@ Type 'q()' to quit R.
 Loading required package: boot
 Loading required package: cubature
 Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8) + Rmpi 0.5-8
-master (rank 0, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
-slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
+master (rank 0, comm 1) of size 2 is running on: pc-racine2 
+slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2 
 > ## Make sure you have the .Rprofile file from npRmpi/inst/ in your
 > ## current directory or home directory. It is necessary.
 > 
@@ -44,8 +44,12 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > ## Generate some data and broadcast it to all slaves (it will be known
 > ## to the master node)
 > 
-> set.seed(42)
-> x <- rnorm(2500)
+> n <- 2500
+> 
+> mpi.bcast.cmd(set.seed(42),
++               caller.execute=TRUE)
+> 
+> x <- rnorm(n)
 > mpi.bcast.Robj2slave(x)
 > 
 > ## A simple example with likelihood cross-validation
@@ -75,6 +79,6 @@ No. Continuous Vars.: 1
 [1] 1
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 29.088 
+Elapsed time = 30.28 
 > 
 > mpi.quit()

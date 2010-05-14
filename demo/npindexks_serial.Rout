@@ -33,6 +33,7 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > n <- 2500
 > 
 > set.seed(42)
+> 
 > x <- rchisq(n, df=3)
 > x1 <- (ifelse(x < 6, x, 6) - 2.348)/1.511
 > x <- rnorm(n)
@@ -92,9 +93,9 @@ No. Continuous Explanatory Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 58.055 
+Elapsed time = 61.275 
 > 
 > 
 > proc.time()
    user  system elapsed 
- 58.466   0.066  58.544 
+ 61.530   0.084  61.719 
