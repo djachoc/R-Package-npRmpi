@@ -26,6 +26,8 @@ all:
 
 	R CMD BATCH --vanilla npsdeptest_serial.R
 
+	R CMD BATCH --vanilla npdeptest_serial.R
+
 	R CMD BATCH --vanilla npunitest_serial.R
 
 	R CMD BATCH --vanilla npdeneqtest_serial.R
@@ -61,6 +63,10 @@ npsigtest:
 npsdeptest:
 
 	R CMD BATCH --vanilla npsdeptest_serial.R
+
+npdeptest:
+
+	R CMD BATCH --vanilla npdeptest_serial.R
 
 npunitest:
 

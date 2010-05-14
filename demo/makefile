@@ -53,6 +53,10 @@ all:
 	grep "time = " npsdeptest*.Rout
 	grep "Test Statistic" npsdeptest*.Rout
 
+	mpirun -np $(np) R CMD BATCH --no-save npdeptest_npRmpi.R
+	grep "time = " npdeptest*.Rout
+	grep "Test Statistic" npdeptest*.Rout
+
 	mpirun -np $(np) R CMD BATCH --no-save npunitest_npRmpi.R
 	grep "time = " npunitest*.Rout
 	grep "Test Statistic" npunitest*.Rout
@@ -107,6 +111,12 @@ npsdeptest:
 	mpirun -np $(np) R CMD BATCH --no-save npsdeptest_npRmpi.R
 	grep "time = " npsdeptest*.Rout
 	grep "Test Statistic" npsdeptest*.Rout
+
+npdeptest:
+
+	mpirun -np $(np) R CMD BATCH --no-save npdeptest_npRmpi.R
+	grep "time = " npdeptest*.Rout
+	grep "Test Statistic" npdeptest*.Rout
 
 npunitest:
 
