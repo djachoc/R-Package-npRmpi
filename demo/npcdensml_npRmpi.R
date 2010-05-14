@@ -20,8 +20,12 @@ mpi.bcast.cmd(options(np.messages=FALSE),
 ## Load your data and broadcast it to all slave nodes
 
 library(MASS)
-set.seed(42)
+
+mpi.bcast.cmd(set.seed(42),
+              caller.execute=TRUE)
+
 n <- 1000
+
 rho <- 0.25
 mu <- c(0,0)
 Sigma <- matrix(c(1,rho,rho,1),2,2)

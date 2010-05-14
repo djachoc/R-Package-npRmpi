@@ -8,8 +8,12 @@ options(np.messages=FALSE)
 
 ## Generate some data
 
-set.seed(42)
-x <- rnorm(2500)
+n <- 2500
+
+mpi.bcast.cmd(set.seed(42),
+              caller.execute=TRUE)
+
+x <- rnorm(n)
 
 ## A simple example with likelihood cross-validation
 

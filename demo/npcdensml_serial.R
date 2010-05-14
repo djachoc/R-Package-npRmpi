@@ -7,8 +7,12 @@ library(np)
 options(np.messages=FALSE)
 
 library(MASS)
-set.seed(42)
+
+mpi.bcast.cmd(set.seed(42),
+              caller.execute=TRUE)
+
 n <- 1000
+
 rho <- 0.25
 mu <- c(0,0)
 Sigma <- matrix(c(1,rho,rho,1),2,2)

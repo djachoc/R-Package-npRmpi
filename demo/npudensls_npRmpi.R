@@ -20,8 +20,12 @@ mpi.bcast.cmd(options(np.messages=FALSE),
 ## Generate some data and broadcast it to all slaves (it will be known
 ## to the master node)
 
-set.seed(42)
-x <- rnorm(2500)
+n <- 2500
+
+mpi.bcast.cmd(set.seed(42),
+              caller.execute=TRUE)
+
+x <- rnorm(n)
 mpi.bcast.Robj2slave(x)
 
 ## A simple example with likelihood cross-validation

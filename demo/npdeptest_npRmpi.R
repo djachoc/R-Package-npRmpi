@@ -22,7 +22,8 @@ mpi.bcast.cmd(options(np.messages=FALSE),
 
 n <- 1000
 
-set.seed(42)
+mpi.bcast.cmd(set.seed(42),
+              caller.execute=TRUE)
 
 x <- rnorm(n)
 y <- 1 + x + rnorm(n)

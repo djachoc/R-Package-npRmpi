@@ -17,7 +17,8 @@ mpi.bcast.cmd(np.mpi.initialize(),
 mpi.bcast.cmd(options(np.messages=FALSE),
               caller.execute=TRUE)
 
-set.seed(42)
+mpi.bcast.cmd(set.seed(42),
+              caller.execute=TRUE)
 
 ## Significance testing with z irrelevant
 

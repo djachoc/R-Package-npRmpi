@@ -8,7 +8,8 @@ options(np.messages=FALSE)
 
 ## Generate some data
 
-set.seed(42)
+mpi.bcast.cmd(set.seed(42),
+              caller.execute=TRUE)
 
 ## A function to create a time series
 

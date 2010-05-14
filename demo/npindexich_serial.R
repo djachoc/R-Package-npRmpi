@@ -10,7 +10,9 @@ options(np.messages=FALSE)
 
 n <- 2500
 
-set.seed(42)
+mpi.bcast.cmd(set.seed(42),
+              caller.execute=TRUE)
+
 x1 <- runif(n, min=-1, max=1)
 x2 <- runif(n, min=-1, max=1)
 y <- x1 - x2 + rnorm(n)
