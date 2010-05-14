@@ -1,5 +1,5 @@
 Package: npRmpi
-Version: 0.30-8
+Version: 0.30-9
 Date: 2010-04-30
 Depends: boot, cubature
 Suggests: quantreg, MASS

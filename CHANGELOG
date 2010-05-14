@@ -1,3 +1,5 @@
+Changes from Version 0.30-8 to 0.30-9 [xxx-May-2010]
+
 * bug in save/restore seed in np.deptest fixed
 
 Changes from Version 0.30-7 to 0.30-8 [20-Apr-2010]

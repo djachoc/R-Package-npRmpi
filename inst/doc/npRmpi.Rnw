@@ -206,6 +206,10 @@ you would typically run using the \pkg{np} package.
 ## counterpart for insight about your own problems.
 
 library(np)
+
+## Turn off progress i/o as this clutters the output file (if you want
+## to see search progress you can comment out this command)
+
 options(np.messages=FALSE)
 
 ## Generate some data
@@ -294,7 +298,6 @@ summary(bw)
 ## Clean up properly then quit()
 
 mpi.close.Rslaves()
-
 mpi.quit()
 \end{verbatim}
 
