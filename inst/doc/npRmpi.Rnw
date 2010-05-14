@@ -391,8 +391,12 @@ npudens & 14.1 & 25.3 & 0.56\cr
   
 \item The function \code{npunitest} currently runs orders of magnitude
   slower under \proglang{MPI} when using \code{method="integration"}
-  (default). For the time use the serial \pkg{np} package or select
-  \code{method="summation"} (see \code{?npunitest} for caveats).
+  (default). For the time being you are advised to use the serial
+  \pkg{np} package if you require this function or select
+  \code{method="summation"} (see \code{?npunitest} for caveats, though
+  this function is quite efficient computationally speaking and can
+  handle quite large datasets by default via the serial
+  implementation).
   
 \end{enumerate}
 
