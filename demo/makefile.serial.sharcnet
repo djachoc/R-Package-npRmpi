@@ -1,12 +1,19 @@
 all:
 
-	sqsub -o npudens_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npudens_serial.R
+	export MPI_ROOT=/opt/sharcnet/openmpi/1.3.3/intel
+	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/sharcnet/openmpi/1.3.3/intel/lib
+
+	sqsub -o npudensml_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npudensml_serial.R
+
+	sqsub -o npudensls_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npudensls_serial.R
 
 	sqsub -o npregll_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npregll_serial.R
 
 	sqsub -o npreglc_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npreglc_serial.R
 
-	sqsub -o npindex_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npindex_serial.R
+	sqsub -o npindexich_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npindexich_serial.R
+
+	sqsub -o npindexks_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npindexks_serial.R
 
 	sqsub -o npscoef_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npscoef_serial.R
 
@@ -21,4 +28,12 @@ all:
 	sqsub -o npsigtest_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npsigtest_serial.R
 
 	sqsub -o npsdeptest_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npsdeptest_serial.R
+
+	sqsub -o npdeptest_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npdeptest_serial.R
+
+	sqsub -o npunitest_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npunitest_serial.R
+
+	sqsub -o npdeneqtest_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npdeneqtest_serial.R
+
+	sqsub -o npqreg_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npqreg_serial.R
 
