@@ -1,4 +1,4 @@
-## This is the serial version of npudensml_npRmpi.R for comparison
+## This is the serial version of npunitest_npRmpi.R for comparison
 ## purposes (bandwidth ought to be identical, timing may
 ## differ). Study the differences between this file and its MPI
 ## counterpart for insight about your own problems.
@@ -17,7 +17,9 @@ y <- rnorm(n)
 
 ## A simple example
 
-t <- system.time(output <- npunitest(x,y,bootstrap=TRUE))
+t <- system.time(output <- npunitest(x,y,
+                                     method="summation",
+                                     bootstrap=TRUE))
 
 output
 

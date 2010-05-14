@@ -92,18 +92,17 @@ cannot simply load the \pkg{Rmpi} package itself).\footnote{The
   community.}
 
 All of the functions in \pkg{np} can exploit the presence of multiple
-processors, and for large files run time is in general linear in the
-number of processors present in that two processors will complete the
-job in one half the amount of time that one processor
-could.\footnote{There is minor overhead involved with message passing,
-  and for small samples the overhead can be substantial when the ratio
-  of message passing to computing the kernel estimator increases -
-  this will be negligible for sufficiently large samples.}  Given the
-availability of commodity cluster computers and the presence of
-multiple cores in desktop and laptop machines, leveraging the
-\pkg{npRmpi} package for large data sets may present a feasible
-solution to the often lengthy computation times associated with
-nonparametric kernel methods.
+processors. Run time follows a power law (inverse function of the
+number of processors) hence doubling the number of processors will cut
+run time in half.\footnote{There is minor overhead involved with
+  message passing, and for small samples the overhead can be
+  substantial when the ratio of message passing to computing the
+  kernel estimator increases - this will be negligible for
+  sufficiently large samples.}  Given the availability of commodity
+cluster computers and the presence of multiple cores in desktop and
+laptop machines, leveraging the \pkg{npRmpi} package for large data
+sets may present a feasible solution to the often lengthy computation
+times associated with nonparametric kernel methods.
 
 The code has been tested in the Mac OS X and Linux environments which
 allow the user to compile \proglang{R} packages on the fly. Users
@@ -178,7 +177,7 @@ mpirun -np 2 R CMD BATCH npudens_npRmpi.R
 \end{verbatim}
 
 You can compare run times and any other differences by examining the
-files \verb+npudens_serial.Rout+ and \verb+npudens_npRmpi.Rout+ (see
+files \code{npudens_serial.Rout}+ and \code{npudens_npRmpi.Rout} (see
 Section \ref{sec run time} below for some illustrative
 examples). Clearly you could do this with a subset of your data for
 large problems to judge the extent to which the parallel code reduces
@@ -313,22 +312,22 @@ things to me immediately along with the offending code.
 The \pkg{npRmpi} package is a parallel implementation of the \pkg{np}
 package that can exploit the presence of multiple processors and the
 \proglang{MPI} interface for parallel computing to reduce the
-computational run time associated with kernel methods. Run time is
-linear in the number of processors available, so two processors will
-complete a job in roughly one half the time of one processor, ten in
-one tenth and so forth.\footnote{There is minor overhead involved with
-  message passing, and for small samples the overhead can be
-  substantial as the ratio of message passing to computing the kernel
-  estimator increases - this will be negligible for sufficiently large
-  samples.} Though installation of a working \proglang{MPI}
-implementation requires some familiarity with computer systems, local
-expertise exists for many and help is to be found there. That being
-said, the Mac OS X operating system comes stock with a fully
-functioning version of Open \proglang{MPI} so there is zero additional
-effort required for the user in order to get up and running in this
-environment. Finally, any feedback for improvements for this document,
-reporting of errors and bugs and so forth is always encouraged and
-much appreciated.
+computational run time associated with kernel methods. Run time
+follows a power law and is inversely related to the number of
+processors available, so two processors will complete a job in roughly
+one half the time of one processor, ten in one tenth and so
+forth.\footnote{There is minor overhead involved with message passing,
+  and for small samples the overhead can be substantial as the ratio
+  of message passing to computing the kernel estimator increases -
+  this will be negligible for sufficiently large samples.} Though
+installation of a working \proglang{MPI} implementation requires some
+familiarity with computer systems, local expertise exists for many and
+help is to be found there. That being said, the Mac OS X operating
+system comes stock with a fully functioning version of Open
+\proglang{MPI} so there is zero additional effort required for the
+user in order to get up and running in this environment. Finally, any
+feedback for improvements for this document, reporting of errors and
+bugs and so forth is always encouraged and much appreciated.
 
 \bibliography{npRmpi}
 
@@ -349,7 +348,7 @@ Note that many of these illustrative examples use smallish sample
 sizes hence the run time with 2 processors will not be 1/2 that with 1
 processor due to overhead. But for larger samples (i.e. the ones you
 actually need parallel computing for, not these toy illustrations) you
-ought to see an improvement that is linear in the number of
+ought to see an improvement that is inversely related to the number of
 processors.
 
 \begin{table}
@@ -387,8 +386,13 @@ npudens & 14.1 & 25.3 & 0.56\cr
   \proglang{R} (always good practice) and not do so using the formula
   interface. 
   
-  Casting responses (i.e.~stuff to the left of the \verb+~+) works in
-  the serial version but does not appear to work for \verb+npcdensbw+.
+  Casting responses (i.e.~stuff to the left of the \code{~}) works in
+  the serial version but does not appear to work for \code{npcdensbw}.
+  
+\item The function \code{npunitest} currently runs orders of magnitude
+  slower under \proglang{MPI} when using \code{method="integration"}
+  (default). For the time use the serial \pkg{np} package or select
+  \code{method="summation"} (see \code{?npunitest} for caveats).
   
 \end{enumerate}
 

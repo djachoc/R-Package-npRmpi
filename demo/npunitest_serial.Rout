@@ -39,22 +39,24 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-8)
 > 
 > ## A simple example
 > 
-> t <- system.time(output <- npunitest(x,y,bootstrap=TRUE))
+> t <- system.time(output <- npunitest(x,y,
++                                      method="summation",
++                                      bootstrap=TRUE))
 > 
 > output
 
 Consistent Univariate Entropy Density Equality Test
 399 Bootstrap Replications
 
-Test Statistic ‘Srho’: 0.001164558	P Value: 0.83459 
+Test Statistic ‘Srho’: 0.00104913	P Value: 0.7193 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Fail to reject the null of equality at the 10% level
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 177.954 
+Elapsed time = 39.673 
 > 
 > proc.time()
    user  system elapsed 
-176.147   1.115 178.426 
+ 40.009   0.086  40.135 
