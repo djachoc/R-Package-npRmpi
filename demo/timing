@@ -1,8 +1,8 @@
 #!/bin/sh
 
-grep "time = " *npRmpi.Rout | awk -F_ '{print $1}' > names.tmp
-grep "time = " *npRmpi.Rout | awk -F= '{print $2}' > npRmpi.tmp
-grep "time = " *serial.Rout | awk -F= '{print $2}' > serial.tmp
+grep "time = " n_2/*npRmpi.Rout | awk -F_ '{print $1}' > names.tmp
+grep "time = " n_2/*npRmpi.Rout | awk -F= '{print $2}' > npRmpi.tmp
+grep "time = " serial/*serial.Rout | awk -F= '{print $2}' > serial.tmp
 
 paste names.tmp npRmpi.tmp serial.tmp | awk '{printf("%s: np=1: %.1f, np=2: %.1f, ratio=%.2f\n", $1, $2, $3, $2/$3)}' > timing.dat
 

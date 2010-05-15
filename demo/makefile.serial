@@ -1,107 +1,19 @@
 all:
 
-	R CMD BATCH --vanilla npudensml_serial.R
-
-	R CMD BATCH --vanilla npudensls_serial.R
-
-	R CMD BATCH --vanilla npregll_serial.R
-
-	R CMD BATCH --vanilla npreglc_serial.R
-
-	R CMD BATCH --vanilla npindexich_serial.R
-
-	R CMD BATCH --vanilla npindexks_serial.R
-
-	R CMD BATCH --vanilla npscoef_serial.R
-
-	R CMD BATCH --vanilla npcdensml_serial.R
-
-	R CMD BATCH --vanilla npcdensls_serial.R
-
-	R CMD BATCH --vanilla npconmode_serial.R
-
-	R CMD BATCH --vanilla npcmstest_serial.R
-
-	R CMD BATCH --vanilla npsigtest_serial.R
-
-	R CMD BATCH --vanilla npsdeptest_serial.R
-
-	R CMD BATCH --vanilla npdeptest_serial.R
-
-	R CMD BATCH --vanilla npunitest_serial.R
-
-	R CMD BATCH --vanilla npdeneqtest_serial.R
-
-	R CMD BATCH --vanilla npqreg_serial.R
-
-npudensml:
-
-	R CMD BATCH --vanilla npudensml_serial.R
-
-npudensls:
-
-	R CMD BATCH --vanilla npudensls_serial.R
-
-npcdensml:
-
-	R CMD BATCH --vanilla npcdensml_serial.R
-
-npcdensls:
-
-	R CMD BATCH --vanilla npcdensls_serial.R
-
-npconmode:
-
-	R CMD BATCH --vanilla npconmode_serial.R
-
-npcmstest:
-
-	R CMD BATCH --vanilla npcmstest_serial.R
-
-npsigtest:
-
-	R CMD BATCH --vanilla npsigtest_serial.R
-
-npsdeptest:
-
-	R CMD BATCH --vanilla npsdeptest_serial.R
-
-npdeptest:
-
-	R CMD BATCH --vanilla npdeptest_serial.R
-
-npunitest:
-
-	R CMD BATCH --vanilla npunitest_serial.R
-
-npdeneqtest:
-
-	R CMD BATCH --vanilla npdeneqtest_serial.R
-
-npqreg:
-
-	R CMD BATCH --vanilla npqreg_serial.R
-
-npregll:
-
-	R CMD BATCH --vanilla npregll_serial.R
-
-npreglc:
-
-	R CMD BATCH --vanilla npreglc_serial.R
-
-npindexich:
-
-	R CMD BATCH --vanilla npindexich_serial.R
-
-npindexks:
-
-	R CMD BATCH --vanilla npindexks_serial.R
-
-npscoef:
-
-	R CMD BATCH --vanilla npscoef_serial.R
-
-clean:
-
-	rm *.out *.Rout *~
+	R CMD BATCH --vanilla ../npudensml_serial.R
+	R CMD BATCH --vanilla ../npudensls_serial.R
+	R CMD BATCH --vanilla ../npregll_serial.R
+	R CMD BATCH --vanilla ../npreglc_serial.R
+	R CMD BATCH --vanilla ../npindexich_serial.R
+	R CMD BATCH --vanilla ../npindexks_serial.R
+	R CMD BATCH --vanilla ../npscoef_serial.R
+	R CMD BATCH --vanilla ../npcdensml_serial.R
+	R CMD BATCH --vanilla ../npcdensls_serial.R
+	R CMD BATCH --vanilla ../npconmode_serial.R
+	R CMD BATCH --vanilla ../npcmstest_serial.R
+	R CMD BATCH --vanilla ../npsigtest_serial.R
+	R CMD BATCH --vanilla ../npsdeptest_serial.R
+	R CMD BATCH --vanilla ../npdeptest_serial.R
+	R CMD BATCH --vanilla ../npunitest_serial.R
+	R CMD BATCH --vanilla ../npdeneqtest_serial.R
+	R CMD BATCH --vanilla ../npqreg_serial.R

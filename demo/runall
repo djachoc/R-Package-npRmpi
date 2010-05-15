@@ -1,5 +1,48 @@
 #!/bin/sh
 
-make -f makefile.serial
-make np=2
-timing
+mkdir serial
+cd serial
+make -f ../makefile.serial
+cd ../
+
+mkdir n_2
+cd n_2
+cp ../.Rprofile .
+make -f ../makefile np=2
+cd ../
+
+#mkdir n_3
+#cd n_3
+#cp ../.Rprofile .
+#make -f ../makefile np=3
+#cd ../
+#
+#mkdir n_4
+#cd n_4
+#cp ../.Rprofile .
+#make -f ../makefile np=4
+#cd ../
+#
+#mkdir n_5
+#cd n_5
+#cp ../.Rprofile .
+#make -f ../makefile np=5
+#cd ../
+#
+#mkdir n_6
+#cd n_6
+#cp ../.Rprofile .
+#make -f ../makefile np=6
+#cd ../
+#
+#mkdir n_7
+#cd n_7
+#cp ../.Rprofile .
+#make -f ../makefile np=7
+#cd ../
+#
+#mkdir n_8
+#cd n_8
+#cp ../.Rprofile .
+#make -f ../makefile np=8
+#cd ../
