@@ -82,6 +82,6 @@ Null of independence is rejected at the 0.1% level
 [1] 1
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 35.509 
+Elapsed time = 36.298 
 > 
 > mpi.quit()

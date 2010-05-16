@@ -106,6 +106,6 @@ No. Continuous Explanatory Vars.: 1
 [1] 1
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 18.68 
+Elapsed time = 18.893 
 > 
 > mpi.quit()

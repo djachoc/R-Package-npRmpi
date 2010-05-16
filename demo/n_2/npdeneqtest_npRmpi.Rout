@@ -77,6 +77,6 @@ Fail to reject the null of equality at the 10% level
 [1] 1
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 22.406 
+Elapsed time = 25.515 
 > 
 > mpi.quit()

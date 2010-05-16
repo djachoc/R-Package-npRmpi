@@ -89,6 +89,6 @@ Null of correct specification is rejected at the 0.1% level
 [1] 1
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 301.605 
+Elapsed time = 318.525 
 > 
 > mpi.quit()
