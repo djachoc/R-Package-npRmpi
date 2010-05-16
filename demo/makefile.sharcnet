@@ -28,7 +28,9 @@ all:
 
 	sqsub -o npsigtest_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npsigtest_npRmpi.R
 
-	sqsub -o npsdeptest_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npsdeptest_npRmpi.R
+	sqsub -o npsdeptest_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH 	--no-save ../R/npsdeptest_npRmpi.R
+
+	sqsub -o npsymtest_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npsymtest_npRmpi.R
 
 	sqsub -o npdeptest_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npdeptest_npRmpi.R
 

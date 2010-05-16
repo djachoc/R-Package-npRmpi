@@ -13,6 +13,7 @@ all:
 	R CMD BATCH --vanilla ../npcmstest_serial.R
 	R CMD BATCH --vanilla ../npsigtest_serial.R
 	R CMD BATCH --vanilla ../npsdeptest_serial.R
+	R CMD BATCH --vanilla ../npsymtest_serial.R
 	R CMD BATCH --vanilla ../npdeptest_serial.R
 	R CMD BATCH --vanilla ../npunitest_serial.R
 	R CMD BATCH --vanilla ../npdeneqtest_serial.R

@@ -13,6 +13,7 @@ all:
 	mpirun -np $(np) R CMD BATCH --no-save ../npcmstest_npRmpi.R
 	mpirun -np $(np) R CMD BATCH --no-save ../npsigtest_npRmpi.R
 	mpirun -np $(np) R CMD BATCH --no-save ../npsdeptest_npRmpi.R
+	mpirun -np $(np) R CMD BATCH --no-save ../npsymtest_npRmpi.R
 	mpirun -np $(np) R CMD BATCH --no-save ../npdeptest_npRmpi.R
 	mpirun -np $(np) R CMD BATCH --no-save ../npunitest_npRmpi.R
 	mpirun -np $(np) R CMD BATCH --no-save ../npdeneqtest_npRmpi.R

@@ -29,6 +29,8 @@ all:
 
 	sqsub -o npsdeptest_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npsdeptest_serial.R
 
+	sqsub -o npsymtest_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npsymtest_serial.R
+
 	sqsub -o npdeptest_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npdeptest_serial.R
 
 	sqsub -o npunitest_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npunitest_serial.R

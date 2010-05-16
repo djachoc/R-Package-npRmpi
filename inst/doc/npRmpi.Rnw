@@ -73,9 +73,8 @@ computationally speaking their analysis may lie beyond the reach of
 many users.  Some background may be in order. My co-authors and I
 favor data-driven methods of bandwidth selection such as
 cross-validation, among others. These bandwidth selection methods have
-run times that are exponential in the number of observations (of
-computational order $n^2$ hence a doubling of the sample size will
-increase run time by a factor of four).
+run times that are proportional to the square of the number of
+observations.
 
 The solution adopted in the \pkg{npRmpi} package is to run the code in
 a parallel computing environment and exploit the presence of multiple
@@ -92,17 +91,17 @@ cannot simply load the \pkg{Rmpi} package itself).\footnote{The
   community.}
 
 All of the functions in \pkg{np} can exploit the presence of multiple
-processors. Run time follows a power law (inverse function of the
-number of processors) hence doubling the number of processors will cut
-run time in half.\footnote{There is minor overhead involved with
-  message passing, and for small samples the overhead can be
-  substantial when the ratio of message passing to computing the
-  kernel estimator increases - this will be negligible for
-  sufficiently large samples.}  Given the availability of commodity
-cluster computers and the presence of multiple cores in desktop and
-laptop machines, leveraging the \pkg{npRmpi} package for large data
-sets may present a feasible solution to the often lengthy computation
-times associated with nonparametric kernel methods.
+processors. Run time is inversely proportional to the number of
+processors hence doubling the number of processors will cut run time
+in half.\footnote{There is minor overhead involved with message
+  passing, and for small samples the overhead can be substantial when
+  the ratio of message passing to computing the kernel estimator
+  increases - this will be negligible for sufficiently large samples.}
+Given the availability of commodity cluster computers and the presence
+of multiple cores in desktop and laptop machines, leveraging the
+\pkg{npRmpi} package for large data sets may present a feasible
+solution to the often lengthy computation times associated with
+nonparametric kernel methods.
 
 The code has been tested in the Mac OS X and Linux environments which
 allow the user to compile \proglang{R} packages on the fly. Users
@@ -115,7 +114,7 @@ this.
 \section{Differences Between np and npRmpi}
 
 There are only a few visible differences between running code in
-serial versus parallel environments. Typically you run your parallel
+serial versus parallel environments.  Typically you run your parallel
 code in batch mode so the first step would be to get your code running
 in batch mode using the \pkg{np} package (obviously on a subset of
 your data for large data sets). Once you have properly functioning
@@ -125,6 +124,10 @@ finally you will run the job using either \code{mpirun} or,
 indirectly, via a batch scheduler on your cluster such as \code{sqsub}
 (kindly consult your local support personnel for assistance on using
 batch queueing systems on your local cluster).
+
+Note that, since the data has to be broadcast to the slave notes, it
+is a good idea to put it in a dataframe first and it is always a good
+idea at this stage to cast your variables according to type.
 
 \subsection*{Installation}
 
@@ -317,22 +320,22 @@ things to me immediately along with the offending code.
 The \pkg{npRmpi} package is a parallel implementation of the \pkg{np}
 package that can exploit the presence of multiple processors and the
 \proglang{MPI} interface for parallel computing to reduce the
-computational run time associated with kernel methods. Run time
-follows a power law and is inversely related to the number of
-processors available, so two processors will complete a job in roughly
-one half the time of one processor, ten in one tenth and so
-forth.\footnote{There is minor overhead involved with message passing,
-  and for small samples the overhead can be substantial as the ratio
-  of message passing to computing the kernel estimator increases -
-  this will be negligible for sufficiently large samples.} Though
-installation of a working \proglang{MPI} implementation requires some
-familiarity with computer systems, local expertise exists for many and
-help is to be found there. That being said, the Mac OS X operating
-system comes stock with a fully functioning version of Open
-\proglang{MPI} so there is zero additional effort required for the
-user in order to get up and running in this environment. Finally, any
-feedback for improvements for this document, reporting of errors and
-bugs and so forth is always encouraged and much appreciated.
+computational run time associated with kernel methods. Run time is
+inversely proportional to the number of available processors, so two
+processors will complete a job in roughly one half the time of one
+processor, ten in one tenth and so forth.\footnote{There is minor
+  overhead involved with message passing, and for small samples the
+  overhead can be substantial as the ratio of message passing to
+  computing the kernel estimator increases - this will be negligible
+  for sufficiently large samples.} Though installation of a working
+\proglang{MPI} implementation requires some familiarity with computer
+systems, local expertise exists for many and help is to be found
+there. That being said, the Mac OS X operating system comes stock with
+a fully functioning version of Open \proglang{MPI} so there is zero
+additional effort required for the user in order to get up and running
+in this environment. Finally, any feedback for improvements for this
+document, reporting of errors and bugs and so forth is always
+encouraged and much appreciated.
 
 \bibliography{npRmpi}
 
@@ -398,19 +401,21 @@ npunitest & 27.3 & 41.4 & 0.66\cr
   Casting responses (i.e.~stuff to the left of the \code{~}) works in
   the serial version but does not appear to work for \code{npcdensbw}.
   
-\item The functions \code{npunitest} and \code{npdeptest} currently
-  run orders of magnitude slower under \proglang{MPI} when using
+\item The functions \code{npdeptest}, \code{npdeptest},
+  \code{npsymtest} and \code{npunitest} currently run orders of
+  magnitude slower under \proglang{MPI} when using
   \code{method="integration"} (default). This might be related to a
   limit on the number of nested function calls in \proglang{R} and/or
   the \pkg{cubature} package as I have encountered this in a serial
-  environment in the past (solutions welcomed!). 
+  environment in the past (solutions welcomed!).
   
   For the time being you are advised to use the serial \pkg{np}
   package if you require this function or select
-  \code{method="summation"} (see \code{?npunitest} and
-  \code{?npdeptest} for caveats, though these functions are quite
-  efficient computationally speaking and can handle quite large
-  data sets by default via the serial implementation).
+  \code{method="summation"} (see \code{?npdeptest}, \code{?npdeptest},
+  \code{?npsymtest} and \code{?npunitest} for caveats, though these
+  functions are quite efficient computationally speaking and can
+  handle quite large data sets by default via the serial
+  implementation).
   
 \end{enumerate}
 

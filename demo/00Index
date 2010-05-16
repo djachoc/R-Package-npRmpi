@@ -1,12 +1,12 @@
 The files
 
-    npudens_serial.R
-    npudens_npRmpi.R
+    npudensml_serial.R
+    npudensml_npRmpi.R
 
 demonstrate the difference between constructing serial versus parallel
 MPI np programs via a simple density bandwidth selection
 illustration. See also other similarly named files in this directory
-for regression and conditional density examples, among others. 
+for regression and conditional density examples, among others.
 
 Kindly study these files and the comments in each in order to extend
 this approach to your problem.
@@ -49,7 +49,7 @@ further assistance on installing and running parallel programs.
 To run the serial version (i.e. standard non-parallel version) install
 the np program from CRAN and then, from a command shell, run
 
-R CMD BATCH npudens_serial.R
+R CMD BATCH npudensml_serial.R
 
 *** Parallel MPI program batch execution:
 
@@ -58,10 +58,10 @@ file in npRmpi/inst to the current directory and name it .Rprofile (or
 copy it to your home directory and again name it .Rprofile) and then
 on Open MPI systems run something like
 
-mpirun -np 2 R CMD BATCH npudens_npRmpi.R
+mpirun -np 2 R CMD BATCH npudensml_npRmpi.R
 
 You can compare run times and any other differences by examining the
-files npudens_serial.Rout and npudens_npRmpi.Rout. Clearly you could
+files npudensml_serial.Rout and npudensml_npRmpi.Rout. Clearly you could
 do this with a subset of your data for large problems to judge the
 extent to which the parallel code reduces run time. 
 
