@@ -15,7 +15,7 @@ n <- 1000
 sample.A <- data.frame(x=rnorm(n))
 sample.B <- data.frame(x=rnorm(n))
 
-## A simple example with likelihood cross-validation
+## A consistent density equality test example
 
 t <- system.time(output <- npdeneqtest(sample.A,sample.B,boot.num=99))
 

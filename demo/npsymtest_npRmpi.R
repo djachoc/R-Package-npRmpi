@@ -43,7 +43,7 @@ yt <- ar.series(0.5,rnorm(n))
 
 mpi.bcast.Robj2slave(yt)
 
-## A simple example with likelihood cross-validation
+## A simple example of the test for symmetry
 
 t <- system.time(mpi.bcast.cmd(output <- npsymtest(yt,
                                                    boot.num=399,

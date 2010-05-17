@@ -28,7 +28,7 @@ n <- 1000
 
 yt <- ar.series(0.95,rnorm(n))
 
-## A simple example with likelihood cross-validation
+## A simple example of a test for serial dependence
 
 t <- system.time(output <- npsdeptest(yt,
                                       lag.num=2,

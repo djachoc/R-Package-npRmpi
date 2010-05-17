@@ -25,6 +25,8 @@ model <- lm(growth ~ oecd +
 
 X <- data.frame(factor(oecd), factor(year), initgdp, popgro, inv, humancap)
 
+## Consistent model specification test
+
 t <- system.time(output <- npcmstest(model = model,
                                      xdat = X,
                                      ydat = growth))

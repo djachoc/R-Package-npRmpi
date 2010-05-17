@@ -31,7 +31,7 @@ sample.B <- data.frame(x=rnorm(n))
 mpi.bcast.Robj2slave(sample.A)
 mpi.bcast.Robj2slave(sample.B)
 
-## A simple example with likelihood cross-validation
+## A consistent density equality test example
 
 t <- system.time(mpi.bcast.cmd(output <- npdeneqtest(sample.A,sample.B,boot.num=99),
                                caller.execute=TRUE))

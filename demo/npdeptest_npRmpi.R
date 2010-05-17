@@ -33,7 +33,7 @@ y.fit <- fitted(model)
 mpi.bcast.Robj2slave(y)
 mpi.bcast.Robj2slave(y.fit)
 
-## A simple example
+## A simple example for the consistent dependence metric test
 
 t <- system.time(mpi.bcast.cmd(output <- npdeptest(y,
                                                    y.fit,

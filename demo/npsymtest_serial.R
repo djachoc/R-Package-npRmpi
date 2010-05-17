@@ -28,7 +28,7 @@ n <- 1000
 
 yt <- ar.series(0.5,rnorm(n))
 
-## A simple example with likelihood cross-validation
+## A simple example of the test for symmetry
 
 t <- system.time(output <- npsymtest(yt,
                                      boot.num=399,

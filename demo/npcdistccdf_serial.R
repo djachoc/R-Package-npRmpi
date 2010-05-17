@@ -1,4 +1,4 @@
-## This is the serial version of npcdensml_npRmpi.R for comparison
+## This is the serial version of npcdistccdf_npRmpi.R for comparison
 ## purposes (bandwidth ought to be identical, timing may
 ## differ). Study the differences between this file and its MPI
 ## counterpart for insight about your own problems.

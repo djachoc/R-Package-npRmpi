@@ -17,7 +17,8 @@ y <- 1 + x + rnorm(n)
 model <- lm(y~x)
 y.fit <- fitted(model)
      
-## A simple example
+
+## A simple example for the consistent dependence metric test 
 
 t <- system.time(output <- npdeptest(y,y.fit,
                                      boot.num=99,

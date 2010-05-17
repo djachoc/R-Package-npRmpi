@@ -31,7 +31,7 @@ y <- rnorm(n)
 mpi.bcast.Robj2slave(x)
 mpi.bcast.Robj2slave(y)
 
-## A simple example
+## A simple example of the test for equality of univariate densities
 
 t <- system.time(mpi.bcast.cmd(output <- npunitest(x,y,
                                                    method="summation",

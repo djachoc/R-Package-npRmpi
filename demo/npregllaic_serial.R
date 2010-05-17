@@ -1,4 +1,4 @@
-## This is the serial version of npreglc_npRmpi.R for comparison
+## This is the serial version of npregllaic_npRmpi.R for comparison
 ## purposes (bandwidth ought to be identical, timing may
 ## differ). Study the differences between this file and its MPI
 ## counterpart for insight about your own problems.
@@ -16,7 +16,7 @@ y <- cos(2*pi*x) + z1 + rnorm(n,sd=.25)
 mydat <- data.frame(y,x,z1=factor(z1),z2=factor(z2))
 rm(x,y,z1,z2)
 
-## A regression example (local constant)
+## A regression example (local linear, aic cross-validation)
 
 t <- system.time(bw <- npregbw(y~x+z1+z2,
                                regtype="ll",

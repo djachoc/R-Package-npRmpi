@@ -38,6 +38,8 @@ t <- system.time(mpi.bcast.cmd(model <- npreg(y~z+x1+x2,
                                                   bwmethod="cv.aic"),
                                    caller.execute=TRUE))
 
+## An example of the consistent nonparametric significance test
+
 t <- t + system.time(mpi.bcast.cmd(output <- npsigtest(model),
                                caller.execute=TRUE ))
 

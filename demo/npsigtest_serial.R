@@ -1,4 +1,4 @@
-## This is the serial version of npcmstest_npRmpi.R for comparison
+## This is the serial version of npsigtest_npRmpi.R for comparison
 ## purposes (bandwidth ought to be identical, timing may
 ## differ). Study the differences between this file and its MPI
 ## counterpart for insight about your own problems.
@@ -19,6 +19,9 @@ y <- x1 + x2 + rnorm(n)
 t <- system.time(model <- npreg(y~z+x1+x2,
                                     regtype="ll",
                                     bwmethod="cv.aic"))
+
+
+## An example of the consistent nonparametric significance test
 
 t <- t + system.time(output <- npsigtest(model))
 

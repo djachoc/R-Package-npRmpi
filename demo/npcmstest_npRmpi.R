@@ -41,6 +41,8 @@ X <- data.frame(factor(oecd), factor(year), initgdp, popgro, inv, humancap)
 mpi.bcast.Robj2slave(model)
 mpi.bcast.Robj2slave(X)
 
+## Consistent model specification test
+
 t <- system.time(mpi.bcast.cmd(output <- npcmstest(model = model,
                                                    xdat = X,
                                                    ydat = growth),

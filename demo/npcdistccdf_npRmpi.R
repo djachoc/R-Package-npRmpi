@@ -2,7 +2,7 @@
 ## current directory or home directory. It is necessary.
 
 ## To run this on systems with OPENMPI installed and working, try
-## mpirun -np 2 R CMD BATCH npcdensml_npRmpi. Check the time in the
+## mpirun -np 2 R CMD BATCH npcdistccdf_npRmpi. Check the time in the
 ## output file foo.Rout (the name of this file with extension .Rout),
 ## then try with, say, 4 processors and compare run time.
 

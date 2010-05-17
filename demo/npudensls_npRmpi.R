@@ -28,7 +28,7 @@ mpi.bcast.cmd(set.seed(42),
 x <- rnorm(n)
 mpi.bcast.Robj2slave(x)
 
-## A simple example with likelihood cross-validation
+## A simple example with least squares cross-validation
 
 t <- system.time(mpi.bcast.cmd(bw <- npudensbw(~x,
                                                bwmethod="cv.ls"),

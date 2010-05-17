@@ -14,7 +14,7 @@ set.seed(42)
 
 x <- rnorm(n)
 
-## A simple example with likelihood cross-validation
+## A simple example with least squares cross-validation
 
 t <- system.time(bw <- npudensbw(~x,
                                  bwmethod="cv.ls"))

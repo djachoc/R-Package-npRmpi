@@ -2,9 +2,9 @@
 ## current directory or home directory. It is necessary.
 
 ## To run this on systems with OPENMPI installed and working, try
-## mpirun -np 2 R CMD BATCH npreglc_npRmpi. Check the time in the output
-## file foo.Rout (the name of this file with extension .Rout), then
-## try with, say, 4 processors and compare run time.
+## mpirun -np 2 R CMD BATCH npregllls_npRmpi. Check the time in the
+## output file foo.Rout (the name of this file with extension .Rout),
+## then try with, say, 4 processors and compare run time.
 
 ## Initialize master and slaves.
 
@@ -32,7 +32,7 @@ rm(x,y,z1,z2)
 
 mpi.bcast.Robj2slave(mydat)
 
-## A regression example (local constant)
+## A regression example (local linear, least squares cross-validation)
 
 t <- system.time(mpi.bcast.cmd(bw <- npregbw(y~x+z1+z2,
                                              regtype="ll",

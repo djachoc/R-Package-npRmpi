@@ -15,7 +15,7 @@ n <- 1000
 x <- rnorm(n)
 y <- rnorm(n)
 
-## A simple example
+## A simple example of the test for equality of univariate densities
 
 t <- system.time(output <- npunitest(x,y,
                                      method="summation",
