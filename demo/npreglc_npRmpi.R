@@ -17,21 +17,27 @@ mpi.bcast.cmd(np.mpi.initialize(),
 mpi.bcast.cmd(options(np.messages=FALSE),
               caller.execute=TRUE)
 
-## Load your data and broadcast it to all slave nodes
+## Generate data and broadcast it to all slave nodes in the form of a
+## data frame
 
-data(wage1)
-mpi.bcast.Robj2slave(wage1)
+n <- 1000
+
+set.seed(42)
+x <- runif(n)
+z1 <- rbinom(n,1,.5)
+z2 <- rbinom(n,1,.5)
+y <- cos(2*pi*x) + z1 + rnorm(n,sd=.25)
+mydat <- data.frame(y,x,z1=factor(z1),z2=factor(z2))
+rm(x,y,z1,z2)
+
+mpi.bcast.Robj2slave(mydat)
 
 ## A regression example (local constant)
 
-t <- system.time(mpi.bcast.cmd(bw <- npregbw(lwage~female+
-                                             married+
-                                             educ+
-                                             exper+
-                                             tenure,
+t <- system.time(mpi.bcast.cmd(bw <- npregbw(y~x+z1+z2,
                                              regtype="lc",
                                              bwmethod="cv.aic",
-                                             data=wage1),
+                                             data=mydat),
                                caller.execute=TRUE))
 
 summary(bw)

@@ -6,19 +6,22 @@
 library(np)
 options(np.messages=FALSE)
 
-data(wage1)
-attach(wage1)
+n <- 1000
+
+set.seed(42)
+x <- runif(n)
+z1 <- rbinom(n,1,.5)
+z2 <- rbinom(n,1,.5)
+y <- cos(2*pi*x) + z1 + rnorm(n,sd=.25)
+mydat <- data.frame(y,x,z1=factor(z1),z2=factor(z2))
+rm(x,y,z1,z2)
 
 ## A regression example (local constant)
 
-t <- system.time(bw <- npregbw(lwage~female+
-                               married+
-                               educ+
-                               exper+
-                               tenure,
+t <- system.time(bw <- npregbw(y~x+z1+z2,
                                regtype="lc",
                                bwmethod="cv.aic",
-                               data=wage1))
+                               data=mydat))
 
 summary(bw)
 

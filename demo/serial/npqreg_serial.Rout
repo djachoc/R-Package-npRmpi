@@ -60,8 +60,8 @@ No. Ordered Categorical Explanatory Vars.: 1
 > t <- t + system.time(model.q0.75 <- npqreg(bws=bw, tau=0.75))
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 92.758 
+Elapsed time = 96.271 
 > 
 > proc.time()
    user  system elapsed 
- 93.127   0.067  93.314 
+ 96.506   0.103  96.786 

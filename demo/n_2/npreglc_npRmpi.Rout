@@ -20,8 +20,8 @@ Type 'q()' to quit R.
 Loading required package: boot
 Loading required package: cubature
 Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-9) + Rmpi 0.5-8
-master (rank 0, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
-slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
+master (rank 0, comm 1) of size 2 is running on: pc-racine2 
+slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2 
 > ## Make sure you have the .Rprofile file from npRmpi/inst/ in your
 > ## current directory or home directory. It is necessary.
 > 
@@ -41,41 +41,45 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > mpi.bcast.cmd(options(np.messages=FALSE),
 +               caller.execute=TRUE)
 > 
-> ## Load your data and broadcast it to all slave nodes
+> ## Generate data and broadcast it to all slave nodes in the form of a
+> ## data frame
 > 
-> data(wage1)
-> mpi.bcast.Robj2slave(wage1)
+> n <- 1000
+> 
+> set.seed(42)
+> x <- runif(n)
+> z1 <- rbinom(n,1,.5)
+> z2 <- rbinom(n,1,.5)
+> y <- cos(2*pi*x) + z1 + rnorm(n,sd=.25)
+> mydat <- data.frame(y,x,z1=factor(z1),z2=factor(z2))
+> rm(x,y,z1,z2)
+> 
+> mpi.bcast.Robj2slave(mydat)
 > 
 > ## A regression example (local constant)
 > 
-> t <- system.time(mpi.bcast.cmd(bw <- npregbw(lwage~female+
-+                                              married+
-+                                              educ+
-+                                              exper+
-+                                              tenure,
+> t <- system.time(mpi.bcast.cmd(bw <- npregbw(y~x+z1+z2,
 +                                              regtype="lc",
 +                                              bwmethod="cv.aic",
-+                                              data=wage1),
++                                              data=mydat),
 +                                caller.execute=TRUE))
 > 
 > summary(bw)
 
-Regression Data (526 observations, 5 variable(s)):
+Regression Data (1000 observations, 3 variable(s)):
 
 Regression Type: Local-Constant
 Bandwidth Selection Method: Expected Kullback-Leibler Cross-Validation
-Formula: lwage ~ female + married + educ + exper + tenure
+Formula: y ~ x + z1 + z2
 Bandwidth Type: Fixed
-Objective Function Value: -0.800832 (achieved on multistart 1)
+Objective Function Value: -1.740687 (achieved on multistart 3)
 
-Exp. Var. Name: female  Bandwidth: 0.08107101   Lambda Max: 0.5      
-Exp. Var. Name: married Bandwidth: 0.25         Lambda Max: 0.5      
-Exp. Var. Name: educ    Bandwidth: 1.657548   Scale Factor: 2.736236 
-Exp. Var. Name: exper   Bandwidth: 4.282593   Scale Factor: 0.7722716
-Exp. Var. Name: tenure  Bandwidth: 9.018288   Scale Factor: 4.253473 
+Exp. Var. Name: x  Bandwidth: 0.03867583   Scale Factor: 0.5283297
+Exp. Var. Name: z1 Bandwidth: 1.238257e-05   Lambda Max: 0.5      
+Exp. Var. Name: z2 Bandwidth: 0.5            Lambda Max: 0.5      
 
 Continuous Kernel Type: Second-Order Gaussian
-No. Continuous Explanatory Vars.: 3
+No. Continuous Explanatory Vars.: 1
 
 Unordered Categorical Kernel Type: Aitchison and Aitken
 No. Unordered Categorical Explanatory Vars.: 2
@@ -86,17 +90,17 @@ No. Unordered Categorical Explanatory Vars.: 2
 > 
 > summary(model)
 
-Regression Data: 526 training points, in 5 variable(s)
-                  female married     educ    exper   tenure
-Bandwidth(s): 0.08107101    0.25 1.657548 4.282593 9.018288
+Regression Data: 1000 training points, in 3 variable(s)
+                       x           z1  z2
+Bandwidth(s): 0.03867583 1.238257e-05 0.5
 
 Kernel Regression Estimator: Local-Constant
 Bandwidth Type: Fixed
-Residual standard error: 0.1318573
-R-squared: 0.5527248
+Residual standard error: 0.0616364
+R-squared: 0.925667
 
 Continuous Kernel Type: Second-Order Gaussian
-No. Continuous Explanatory Vars.: 3
+No. Continuous Explanatory Vars.: 1
 
 Unordered Categorical Kernel Type: Aitchison and Aitken
 No. Unordered Categorical Explanatory Vars.: 2
@@ -108,6 +112,6 @@ No. Unordered Categorical Explanatory Vars.: 2
 [1] 1
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 131.736 
+Elapsed time = 56.967 
 > 
 > mpi.quit()

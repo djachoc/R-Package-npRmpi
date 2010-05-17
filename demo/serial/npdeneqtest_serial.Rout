@@ -46,15 +46,15 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-9)
 Consistent Density Equality Test
 99 Bootstrap Replications
 
-Test Statistic ‘Tn’: -2.129443	P Value: 0.9192 
+Test Statistic 'Tn': -2.129443	P Value: 0.9192 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Fail to reject the null of equality at the 10% level
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 41.101 
+Elapsed time = 43.35 
 > 
 > proc.time()
    user  system elapsed 
- 41.470   0.060  41.568 
+ 43.581   0.084  43.762 

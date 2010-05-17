@@ -27,6 +27,7 @@ Loading required package: boot
 Loading required package: cubature
 Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-9)
 > options(np.messages=FALSE)
+> set.seed(42)
 > 
 > library(MASS)
 > data(birthwt)
@@ -122,8 +123,8 @@ No. Ordered Categorical Explanatory Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 86.381 
+Elapsed time = 91.463 
 > 
 > proc.time()
    user  system elapsed 
- 86.651   0.115  86.961 
+ 91.832   0.106  92.155 

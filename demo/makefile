@@ -1,20 +1,21 @@
 all:
 
-	mpirun -np $(np) R CMD BATCH --no-save ../npudensml_npRmpi.R
-	mpirun -np $(np) R CMD BATCH --no-save ../npudensls_npRmpi.R
-	mpirun -np $(np) R CMD BATCH --no-save ../npregll_npRmpi.R
-	mpirun -np $(np) R CMD BATCH --no-save ../npreglc_npRmpi.R
+	mpirun -np $(np) R CMD BATCH --no-save ../npcdensls_npRmpi.R
+	mpirun -np $(np) R CMD BATCH --no-save ../npcdensml_npRmpi.R
+	mpirun -np $(np) R CMD BATCH --no-save ../npcdistccdf_npRmpi.R
+	mpirun -np $(np) R CMD BATCH --no-save ../npcmstest_npRmpi.R
+	mpirun -np $(np) R CMD BATCH --no-save ../npconmode_npRmpi.R
+	mpirun -np $(np) R CMD BATCH --no-save ../npdeneqtest_npRmpi.R
+	mpirun -np $(np) R CMD BATCH --no-save ../npdeptest_npRmpi.R
 	mpirun -np $(np) R CMD BATCH --no-save ../npindexich_npRmpi.R
 	mpirun -np $(np) R CMD BATCH --no-save ../npindexks_npRmpi.R
-	mpirun -np $(np) R CMD BATCH --no-save ../npscoef_npRmpi.R
-	mpirun -np $(np) R CMD BATCH --no-save ../npcdensml_npRmpi.R
-	mpirun -np $(np) R CMD BATCH --no-save ../npcdensls_npRmpi.R
-	mpirun -np $(np) R CMD BATCH --no-save ../npconmode_npRmpi.R
-	mpirun -np $(np) R CMD BATCH --no-save ../npcmstest_npRmpi.R
-	mpirun -np $(np) R CMD BATCH --no-save ../npsigtest_npRmpi.R
-	mpirun -np $(np) R CMD BATCH --no-save ../npsdeptest_npRmpi.R
-	mpirun -np $(np) R CMD BATCH --no-save ../npsymtest_npRmpi.R
-	mpirun -np $(np) R CMD BATCH --no-save ../npdeptest_npRmpi.R
-	mpirun -np $(np) R CMD BATCH --no-save ../npunitest_npRmpi.R
-	mpirun -np $(np) R CMD BATCH --no-save ../npdeneqtest_npRmpi.R
 	mpirun -np $(np) R CMD BATCH --no-save ../npqreg_npRmpi.R
+	mpirun -np $(np) R CMD BATCH --no-save ../npreglc_npRmpi.R
+	mpirun -np $(np) R CMD BATCH --no-save ../npregll_npRmpi.R
+	mpirun -np $(np) R CMD BATCH --no-save ../npscoef_npRmpi.R
+	mpirun -np $(np) R CMD BATCH --no-save ../npsdeptest_npRmpi.R
+	mpirun -np $(np) R CMD BATCH --no-save ../npsigtest_npRmpi.R
+	mpirun -np $(np) R CMD BATCH --no-save ../npsymtest_npRmpi.R
+	mpirun -np $(np) R CMD BATCH --no-save ../npudensls_npRmpi.R
+	mpirun -np $(np) R CMD BATCH --no-save ../npudensml_npRmpi.R
+	mpirun -np $(np) R CMD BATCH --no-save ../npunitest_npRmpi.R

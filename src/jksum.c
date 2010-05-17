@@ -1839,9 +1839,6 @@ int *num_categories){
       //fprintf(stderr,"mj: %e\n",mean[ii2]/(MAX(DBL_MIN, mean[ii2+1])));
     }
 
-
-    
-
     //exit(1);
 
     free(lc_Y[1]);
