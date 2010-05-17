@@ -210,6 +210,11 @@ npindex(bws, \dots)
 }
 
 \examples{
+## For the npRmpi package kindly see the examples in the demos directory
+## (npRmpi/demos) and study them carefully. The examples below run only
+## in the np package version (serial) and running parallel programs
+## requires additional care (see the npRmpi vignette for details via
+## vignette("npRmpi",package="npRmpi")).
 \dontrun{
 # EXAMPLE 1 (INTERFACE=FORMULA): Generate a simple linear model then
 # estimate it using a semiparametric single index specification and

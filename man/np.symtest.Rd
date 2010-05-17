@@ -130,6 +130,11 @@ npsymtest(data = NULL,
 }
 
 \examples{
+## For the npRmpi package kindly see the examples in the demos directory
+## (npRmpi/demos) and study them carefully. The examples below run only
+## in the np package version (serial) and running parallel programs
+## requires additional care (see the npRmpi vignette for details via
+## vignette("npRmpi",package="npRmpi")).
 \dontrun{
 set.seed(1234)
 

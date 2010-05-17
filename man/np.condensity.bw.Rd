@@ -417,6 +417,11 @@ npcdensbw(\dots)
 }
 
 \examples{
+## For the npRmpi package kindly see the examples in the demos directory
+## (npRmpi/demos) and study them carefully. The examples below run only
+## in the np package version (serial) and running parallel programs
+## requires additional care (see the npRmpi vignette for details via
+## vignette("npRmpi",package="npRmpi")).
 \dontrun{
 # EXAMPLE 1 (INTERFACE=FORMULA): For this example, we compute the
 # likelihood cross-validated bandwidths (default) using a second-order

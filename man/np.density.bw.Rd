@@ -378,6 +378,11 @@ npudensbw(\dots)
   \code{\link{bw.nrd}}, \code{\link{bw.SJ}},  \code{\link{hist}},
   \code{\link{npudens}}, \code{\link{npudist}} }
 \examples{
+## For the npRmpi package kindly see the examples in the demos directory
+## (npRmpi/demos) and study them carefully. The examples below run only
+## in the np package version (serial) and running parallel programs
+## requires additional care (see the npRmpi vignette for details via
+## vignette("npRmpi",package="npRmpi")).
 \dontrun{
 # EXAMPLE 1 (INTERFACE=FORMULA): For this example, we load Giovanni
 # Baiocchi's Italian GDP panel (see Italy for details), then create a

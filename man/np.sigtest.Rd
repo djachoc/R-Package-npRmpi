@@ -174,6 +174,11 @@ npsigtest(bws, \dots)
 }
 
 \examples{
+## For the npRmpi package kindly see the examples in the demos directory
+## (npRmpi/demos) and study them carefully. The examples below run only
+## in the np package version (serial) and running parallel programs
+## requires additional care (see the npRmpi vignette for details via
+## vignette("npRmpi",package="npRmpi")).
 \dontrun{
 # EXAMPLE 1 (INTERFACE=FORMULA): For this example, we simulate 100 draws
 # from a DGP in which z, the first column of X, is an irrelevant

@@ -17,7 +17,7 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> ## This is the serial version of npcdensml_npRmpi.R for comparison
+> ## This is the serial version of npcdistccdf_npRmpi.R for comparison
 > ## purposes (bandwidth ought to be identical, timing may
 > ## differ). Study the differences between this file and its MPI
 > ## counterpart for insight about your own problems.
@@ -87,9 +87,9 @@ No. Continuous Dependent Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 68.012 
+Elapsed time = 67.732 
 > 
 > 
 > proc.time()
    user  system elapsed 
- 68.210   0.089  68.601 
+ 68.195   0.072  68.319 

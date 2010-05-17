@@ -246,6 +246,11 @@ npksum(\dots)
 }
 
 \examples{
+## For the npRmpi package kindly see the examples in the demos directory
+## (npRmpi/demos) and study them carefully. The examples below run only
+## in the np package version (serial) and running parallel programs
+## requires additional care (see the npRmpi vignette for details via
+## vignette("npRmpi",package="npRmpi")).
 \dontrun{
 # EXAMPLE 1: For this example, we generate 100,000 observations from a
 # N(0, 1) distribution, then evaluate the kernel density on a grid of 50

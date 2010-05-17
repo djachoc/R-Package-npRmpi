@@ -51,6 +51,11 @@ npseed(seed)
   This method currently only supports objects from the \code{\link{np}} library.
 }
 \examples{
+## For the npRmpi package kindly see the examples in the demos directory
+## (npRmpi/demos) and study them carefully. The examples below run only
+## in the np package version (serial) and running parallel programs
+## requires additional care (see the npRmpi vignette for details via
+## vignette("npRmpi",package="npRmpi")).
 \dontrun{
 npseed(712)
 x <- runif(10)
