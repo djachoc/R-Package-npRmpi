@@ -64,17 +64,20 @@
 
 \section{Overview}
 
-A common and understandable complaint often levied against
-nonparametric kernel methods concerns the amount of computation time
+A common and understandable complaint often voiced about applied
+nonparametric kernel methods is the amount of computation time
 required for data-driven bandwidth selection when one has a large data
 set. There is a certain irony at play here since nonparametric methods
-are ideally suited to situations involving large data sets, however,
-computationally speaking their analysis may lie beyond the reach of
+are ideally suited to situations involving large data sets yet,
+computationally speaking, their analysis may lie beyond the reach of
 many users.  Some background may be in order. My co-authors and I
 favor data-driven methods of bandwidth selection such as
-cross-validation, among others. These bandwidth selection methods have
-run times that are proportional to the square of the number of
-observations.
+cross-validation, among others. These methods possess a number of very
+desirable properties but have run times that are proportional to the
+square of the number of observations hence doubling the number of
+observations will increase run time by a factor of four. For large
+data sets run time many simply not be feasible in a serial
+(i.e.~single processor) environment.
 
 The solution adopted in the \pkg{npRmpi} package is to run the code in
 a parallel computing environment and exploit the presence of multiple
