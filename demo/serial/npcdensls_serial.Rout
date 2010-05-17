@@ -86,9 +86,9 @@ No. Continuous Dependent Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 119.919 
+Elapsed time = 125.651 
 > 
 > 
 > proc.time()
    user  system elapsed 
-119.858   0.202 120.496 
+125.624   0.170 126.241 

@@ -58,15 +58,15 @@ Parametric null model: lm(formula = growth ~ oecd + factor(year) + initgdp + I(i
 Number of regressors: 6
 IID Bootstrap (399 replications)
 
-Test Statistic 'Jn': 3.831149	P Value: < 2.22e-16 ***
+Test Statistic ‘Jn’: 3.831149	P Value: < 2.22e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Null of correct specification is rejected at the 0.1% level
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 592.444 
+Elapsed time = 599.009 
 > 
 > proc.time()
    user  system elapsed 
-591.343   0.518 592.904 
+594.512   0.499 599.561 

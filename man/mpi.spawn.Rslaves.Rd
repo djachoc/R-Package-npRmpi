@@ -17,7 +17,7 @@ environments.
 in one working directory).
 }
 \usage{
-mpi.spawn.Rslaves(Rscript=system.file("slavedaemon.R", package="Rmpi"),
+mpi.spawn.Rslaves(Rscript=system.file("slavedaemon.R", package="npRmpi"),
         nslaves=mpi.universe.size(), root = 0, intercomm = 2,
         comm = 1, hosts = NULL, needlog = TRUE, mapdrive=TRUE)
 
@@ -50,7 +50,7 @@ slaves are successfully spawned and where they are running.
 }
 \details{
 The R slaves that \code{mpi.spawn.Rslaves} spawns are really running a shell 
-program which can be found in \code{system.file("Rslaves.sh",package="Rmpi")} 
+program which can be found in \code{system.file("Rslaves.sh",package="npRmpi")} 
 which takes a Rscript 
 file as one of its arguments. Other arguments are used to see if a log 
 file (R output) is needed and how to name it. The master process id and 
@@ -77,7 +77,7 @@ Notice that this is LAM-MPI specific.
   \code{\link{lamhosts}}.
 }
 \author{
-Hao Yu
+Hao Yu (minor modifications by Jeffrey S. Racine \email{racinej@mcmaster.ca})
 }
 \examples{
 \dontrun{

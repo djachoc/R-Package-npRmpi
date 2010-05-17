@@ -51,9 +51,11 @@ npseed(seed)
   This method currently only supports objects from the \code{\link{np}} library.
 }
 \examples{
+\dontrun{
 npseed(712)
 x <- runif(10)
 y <- x + rnorm(10, sd = 0.1)
 bw <- npregbw(y~x)
+}
 }
 \keyword{nonparametric}

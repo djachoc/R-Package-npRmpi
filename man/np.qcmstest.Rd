@@ -184,6 +184,7 @@ npqcmstest(formula,
 }
 
 \examples{
+\dontrun{
 # EXAMPLE 1: For this example, we conduct a consistent quantile regression
 # model specification test for a parametric wage quantile regression
 # model that is quadratic in age. The work of Murphy and Welch (1990)
@@ -206,8 +207,6 @@ X <- data.frame(age)
 # computer...
 
 npqcmstest(model = model, xdat = X, ydat = logwage, tau=0.5)
-
-\dontrun{
 
 # Sleep for 5 seconds so that we can examine the output...
 

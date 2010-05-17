@@ -10,8 +10,10 @@ all:
 	mpirun -np $(np) R CMD BATCH --no-save ../npindexich_npRmpi.R
 	mpirun -np $(np) R CMD BATCH --no-save ../npindexks_npRmpi.R
 	mpirun -np $(np) R CMD BATCH --no-save ../npqreg_npRmpi.R
-	mpirun -np $(np) R CMD BATCH --no-save ../npreglc_npRmpi.R
-	mpirun -np $(np) R CMD BATCH --no-save ../npregll_npRmpi.R
+	mpirun -np $(np) R CMD BATCH --no-save ../npreglcaic_npRmpi.R
+	mpirun -np $(np) R CMD BATCH --no-save ../npreglcls_npRmpi.R
+	mpirun -np $(np) R CMD BATCH --no-save ../npregllaic_npRmpi.R
+	mpirun -np $(np) R CMD BATCH --no-save ../npregllls_npRmpi.R
 	mpirun -np $(np) R CMD BATCH --no-save ../npscoef_npRmpi.R
 	mpirun -np $(np) R CMD BATCH --no-save ../npsdeptest_npRmpi.R
 	mpirun -np $(np) R CMD BATCH --no-save ../npsigtest_npRmpi.R

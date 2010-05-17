@@ -1,0 +1,26 @@
+all:
+
+	R CMD BATCH --vanilla npcdistccdf_serial.R
+	mpirun -np 2 R CMD BATCH --no-save npcdistccdf_npRmpi.R
+	grep Objective npcdistccdf*.Rout
+	grep "time = " npcdistccdf*.Rout
+
+serial:
+
+	R CMD BATCH --vanilla npcdistccdf_serial.R
+	grep Objective npcdistccdf*.Rout
+	grep "time = " npcdistccdf*.Rout
+
+mpi:
+
+	mpirun -np 2 R CMD BATCH --no-save npcdistccdf_npRmpi.R
+	grep Objective npcdistccdf*.Rout
+	grep "time = " npcdistccdf*.Rout
+
+debug_serial:
+
+	R CMD BATCH --vanilla npcdistccdf_serial.R
+
+debug_mpi:
+
+	mpirun -np 2 R CMD BATCH --no-save npcdistccdf_npRmpi.R

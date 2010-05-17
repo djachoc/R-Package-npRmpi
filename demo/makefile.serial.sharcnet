@@ -13,8 +13,10 @@ all:
 	sqsub -o npindexks_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npindexks_serial.R
 	sqsub -o npqreg_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npcdistccdf_serial.R
 	sqsub -o npqreg_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npqreg_serial.R
-	sqsub -o npreglc_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npreglc_serial.R
-	sqsub -o npregll_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npregll_serial.R
+	sqsub -o npreglcaic_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npreglcaic_serial.R
+	sqsub -o npreglcls_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npreglcls_serial.R
+	sqsub -o npregllaic_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npregllaic_serial.R
+	sqsub -o npregllls_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npregllls_serial.R
 	sqsub -o npscoef_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npscoef_serial.R
 	sqsub -o npsdeptest_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npsdeptest_serial.R
 	sqsub -o npsigtest_serial.out -r 2h -q serial R CMD BATCH --vanilla ../R/npsigtest_serial.R

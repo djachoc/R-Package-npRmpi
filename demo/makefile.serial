@@ -10,8 +10,10 @@ all:
 	R CMD BATCH --vanilla ../npindexich_serial.R
 	R CMD BATCH --vanilla ../npindexks_serial.R
 	R CMD BATCH --vanilla ../npqreg_serial.R
-	R CMD BATCH --vanilla ../npreglc_serial.R
-	R CMD BATCH --vanilla ../npregll_serial.R
+	R CMD BATCH --vanilla ../npreglcaic_serial.R
+	R CMD BATCH --vanilla ../npreglcls_serial.R
+	R CMD BATCH --vanilla ../npregllaic_serial.R
+	R CMD BATCH --vanilla ../npregllls_serial.R
 	R CMD BATCH --vanilla ../npscoef_serial.R
 	R CMD BATCH --vanilla ../npsdeptest_serial.R
 	R CMD BATCH --vanilla ../npsigtest_serial.R

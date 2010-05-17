@@ -432,6 +432,7 @@ npscoefbw(\dots)
 \seealso{
   \code{\link{npregbw}}, \code{\link{npreg}} }
 \examples{
+\dontrun{
 # EXAMPLE 1 (INTERFACE=FORMULA): 
 
 n <- 100
@@ -441,7 +442,6 @@ y <- x*exp(z)*(1.0+rnorm(n,sd = 0.2))
 bw <- npscoefbw(formula=y~x|z)
 summary(bw)
 
-\dontrun{
 # EXAMPLE 1 (INTERFACE=DATA FRAME): 
 
 n <- 100

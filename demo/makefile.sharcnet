@@ -13,8 +13,10 @@ all:
 	sqsub -o npindexks_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npindexks_npRmpi.R
 	sqsub -o npqreg_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npcdistccdf_npRmpi.R
 	sqsub -o npqreg_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npqreg_npRmpi.R
-	sqsub -o npreglc_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npreglc_npRmpi.R
-	sqsub -o npregll_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npregll_npRmpi.R
+	sqsub -o npreglcaic_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npreglcaic_npRmpi.R
+	sqsub -o npreglcls_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npreglcls_npRmpi.R
+	sqsub -o npregllaic_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npregllaic_npRmpi.R
+	sqsub -o npregllls_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npregllls_npRmpi.R
 	sqsub -o npscoef_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npscoef_npRmpi.R
 	sqsub -o npsdeptest_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH 	--no-save ../R/npsdeptest_npRmpi.R
 	sqsub -o npsigtest_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npsigtest_npRmpi.R

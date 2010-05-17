@@ -7,12 +7,14 @@
   spawned by using slavedaemon.R script.
 }
 \usage{
-mpi.bcast.cmd(cmd=NULL, rank = 0, comm = 1)
+mpi.bcast.cmd(cmd=NULL, rank = 0, comm = 1,caller.execute=FALSE)
 }
 \arguments{
   \item{cmd}{a command to be sent for master.}
   \item{rank}{the sender}
   \item{comm}{a communicator number}
+  \item{caller.execute}{a logical value indicating whether the master
+    node is additionally to execute the command}
 }
 \value{
   \code{mpi.bcast.cmd} returns no value for the sender and an expression 
@@ -30,7 +32,7 @@ mpi.bcast.cmd(cmd=NULL, rank = 0, comm = 1)
   slaves.
  }
 \author{
-Hao Yu
+Hao Yu (minor modifications by  Jeffrey S. Racine \email{racinej@mcmaster.ca})
 }
 \seealso{
   \code{\link{mpi.remote.exec}}

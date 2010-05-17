@@ -40,8 +40,6 @@ slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2
 > 
 > mpi.bcast.cmd(options(np.messages=FALSE),
 +               caller.execute=TRUE)
-> mpi.bcast.cmd(set.seed(42),
-+               caller.execute=TRUE)
 > 
 > library(MASS)
 > data(birthwt)
@@ -146,6 +144,6 @@ No. Ordered Categorical Explanatory Vars.: 1
 [1] 1
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 38.398 
+Elapsed time = 38.648 
 > 
 > mpi.quit()

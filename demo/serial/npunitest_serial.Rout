@@ -48,15 +48,15 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-9)
 Consistent Univariate Entropy Density Equality Test
 399 Bootstrap Replications
 
-Test Statistic 'Srho': 0.00104913	P Value: 0.71178 
+Test Statistic ‘Srho’: 0.00104913	P Value: 0.71178 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Fail to reject the null of equality at the 10% level
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 41.516 
+Elapsed time = 45.117 
 > 
 > proc.time()
    user  system elapsed 
- 41.730   0.093  41.924 
+ 42.835   0.177  45.622 
