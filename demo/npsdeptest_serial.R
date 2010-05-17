@@ -22,7 +22,7 @@ ar.series <- function(phi,epsilon) {
   return(series)
 }
 
-n <- 1000
+n <- 500
 
 ## Stationary persistent time-series
 
