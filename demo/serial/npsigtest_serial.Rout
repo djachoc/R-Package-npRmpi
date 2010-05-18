@@ -17,7 +17,7 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> ## This is the serial version of npcmstest_npRmpi.R for comparison
+> ## This is the serial version of npsigtest_npRmpi.R for comparison
 > ## purposes (bandwidth ought to be identical, timing may
 > ## differ). Study the differences between this file and its MPI
 > ## counterpart for insight about your own problems.
@@ -42,6 +42,9 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-9)
 +                                     regtype="ll",
 +                                     bwmethod="cv.aic"))
 > 
+> 
+> ## An example of the consistent nonparametric significance test
+> 
 > t <- t + system.time(output <- npsigtest(model))
 > 
 > output
@@ -64,8 +67,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 144.983 
+Elapsed time = 143.219 
 > 
 > proc.time()
    user  system elapsed 
-143.755   0.198 145.571 
+143.498   0.118 143.741 

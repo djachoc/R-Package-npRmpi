@@ -36,7 +36,7 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-9)
 > 
 > x <- rnorm(n)
 > 
-> ## A simple example with likelihood cross-validation
+> ## A simple example with least squares cross-validation
 > 
 > t <- system.time(bw <- npudensbw(~x,
 +                                  bwmethod="cv.ls"))
@@ -57,8 +57,8 @@ No. Continuous Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 63.829 
+Elapsed time = 60.859 
 > 
 > proc.time()
    user  system elapsed 
- 61.348   0.166  64.396 
+ 61.249   0.062  61.351 

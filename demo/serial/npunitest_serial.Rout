@@ -37,7 +37,7 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-9)
 > x <- rnorm(n)
 > y <- rnorm(n)
 > 
-> ## A simple example
+> ## A simple example of the test for equality of univariate densities
 > 
 > t <- system.time(output <- npunitest(x,y,
 +                                      method="summation",
@@ -55,8 +55,8 @@ Fail to reject the null of equality at the 10% level
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 45.117 
+Elapsed time = 41.598 
 > 
 > proc.time()
    user  system elapsed 
- 42.835   0.177  45.622 
+ 42.012   0.069  42.093 

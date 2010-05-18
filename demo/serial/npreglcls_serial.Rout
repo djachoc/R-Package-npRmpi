@@ -17,7 +17,7 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> ## This is the serial version of npreglc_npRmpi.R for comparison
+> ## This is the serial version of npreglcls_npRmpi.R for comparison
 > ## purposes (bandwidth ought to be identical, timing may
 > ## differ). Study the differences between this file and its MPI
 > ## counterpart for insight about your own problems.
@@ -38,7 +38,7 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-9)
 > mydat <- data.frame(y,x,z1=factor(z1),z2=factor(z2))
 > rm(x,y,z1,z2)
 > 
-> ## A regression example (local constant)
+> ## A regression example (local constant, least-squares cross-validation)
 > 
 > t <- system.time(bw <- npregbw(y~x+z1+z2,
 +                                regtype="lc",
@@ -87,9 +87,9 @@ No. Unordered Categorical Explanatory Vars.: 2
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 86.159 
+Elapsed time = 81.847 
 > 
 > 
 > proc.time()
    user  system elapsed 
- 82.385   0.189  86.702 
+ 82.253   0.076  82.381 

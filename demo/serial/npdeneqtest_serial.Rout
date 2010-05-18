@@ -37,7 +37,7 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-9)
 > sample.A <- data.frame(x=rnorm(n))
 > sample.B <- data.frame(x=rnorm(n))
 > 
-> ## A simple example with likelihood cross-validation
+> ## A consistent density equality test example
 > 
 > t <- system.time(output <- npdeneqtest(sample.A,sample.B,boot.num=99))
 > 
@@ -53,8 +53,8 @@ Fail to reject the null of equality at the 10% level
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 43.563 
+Elapsed time = 43.229 
 > 
 > proc.time()
    user  system elapsed 
- 43.701   0.081  44.057 
+ 43.642   0.070  43.722 

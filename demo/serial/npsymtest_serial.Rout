@@ -50,7 +50,7 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-9)
 > 
 > yt <- ar.series(0.5,rnorm(n))
 > 
-> ## A simple example with likelihood cross-validation
+> ## A simple example of the test for symmetry
 > 
 > t <- system.time(output <- npsymtest(yt,
 +                                      boot.num=399,
@@ -69,8 +69,8 @@ Fail to reject the null of symmetry at the 10% level
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 44.586 
+Elapsed time = 43.164 
 > 
 > proc.time()
    user  system elapsed 
- 43.934   0.145  45.095 
+ 43.559   0.097  43.664 

@@ -65,9 +65,15 @@ slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2
 > mpi.bcast.Robj2slave(model)
 > mpi.bcast.Robj2slave(X)
 > 
+> ## Consistent model specification test (we override defaults for
+> ## demonstration purposes - don't do this for real problems).
+> 
 > t <- system.time(mpi.bcast.cmd(output <- npcmstest(model = model,
 +                                                    xdat = X,
-+                                                    ydat = growth),
++                                                    ydat = growth,
++                                                    nmulti=1,
++                                                    ftol=.01,
++                                                    tol=.01),
 +                                caller.execute=TRUE))
 > 
 > output
@@ -77,7 +83,7 @@ Parametric null model: lm(formula = growth ~ oecd + factor(year) + initgdp + I(i
 Number of regressors: 6
 IID Bootstrap (399 replications)
 
-Test Statistic ‘Jn’: 4.093727	P Value: < 2.22e-16 ***
+Test Statistic ‘Jn’: 2.516359	P Value: < 2.22e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Null of correct specification is rejected at the 0.1% level
@@ -89,6 +95,6 @@ Null of correct specification is rejected at the 0.1% level
 [1] 1
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 393.179 
+Elapsed time = 51.946 
 > 
 > mpi.quit()

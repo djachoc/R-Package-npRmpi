@@ -57,7 +57,7 @@ slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2
 > mpi.bcast.Robj2slave(y)
 > mpi.bcast.Robj2slave(y.fit)
 > 
-> ## A simple example
+> ## A simple example for the consistent dependence metric test
 > 
 > t <- system.time(mpi.bcast.cmd(output <- npdeptest(y,
 +                                                    y.fit,
@@ -82,6 +82,6 @@ Null of independence is rejected at the 0.1% level
 [1] 1
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 39.074 
+Elapsed time = 37.86 
 > 
 > mpi.quit()

@@ -55,7 +55,7 @@ slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2
 > mpi.bcast.Robj2slave(sample.A)
 > mpi.bcast.Robj2slave(sample.B)
 > 
-> ## A simple example with likelihood cross-validation
+> ## A consistent density equality test example
 > 
 > t <- system.time(mpi.bcast.cmd(output <- npdeneqtest(sample.A,sample.B,boot.num=99),
 +                                caller.execute=TRUE))
@@ -77,6 +77,6 @@ Fail to reject the null of equality at the 10% level
 [1] 1
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 24.786 
+Elapsed time = 23.908 
 > 
 > mpi.quit()

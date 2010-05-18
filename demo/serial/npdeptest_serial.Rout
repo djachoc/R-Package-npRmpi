@@ -39,7 +39,8 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-9)
 > model <- lm(y~x)
 > y.fit <- fitted(model)
 >      
-> ## A simple example
+> 
+> ## A simple example for the consistent dependence metric test 
 > 
 > t <- system.time(output <- npdeptest(y,y.fit,
 +                                      boot.num=99,
@@ -57,8 +58,8 @@ Null of independence is rejected at the 0.1% level
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 69.372 
+Elapsed time = 69.03 
 > 
 > proc.time()
    user  system elapsed 
- 69.473   0.095  69.876 
+ 69.412   0.079  69.529 

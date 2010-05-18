@@ -52,7 +52,7 @@ slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2
 > x <- rnorm(n)
 > mpi.bcast.Robj2slave(x)
 > 
-> ## A simple example with likelihood cross-validation
+> ## A simple example with least squares cross-validation
 > 
 > t <- system.time(mpi.bcast.cmd(bw <- npudensbw(~x,
 +                                                bwmethod="cv.ls"),
@@ -79,6 +79,6 @@ No. Continuous Vars.: 1
 [1] 1
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 30.302 
+Elapsed time = 30.582 
 > 
 > mpi.quit()

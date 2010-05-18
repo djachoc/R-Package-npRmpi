@@ -55,7 +55,7 @@ slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2
 > mpi.bcast.Robj2slave(x)
 > mpi.bcast.Robj2slave(y)
 > 
-> ## A simple example
+> ## A simple example of the test for equality of univariate densities
 > 
 > t <- system.time(mpi.bcast.cmd(output <- npunitest(x,y,
 +                                                    method="summation",
@@ -79,6 +79,6 @@ Fail to reject the null of equality at the 10% level
 [1] 1
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 28.489 
+Elapsed time = 28.075 
 > 
 > mpi.quit()

@@ -44,13 +44,13 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-9)
 +   return(series)
 + }
 > 
-> n <- 1000
+> n <- 500
 > 
 > ## Stationary persistent time-series
 > 
 > yt <- ar.series(0.95,rnorm(n))
 > 
-> ## A simple example with likelihood cross-validation
+> ## A simple example of a test for serial dependence
 > 
 > t <- system.time(output <- npsdeptest(yt,
 +                                       lag.num=2,
@@ -62,8 +62,8 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-9)
 Consistent Metric Entropy Test for Nonlinear Dependence 
 399 Bootstrap Replications, 2 Lags
 
-Test Statistic ‘Srho[1]’: 0.1070427	P Value: < 2.22e-16 ***
-Test Statistic ‘Srho[2]’: 0.07820768	P Value: < 2.22e-16 ***
+Test Statistic ‘Srho[1]’: 0.0982991	P Value: < 2.22e-16 ***
+Test Statistic ‘Srho[2]’: 0.0702005	P Value: < 2.22e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Null of independence is rejected at lag 1 at the 0.1% level
@@ -71,8 +71,8 @@ Null of independence is rejected at lag 2 at the 0.1% level
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 271.584 
+Elapsed time = 79.435 
 > 
 > proc.time()
    user  system elapsed 
-255.790   0.615 272.120 
+ 79.764   0.136  79.931 

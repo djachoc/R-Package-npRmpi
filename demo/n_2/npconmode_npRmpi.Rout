@@ -144,6 +144,6 @@ No. Ordered Categorical Explanatory Vars.: 1
 [1] 1
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 38.648 
+Elapsed time = 37.237 
 > 
 > mpi.quit()

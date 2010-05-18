@@ -67,7 +67,7 @@ slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2
 > 
 > mpi.bcast.Robj2slave(yt)
 > 
-> ## A simple example with likelihood cross-validation
+> ## A simple example of the test for symmetry
 > 
 > t <- system.time(mpi.bcast.cmd(output <- npsymtest(yt,
 +                                                    boot.num=399,
@@ -92,6 +92,6 @@ Fail to reject the null of symmetry at the 10% level
 [1] 1
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 30.467 
+Elapsed time = 30.477 
 > 
 > mpi.quit()
