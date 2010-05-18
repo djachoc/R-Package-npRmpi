@@ -3,3 +3,5 @@ all:
 	pdflatex npRmpi
 	bibtex npRmpi
 
+clean:
+	rm *.aux *.log *.bbl *.blg *.out *.tex
