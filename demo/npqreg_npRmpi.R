@@ -34,10 +34,9 @@ t <- t + system.time(mpi.bcast.cmd(model.q0.50 <- npqreg(bws=bw, tau=0.50),
 t <- t + system.time(mpi.bcast.cmd(model.q0.75 <- npqreg(bws=bw, tau=0.75),
                                    caller.execute=TRUE))
 
-## Clean up properly then quit()
-
-mpi.close.Rslaves()
-
 cat("Elapsed time =", t[3], "\n")
 
-mpi.quit()
+## Clean up properly then quit()
+
+mpi.bcast.cmd(mpi.quit(),
+              caller.execute=TRUE)

@@ -53,10 +53,9 @@ t <- system.time(mpi.bcast.cmd(output <- npsymtest(yt,
 
 output
 
-## Clean up properly then quit()
-
-mpi.close.Rslaves()
-
 cat("Elapsed time =", t[3], "\n")
 
-mpi.quit()
+## Clean up properly then quit()
+
+mpi.bcast.cmd(mpi.quit(),
+              caller.execute=TRUE)

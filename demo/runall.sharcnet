@@ -10,9 +10,9 @@ cd n_2
 make -f ../R/makefile.sharcnet n=2
 cd ../
 
-mkdir n_2
-cd n_2
-make -f ../R/makefile.sharcnet n=2
+mkdir n_3
+cd n_3
+make -f ../R/makefile.sharcnet n=3
 cd ../
 
 mkdir n_4

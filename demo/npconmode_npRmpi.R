@@ -49,10 +49,9 @@ t <- t + system.time(mpi.bcast.cmd(model <- npconmode(bws=bw),
 
 summary(model)
 
-## Clean up properly then quit()
-
-mpi.close.Rslaves()
-
 cat("Elapsed time =", t[3], "\n")
 
-mpi.quit()
+## Clean up properly then quit()
+
+mpi.bcast.cmd(mpi.quit(),
+              caller.execute=TRUE)

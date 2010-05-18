@@ -20,8 +20,8 @@ Type 'q()' to quit R.
 Loading required package: boot
 Loading required package: cubature
 Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-9) + Rmpi 0.5-8
-master (rank 0, comm 1) of size 2 is running on: pc-racine2 
-slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2 
+master (rank 0, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
+slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
 > ## Make sure you have the .Rprofile file from npRmpi/inst/ in your
 > ## current directory or home directory. It is necessary.
 > 
@@ -99,51 +99,3 @@ No. Ordered Categorical Explanatory Vars.: 1
 > 
 > t <- t + system.time(mpi.bcast.cmd(model <- npconmode(bws=bw),
 +                                    caller.execute=TRUE))
-> 
-> summary(model)
-
-Conditional Mode data: 189 training points, in 8 variable(s)
-(1 dependent variable(s), and 7 explanatory variable(s))
-
-                               low
-Dep. Var. Bandwidth(s): 0.04603296
-                           smoke      race         ht         ui       ftv
-Exp. Var. Bandwidth(s): 0.395644 0.6666667 0.02517859 0.03915691 0.6379859
-                             age      lwt
-Exp. Var. Bandwidth(s): 5.325507 5.455626
-
-Bandwidth Type: Fixed
-
-Confusion Matrix
-      Predicted
-Actual   0   1
-     0 128   2
-     1  27  32
-
-Overall Correct Classification Ratio:  0.8465608
-Correct Classification Ratio By Outcome:
-        0         1 
-0.9846154 0.5423729 
-
-McFadden-Puig-Kerschner performance measure:  0.8260407
-
-Continuous Kernel Type: Second-Order Gaussian
-No. Continuous Explanatory Vars.: 2
-
-Unordered Categorical Kernel Type: Aitchison and Aitken
-No. Unordered Categorical Explanatory Vars.: 4
-No. Unordered Categorical Dependent Vars.: 1
-
-Ordered Categorical Kernel Type: Wang and Van Ryzin
-No. Ordered Categorical Explanatory Vars.: 1
-
-> 
-> ## Clean up properly then quit()
-> 
-> mpi.close.Rslaves()
-[1] 1
-> 
-> cat("Elapsed time =", t[3], "\n")
-Elapsed time = 37.237 
-> 
-> mpi.quit()
