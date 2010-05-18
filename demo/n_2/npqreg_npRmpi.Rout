@@ -72,3 +72,15 @@ No. Ordered Categorical Explanatory Vars.: 1
 > 
 > t <- t + system.time(mpi.bcast.cmd(model.q0.25 <- npqreg(bws=bw, tau=0.25),
 +                                    caller.execute=TRUE))
+> t <- t + system.time(mpi.bcast.cmd(model.q0.50 <- npqreg(bws=bw, tau=0.50),
++                                    caller.execute=TRUE))
+> t <- t + system.time(mpi.bcast.cmd(model.q0.75 <- npqreg(bws=bw, tau=0.75),
++                                    caller.execute=TRUE))
+> 
+> cat("Elapsed time =", t[3], "\n")
+Elapsed time = 49.311 
+> 
+> ## Clean up properly then quit()
+> 
+> mpi.bcast.cmd(mpi.quit(),
++               caller.execute=TRUE)
