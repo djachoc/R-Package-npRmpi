@@ -213,22 +213,24 @@ you would typically run using the \pkg{np} package.
 ## counterpart for insight about your own problems.
 
 library(np)
-
-## Turn off progress i/o as this clutters the output file (if you want
-## to see search progress you can comment out this command)
-
 options(np.messages=FALSE)
 
 ## Generate some data
 
+n <- 2500
+
 set.seed(42)
-x <- rnorm(2500)
+
+x <- rnorm(n)
 
 ## A simple example with likelihood cross-validation
 
-system.time(bw <- npudensbw(~x))
+t <- system.time(bw <- npudensbw(~x,
+                                 bwmethod="cv.ml"))
 
 summary(bw)
+
+cat("Elapsed time =", t[3], "\n")
 \end{verbatim}
 
 Below is the same code modified to run in parallel using the
@@ -257,8 +259,8 @@ Below is the same code modified to run in parallel using the
       \code{caller.execute=TRUE} which indicates it is to execute on
       the master and slave nodes simultaneously.
       
-    \item Finally, we clean up gracefully via the
-      \code{mpi.close.Rslaves()} and \code{mpi.quit()} commands.
+    \item Finally, we clean up gracefully by broadcasting the
+      \code{mpi.quit()} command.
       
     \item There are a number of example files (including that above
       and below) in the \code{npRmpi/demo} directory that you may wish
@@ -291,21 +293,28 @@ mpi.bcast.cmd(options(np.messages=FALSE),
 ## Generate some data and broadcast it to all slaves (it will be known
 ## to the master node)
 
-set.seed(42)
-x <- rnorm(2500)
+n <- 2500
+
+mpi.bcast.cmd(set.seed(42),
+              caller.execute=TRUE)
+
+x <- rnorm(n)
 mpi.bcast.Robj2slave(x)
 
 ## A simple example with likelihood cross-validation
 
-system.time(mpi.bcast.cmd(bw <- npudensbw(~x),
-                          caller.execute=TRUE))
+t <- system.time(mpi.bcast.cmd(bw <- npudensbw(~x,
+                                               bwmethod="cv.ml"),
+                               caller.execute=TRUE))
 
 summary(bw)
 
+cat("Elapsed time =", t[3], "\n")
+
 ## Clean up properly then quit()
 
-mpi.close.Rslaves()
-mpi.quit()
+mpi.bcast.cmd(mpi.quit(),
+              caller.execute=TRUE)
 \end{verbatim}
 
 For more examples including regression, conditional density
