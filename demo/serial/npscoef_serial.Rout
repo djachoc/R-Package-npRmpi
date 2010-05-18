@@ -79,9 +79,9 @@ No. Continuous Explanatory Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 38.106 
+Elapsed time = 38.342 
 > 
 > 
 > proc.time()
    user  system elapsed 
- 38.526   0.093  38.631 
+ 38.567   0.094  38.871 

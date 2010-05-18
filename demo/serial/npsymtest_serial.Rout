@@ -69,8 +69,8 @@ Fail to reject the null of symmetry at the 10% level
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 43.164 
+Elapsed time = 43.286 
 > 
 > proc.time()
    user  system elapsed 
- 43.559   0.097  43.664 
+ 43.615   0.110  43.804 

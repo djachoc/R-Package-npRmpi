@@ -7,7 +7,7 @@
   spawned by using slavedaemon.R script.
 }
 \usage{
-mpi.bcast.cmd(cmd=NULL, rank = 0, comm = 1,caller.execute=FALSE)
+mpi.bcast.cmd(cmd=NULL, rank = 0, comm = 1, caller.execute=FALSE)
 }
 \arguments{
   \item{cmd}{a command to be sent for master.}

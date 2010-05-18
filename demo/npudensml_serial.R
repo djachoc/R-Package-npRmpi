@@ -12,12 +12,13 @@ n <- 2500
 
 set.seed(42)
 
-x <- rnorm(n)
+mydat <- data.frame(x=rnorm(n))
 
 ## A simple example with likelihood cross-validation
 
 t <- system.time(bw <- npudensbw(~x,
-                                 bwmethod="cv.ml"))
+                                 bwmethod="cv.ml",
+                                 data=mydat))
 
 summary(bw)
 

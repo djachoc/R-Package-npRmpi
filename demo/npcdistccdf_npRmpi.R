@@ -30,17 +30,16 @@ rho <- 0.25
 mu <- c(0,0)
 Sigma <- matrix(c(1,rho,rho,1),2,2)
 data <- mvrnorm(n=n, mu, Sigma)
-y <- data[,1]
-x <- data[,2]
+mydat <- data.frame(x=data[,2],y=data[,1])
 
-mpi.bcast.Robj2slave(x)
-mpi.bcast.Robj2slave(y)
+mpi.bcast.Robj2slave(mydat)
 
 ## A simple example with experimental conditional cdf bandwidth
 ## selection (unsupported)
 
 t <- system.time(mpi.bcast.cmd(bw <- npcdensbw(y~x,
-                                               bwmethod="cv.ccdf"),
+                                               bwmethod="cv.ccdf",
+                                               data=mydat),
                                caller.execute=TRUE))
 
 summary(bw)

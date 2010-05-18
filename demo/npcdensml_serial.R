@@ -16,13 +16,13 @@ rho <- 0.25
 mu <- c(0,0)
 Sigma <- matrix(c(1,rho,rho,1),2,2)
 data <- mvrnorm(n=n, mu, Sigma)
-y <- data[,1]
-x <- data[,2]
+mydat <- data.frame(x=data[,2],y=data[,1])
 
 ## A simple example with least-squares cross-validation
 
 t <- system.time(bw <- npcdensbw(y~x,
-                                 bwmethod="cv.ml"))
+                                 bwmethod="cv.ml",
+                                 data=mydat))
 
 summary(bw)
 

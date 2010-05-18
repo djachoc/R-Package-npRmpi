@@ -71,8 +71,8 @@ Null of correct specification is rejected at the 0.1% level
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 73.898 
+Elapsed time = 74.107 
 > 
 > proc.time()
    user  system elapsed 
- 74.333   0.098  74.479 
+ 74.431   0.119  74.704 

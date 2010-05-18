@@ -25,13 +25,14 @@ n <- 2500
 mpi.bcast.cmd(set.seed(42),
               caller.execute=TRUE)
 
-x <- rnorm(n)
-mpi.bcast.Robj2slave(x)
+mydat <- data.frame(x=rnorm(n))
+mpi.bcast.Robj2slave(mydat)
 
 ## A simple example with likelihood cross-validation
 
 t <- system.time(mpi.bcast.cmd(bw <- npudensbw(~x,
-                                               bwmethod="cv.ml"),
+                                               bwmethod="cv.ml",
+                                               data=mydat),
                                caller.execute=TRUE))
 
 summary(bw)
