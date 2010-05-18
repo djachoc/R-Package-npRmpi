@@ -9,7 +9,7 @@ library(npRmpi)
 ## a two core desktop we need an additional slave on top of the master
 ## node to allow both cores to run simultaneously.
 
-mpi.spawn.Rslaves(nslaves=1)
+mpi.spawn.Rslaves(nslaves=0#)
 
 ## Initialize master and slaves.
 
@@ -25,8 +25,7 @@ library(MASS)
 
 mpi.bcast.cmd(set.seed(42),
               caller.execute=TRUE)
-
-n <- 500
+n <- 1000
 
 rho <- 0.25
 mu <- c(0,0)
@@ -52,7 +51,10 @@ summary(model)
 
 cat("Elapsed time =", t[3], "\n")
 
-## Clean up properly then quit()
+#mpi.bcast.cmd(plot(model),caller.execute=TRUE)
+
+## Note - to exit you want to clean up properly then quit() via the
+## following command (uncomment).
 
 mpi.bcast.cmd(mpi.quit(),
               caller.execute=TRUE)
