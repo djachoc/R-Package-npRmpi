@@ -141,13 +141,16 @@ parallel computing you are strongly advised to seek local advice.
 
 That being said, if you have current versions of \proglang{R} and Open
 \proglang{MPI} properly installed on your system, installation of the
-\pkg{npRmpi} package could be as simple as downloading the
-\pkg{npRmpi} tarball and, from a command shell, running
-
+\pkg{npRmpi} package can be done in the standard manner from within
+\proglang{R} via
+\begin{verbatim}
+> install.packages("npRmpi")
+\end{verbatim}
+or, alternatively, you can download the \pkg{npRmpi} tarball from CRAN
+and, from a command shell, run
 \begin{verbatim}
 R CMD INSTALL npRmpi_foo.tar.gz 
 \end{verbatim}
-
 where foo is the version number. 
 
 For clusters you may additionally need to provide locations of
@@ -156,13 +159,10 @@ variations for me to assist). On a local Linux cluster I use the
 following by way of illustration (for this illustration we use the
 Intel compiler suite and need to set \proglang{MPI} library paths and
 \proglang{MPI} root directories):
-
 \begin{verbatim}
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/sharcnet/openmpi/1.4.2/intel/lib
 export MPI_ROOT=/opt/sharcnet/openmpi/1.4.2/intel 
-R CMD INSTALL npRmpi_foo.tar.gz
 \end{verbatim}
-
 where again foo is the version number. 
 
 Please seek local help for further assistance on installing and
@@ -201,6 +201,39 @@ sqsub -q mpi -n 2 R CMD BATCH npudensml_npRmpi.R
 Again, kindly consult local tech support personnel for issues
 concerning the use of batch queueing systems and using compute
 clusters.
+
+\subsection{Parallel R Terminal Execution}
+
+Often you might wish to run your code instead in an R
+terminal/console. Doing so requires the essential elements in Section
+\ref{sec example} below with two minor differences. First, you do not
+require the \code{.Rprofile} to reside in the root or current
+directory, and second you will load the \pkg{npRmpi} pacakage and then
+generate the slave nodes using the command
+\code{mpi.spawn.Rslaves(nslaves=foo)} where on a dual core desktop
+\code{foo=1} so that \code{mpi.spawn.Rslaves(nslaves=1)} will spawn
+one slave node in addition to the master node on which \proglang{R} is
+running. See the file \code{interactive_Rterm.R} in the demo directory
+for an illustration, but here are the additional elements required in
+addition to those below given the caveats above.
+
+\begin{verbatim}
+## This code can be run in real time inside the R terminal/console.
+## It does not require that you have the .Rprofile file from
+## npRmpi/inst/ in your current directory or home directory as we can
+## load the npRmpi package in the standard manner.
+
+library(npRmpi)
+
+## Now we can spawn our slaves from within the R terminal manually. On
+## a two core desktop we need an additional slave on top of the master
+## node to allow both cores to run simultaneously.
+
+mpi.spawn.Rslaves(nslaves=1)
+
+## Then the rest of your program would follow along the lines of that 
+## in Section \ref{sec example}.
+\end{verbatim}
 
 \subsection{Essential Program Elements}\label{sec example}
 
