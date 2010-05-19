@@ -1,5 +1,3 @@
-interactive_Rterm.R	same program for running in an R terminal
-
 npcdensls_npRmpi	sample program for np (_serial) and npRmpi (_npRmpi)
 npcdensls_serial	sample program for np (_serial) and npRmpi (_npRmpi)
 npcdensml_npRmpi	sample program for np (_serial) and npRmpi (_npRmpi)

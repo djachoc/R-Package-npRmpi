@@ -61,9 +61,9 @@ mpi.setup.rngstream <- function(seed=c(runif(3,0,2^32-210),runif(3,0,2^32-22854)
     .lec.CreateStream(names)
     states <- lapply(names, .lec.GetStateList)
     
-#    if (sum(mpi.remote.exec(as.integer(require(rlecuyer)),comm=comm))
-#            < commsize-1)
-#        stop("It seems rlecuyer is not installed properly on slave machines.")
+    if (sum(mpi.remote.exec(as.integer(require(rlecuyer)),comm=comm))
+            < commsize-1)
+        stop("It seems rlecuyer is not installed properly on slave machines.")
     .Rngstream.seed <<- seed
     #adapted from snow
     initRNGstreamNode <- function (stream) {
@@ -104,9 +104,9 @@ mpi.setup.sprng <- function (seed = runif(1, 1, 2^31-1),
         stop(paste("'", kindprng, "' is not a valid choice", sep = ""))
     }
 
-#    if (sum(mpi.remote.exec(as.integer(require(rsprng)),comm=comm))
-#            < commsize-1)
-#        stop("It seems rsprng is not installed properly on slave machines.")
+    if (sum(mpi.remote.exec(as.integer(require(rsprng)),comm=comm))
+            < commsize-1)
+        stop("It seems rsprng is not installed properly on slave machines.")
     assign(".Sprng.seed", as.integer(c(seed, kind, para)), env=.GlobalEnv)
     #adapted from snow
     initSprngNode <- function (streamno, nstream, seed, kind, para) {
