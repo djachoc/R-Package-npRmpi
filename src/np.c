@@ -149,20 +149,7 @@ void np_set_seed(int * num){
   iff = 0;
 }
 
-/* 20/05/10 - to get proper initialization of iNum_Processors we need
-   comm[1] defined as static in Rmpi.c... to call a static function
-   requires the code to be in the same file. So, we moved this to
-   Rmpi.c, changed MPI_Comm_size(MPI_COMM_WORLD, &iNum_Processors) to
-   MPI_Comm_size(comm[1], &iNum_Processors); and added
-
-   #include "headers.h"
-   int my_rank;
-   int iNum_Processors;
-
-   and the mofified function to Rmpi.c. Thanks to Hao Yu for the
-   assistance. */
-
-/*void np_mpi_init(int * mpi_status){
+void np_mpi_init(int * mpi_status){
 #ifdef MPI2 
   MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
   MPI_Comm_size(MPI_COMM_WORLD, &iNum_Processors);
@@ -172,7 +159,7 @@ void np_set_seed(int * num){
   mpi_status[MPI_RANKI] = -1;
   mpi_status[MPI_NUMPI] = -1;
 #endif
-}*/
+}
 
 
 void np_density_bw(double * myuno, double * myord, double * mycon, 
