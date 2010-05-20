@@ -30,6 +30,25 @@ static int COMM_MAXSIZE=10;
 static int STATUS_MAXSIZE=5000;
 static int REQUEST_MAXSIZE=10000;
 
+#include "headers.h"
+int my_rank;
+int iNum_Processors;
+
+void np_mpi_init(int * mpi_status){
+#ifdef MPI2 
+  /*  MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
+      MPI_Comm_size(MPI_COMM_WORLD, &iNum_Processors);*/
+  MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
+  MPI_Comm_size(comm[1], &iNum_Processors);
+  mpi_status[MPI_RANKI] = my_rank;
+  mpi_status[MPI_NUMPI] = iNum_Processors;
+#else
+  mpi_status[MPI_RANKI] = -1;
+  mpi_status[MPI_NUMPI] = -1;
+#endif
+}
+
+
 SEXP mpidist(){
 	int i=0;
 
