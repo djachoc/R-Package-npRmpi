@@ -102,7 +102,7 @@ mpi.spawn.Rslaves <-
     intercomm=2,
     comm=1,
     hosts=NULL,
-    needlog=TRUE,
+    needlog=FALSE,
     mapdrive=TRUE) {
     if (!is.loaded("mpi_comm_spawn"))
         stop("You cannot use MPI_Comm_spawn API")   
