@@ -137,33 +137,38 @@ bin.nchar <- function(x){
     .Call("bin_nchar", x[1],PACKAGE = "npRmpi")
 }
 
-Rmpi.0.50.9.mpi.bcast.cmd <- function (cmd=NULL, rank=0, comm=1){
-    if(mpi.comm.rank(comm) == rank){
-        cmd <- deparse(substitute(cmd), width.cutoff=500)
+Rmpi.0.50.9.mpi.bcast.cmd <- function (cmd=NULL, rank=0, comm=1, caller.execute = FALSE){
+  if(mpi.comm.rank(comm) == rank){
+    if(caller.execute)
+      tcmd <- substitute(cmd)
+    cmd <- deparse(substitute(cmd), width.cutoff=500)
     #cmd <- paste(cmd, collapse="\"\"/")
     cmd <- .mpi.serialize(cmd)
     #mpi.bcast(x=nchar(cmd), type=1, rank=rank, comm=comm)
     mpi.bcast(x=length(cmd), type=1, rank=rank, comm=comm)
-    invisible(mpi.bcast(x=cmd, type=4, rank=rank, comm=comm))
-    } 
+    if (caller.execute)
+      eval(tcmd, envir = parent.frame())
+    else
+      invisible(mpi.bcast(x=cmd, type=4, rank=rank, comm=comm))
+  } else {
+    charlen <- mpi.bcast(x=integer(1), type=1, rank=rank, comm=comm)
+    if (is.character(charlen))   #error
+      parse(text="break")
     else {
-        charlen <- mpi.bcast(x=integer(1), type=1, rank=rank, comm=comm)
-        if (is.character(charlen))   #error
-            parse(text="break")
-        else {
-        #out <- mpi.bcast(x=.Call("mkstr", as.integer(charlen),
-        #    PACKAGE = "npRmpi"), type=3, rank=rank, comm=comm)
-        out <- .mpi.unserialize(mpi.bcast(x=raw(charlen), type=4, rank=rank, comm=comm))
-        #parse(text=unlist(strsplit(out,"\"\"/"))) 
-        parse(text=out) 
-        }
+      #out <- mpi.bcast(x=.Call("mkstr", as.integer(charlen),
+      #    PACKAGE = "npRmpi"), type=3, rank=rank, comm=comm)
+      out <- .mpi.unserialize(mpi.bcast(x=raw(charlen), type=4, rank=rank, comm=comm))
+      #parse(text=unlist(strsplit(out,"\"\"/"))) 
+      parse(text=out) 
     }
+  }
 }
 
 mpi.bcast.cmd <- function (cmd=NULL, rank=0, comm=1, caller.execute = FALSE){
-    if(mpi.comm.rank(comm) == rank){
-      if(caller.execute) tcmd <- substitute(cmd)
-        cmd <- deparse(substitute(cmd), width.cutoff=500)
+  if(mpi.comm.rank(comm) == rank){
+    if(caller.execute)
+      tcmd <- substitute(cmd)
+    cmd <- deparse(substitute(cmd), width.cutoff=500)
     cmd <- paste(cmd, collapse="\"\"/")
     mpi.bcast(x=nchar(cmd), type=1, rank=rank, comm=comm)
     bcast.out <- (mpi.bcast(x=cmd, type=3, rank=rank, comm=comm))
@@ -171,18 +176,18 @@ mpi.bcast.cmd <- function (cmd=NULL, rank=0, comm=1, caller.execute = FALSE){
       eval(tcmd, envir = parent.frame())
     else
       invisible(bcast.out)
-    }
+  }
+  else {
+    charlen <- mpi.bcast(x=integer(1), type=1, rank=rank,
+                         comm=comm)
+    if (is.character(charlen))   #error                                                           
+      parse(text="break")
     else {
-        charlen <- mpi.bcast(x=integer(1), type=1, rank=rank,
-        comm=comm)
-        if (is.character(charlen))   #error                                                           
-            parse(text="break")
-        else {
-        out <- mpi.bcast(x=.Call("mkstr", as.integer(charlen),
-            PACKAGE = "npRmpi"), type=3, rank=rank, comm=comm)
-        parse(text=unlist(strsplit(out,"\"\"/")))
-        }
+      out <- mpi.bcast(x=.Call("mkstr", as.integer(charlen),
+                         PACKAGE = "npRmpi"), type=3, rank=rank, comm=comm)
+      parse(text=unlist(strsplit(out,"\"\"/")))
     }
+  }
 }
 
 mpi.bcast.Robj <- function(obj=NULL, rank=0, comm=1){

@@ -15,10 +15,13 @@ z <- factor(rbinom(n,1,.5))
 x1 <- rnorm(n)
 x2 <- runif(n,-2,2)
 y <- x1 + x2 + rnorm(n)
+mydat <- data.frame(z,x1,x2,y)
+rm(z.x1,x2,y)
 
 t <- system.time(model <- npreg(y~z+x1+x2,
-                                    regtype="ll",
-                                    bwmethod="cv.aic"))
+                                regtype="ll",
+                                bwmethod="cv.aic",
+                                data=mydat))
 
 
 ## An example of the consistent nonparametric significance test

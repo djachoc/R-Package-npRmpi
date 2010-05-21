@@ -28,14 +28,14 @@ mpi.bcast.cmd(set.seed(42),
 x <- runif(n)
 z <- runif(n, min=-2, max=2)
 y <- x*exp(z)*(1.0+rnorm(n,sd = 0.2))
+mydat <- data.frame(x,y,z)
+rm(x,y,z)
 
-mpi.bcast.Robj2slave(x)
-mpi.bcast.Robj2slave(z)
-mpi.bcast.Robj2slave(y)
+mpi.bcast.Robj2slave(mydat)
 
 ## A smooth coefficient model example
 
-t <- system.time(mpi.bcast.cmd(bw <- npscoefbw(y~x|z),
+t <- system.time(mpi.bcast.cmd(bw <- npscoefbw(y~x|z,data=mydat),
                                caller.execute=TRUE))
 
 summary(bw)

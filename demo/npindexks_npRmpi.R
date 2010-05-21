@@ -30,15 +30,16 @@ x1 <- (ifelse(x < 6, x, 6) - 2.348)/1.511
 x <- rnorm(n)
 x2 <- ifelse(abs(x) < 2 , x, 2) / 0.8796
 y <- ifelse(x1 + x2 + rnorm(n) > 0, 1, 0)
+mydat <- data.frame(x1,x2,y)
+rm(x,x1,x2,y)
 
-mpi.bcast.Robj2slave(x1)
-mpi.bcast.Robj2slave(x2)
-mpi.bcast.Robj2slave(y)
+mpi.bcast.Robj2slave(mydat)
 
 ## A single index model example (Klein & Spady, binary y)
 
 t <- system.time(mpi.bcast.cmd(bw <- npindexbw(formula=y~x1+x2,
-                                               method="kleinspady"),
+                                               method="kleinspady",
+                                               data=mydat),
                                caller.execute=TRUE))
 
 summary(bw)
