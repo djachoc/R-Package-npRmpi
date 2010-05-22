@@ -1,8 +1,8 @@
-May 19 2010
+Title: Installing the npRmpi binary package for MS Windows XP (32-bit
+& Service Pack 3)
 
-Instructions for using and installing npRmpi under MS Windows (thanks
-to David Tomas Jacho-Chavez <djachoch@indiana.edu> for this most
-helpful information and for building the Windows binary).
+Date: 05/19/2010
+Author: David T. Jacho-Chavez (djachoch@indiana.edu)
 
 These are based on those given in http://www.stats.uwo.ca/faculty/yu/Rmpi/
 

@@ -1,5 +1,5 @@
-Title: Building Rmpi and npRmpi from source code under MS Windows
-(32-bit & Service Pack 3)
+Title: Compiling npRmpi from source code under MS Windows XP (32-bit &
+Service Pack 3)
 
 Date: 05/21/2010
 Author: David T. Jacho-Chavez (djachoch@indiana.edu)
