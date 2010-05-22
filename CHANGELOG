@@ -1,4 +1,4 @@
-Changes from Version 0.30-9 to 0.40-0 [xxx-May-2010]
+Changes from Version 0.30-9 to 0.30-10 [xxx-June-2010]
 
 * Modified codebase to enable dynamic spawning for interactive
   sessions in npRmpi
