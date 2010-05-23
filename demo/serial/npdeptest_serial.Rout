@@ -58,8 +58,8 @@ Null of independence is rejected at the 0.1% level
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 69.076 
+Elapsed time = 65.536 
 > 
 > proc.time()
    user  system elapsed 
- 69.427   0.081  69.576 
+ 65.912   0.060  66.006 

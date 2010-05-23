@@ -19,10 +19,20 @@ Type 'q()' to quit R.
 
 Loading required package: boot
 Loading required package: cubature
-Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-9) + Rmpi 0.5-9
-master (rank 0, comm 1) of size 2 is running on: pc-racine2 
-slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2 
-> ## Make sure you have the .Rprofile file from npRmpi/inst/ in your
+Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-10) + Rmpi 0.5-9
+master (rank 0, comm 1) of size 2 is running on: jeffrey-
+comm!=rank= 0NULL
+
+comm!=rank= 0NULL
+
+comm!=rank= 0NULL
+
+comm!=rank= 0NULL
+
+comm!=rank= 0NULL
+
+comm!=rank= 0NULL
+you have the .Rprofile file from npRmpi/inst/ in your
 > ## current directory or home directory. It is necessary.
 > 
 > ## To run this on systems with OPENMPI installed and working, try
@@ -34,12 +44,16 @@ slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2
 > 
 > mpi.bcast.cmd(np.mpi.initialize(),
 +               caller.execute=TRUE)
+
+comm==rank= 0NULL
 > 
 > ## Turn off progress i/o as this clutters the output file (if you want
 > ## to see search progress you can comment out this command)
 > 
 > mpi.bcast.cmd(options(np.messages=FALSE),
 +               caller.execute=TRUE)
+
+comm==rank= 0NULL
 > 
 > ## Generate data and broadcast it to all slave nodes in the form of a
 > ## data frame
@@ -65,6 +79,8 @@ slave1 (rank 1, comm 1) of size 2 is running on: pc-racine2
 +                                              bwmethod="cv.aic",
 +                                              data=mydat),
 +                                caller.execute=TRUE))
+
+comm==rank= 0NULL
 > 
 > summary(bw)
 
@@ -90,6 +106,8 @@ No. Unordered Categorical Explanatory Vars.: 2
 > t <- t + system.time(mpi.bcast.cmd(model <- npreg(bws=bw,
 +                                                   data=mydat),
 +                                    caller.execute=TRUE))
+
+comm==rank= 0NULL
 > 
 > summary(model)
 
@@ -110,9 +128,11 @@ No. Unordered Categorical Explanatory Vars.: 2
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 44.127 
+Elapsed time = 40.325 
 > 
 > ## Clean up properly then quit()
 > 
 > mpi.bcast.cmd(mpi.quit(),
 +               caller.execute=TRUE)
+
+comm==rank= 0NULL
