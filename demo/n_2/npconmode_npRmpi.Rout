@@ -20,19 +20,9 @@ Type 'q()' to quit R.
 Loading required package: boot
 Loading required package: cubature
 Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-10) + Rmpi 0.5-9
-master (rank 0, comm 1) of size 2 is running on: jeffrey-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-you have the .Rprofile file from npRmpi/inst/ in your
+master (rank 0, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
+slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
+> ## Make sure you have the .Rprofile file from npRmpi/inst/ in your
 > ## current directory or home directory. It is necessary.
 > 
 > ## To run this on systems with OPENMPI installed and working, try
@@ -44,28 +34,30 @@ you have the .Rprofile file from npRmpi/inst/ in your
 > 
 > mpi.bcast.cmd(np.mpi.initialize(),
 +               caller.execute=TRUE)
-
-comm==rank= 0NULL
 > 
 > ## Turn off progress i/o as this clutters the output file (if you want
 > ## to see search progress you can comment out this command)
 > 
 > mpi.bcast.cmd(options(np.messages=FALSE),
 +               caller.execute=TRUE)
-
-comm==rank= 0NULL
 > 
-> library(MASS)
-> data(birthwt)
+> mpi.bcast.cmd(library(MASS),
++               caller.execute=TRUE)
+> mpi.bcast.cmd(data(birthwt),
++               caller.execute=TRUE)
 > 
-> birthwt$low <- factor(birthwt$low)
-> birthwt$smoke <- factor(birthwt$smoke)
-> birthwt$race <- factor(birthwt$race)
-> birthwt$ht <- factor(birthwt$ht)
-> birthwt$ui <- factor(birthwt$ui)
-> birthwt$ftv <- ordered(birthwt$ftv)
-> 
-> mpi.bcast.Robj2slave(birthwt)
+> mpi.bcast.cmd(birthwt$low <- factor(birthwt$low),
++               caller.execute=TRUE)
+> mpi.bcast.cmd(birthwt$smoke <- factor(birthwt$smoke),
++               caller.execute=TRUE)
+> mpi.bcast.cmd(birthwt$race <- factor(birthwt$race),
++               caller.execute=TRUE)
+> mpi.bcast.cmd(birthwt$ht <- factor(birthwt$ht),
++               caller.execute=TRUE)
+> mpi.bcast.cmd(birthwt$ui <- factor(birthwt$ui),
++               caller.execute=TRUE)
+> mpi.bcast.cmd(birthwt$ftv <- ordered(birthwt$ftv),
++               caller.execute=TRUE)
 > 
 > ## A conditional mode example
 > 
@@ -79,8 +71,6 @@ comm==rank= 0NULL
 +                                                lwt,
 +                                                data=birthwt),
 +                                caller.execute=TRUE))
-
-comm==rank= 0NULL
 > 
 > summary(bw)
 
@@ -115,8 +105,6 @@ No. Ordered Categorical Explanatory Vars.: 1
 > 
 > t <- t + system.time(mpi.bcast.cmd(model <- npconmode(bws=bw),
 +                                    caller.execute=TRUE))
-
-comm==rank= 0NULL
 > 
 > summary(model)
 
@@ -157,11 +145,9 @@ No. Ordered Categorical Explanatory Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 34.974 
+Elapsed time = 35.232 
 > 
 > ## Clean up properly then quit()
 > 
 > mpi.bcast.cmd(mpi.quit(),
 +               caller.execute=TRUE)
-
-comm==rank= 0NULL

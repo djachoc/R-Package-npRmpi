@@ -90,9 +90,9 @@ No. Unordered Categorical Explanatory Vars.: 2
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 85.939 
+Elapsed time = 86.629 
 > 
 > 
 > proc.time()
    user  system elapsed 
- 86.367   0.053  86.439 
+ 86.396   0.148  87.142 

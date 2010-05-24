@@ -20,9 +20,10 @@ mpi.bcast.cmd(options(np.messages=FALSE),
 ## Generate data and broadcast it to all slave nodes in the form of a
 ## data frame
 
+set.seed(42)
+
 n <- 1000
 
-set.seed(42)
 x <- runif(n)
 z1 <- rbinom(n,1,.5)
 z2 <- rbinom(n,1,.5)

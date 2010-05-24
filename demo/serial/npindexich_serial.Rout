@@ -30,20 +30,17 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-9)
 > 
 > ## Generate some data
 > 
-> n <- 2500
-> 
 > set.seed(42)
+> 
+> n <- 2500
 > 
 > x1 <- runif(n, min=-1, max=1)
 > x2 <- runif(n, min=-1, max=1)
 > y <- x1 - x2 + rnorm(n)
-> mydat <- data.frame(x1,x2,y)
-> rm(y,x1,x2)
 > 
 > ## A single index model example (Ichimura, continuous y)
 > 
-> t <- system.time(bw <- npindexbw(formula=y~x1+x2,
-+                                  data=mydat))
+> t <- system.time(bw <- npindexbw(formula=y~x1+x2))
 > 
 > summary(bw)
 
@@ -84,9 +81,9 @@ No. Continuous Explanatory Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 34.892 
+Elapsed time = 34.803 
 > 
 > 
 > proc.time()
    user  system elapsed 
- 35.302   0.061  35.395 
+ 35.222   0.059  35.290 

@@ -8,9 +8,9 @@ options(np.messages=FALSE)
 
 ## Generate some data
 
-n <- 2500
-
 set.seed(42)
+
+n <- 2500
 
 x <- runif(n)
 z <- runif(n, min=-2, max=2)

@@ -4,9 +4,11 @@ Service Pack 3)
 Date: 05/21/2010
 Author: David T. Jacho-Chavez (djachoch@indiana.edu)
 
-0) Create the folder "R_temp" in your C:\ Drive.
+These are based on those given in http://www.stats.uwo.ca/faculty/yu/Rmpi/
 
-1) Download the following files and place then in "C:\R_temp" (note
+1) Create the folder "R_temp" in your C:\ Drive.
+
+2) Download the following files and place then in "C:\R_temp" (note
 version numbers may be more recent so use the most recent available):
 
 R-2.11.0-win32.exe         http://www.r-project.org/
@@ -22,7 +24,7 @@ test.R                     http://www.economics.mcmaster.ca/faculty/racinej
   below) that you can freely move to your working directory (see note
   (i) at the bottom of this document)
 
-2) Install the following programmes (in this order) using the default
+3) Install the following programmes (in this order) using the default
 directories:
 
   (i) R-2.11.0-win32.exe (Please kindly refer to installation
@@ -35,7 +37,7 @@ directories:
       instructions at
       http://www.stats.uwo.ca/faculty/yu/Rmpi/windows.htm)
 
-3) Follow these steps carefully
+4) Follow these steps carefully
 
   (i) Untar Rmpi_0.5-9.tar.gz and npRmpi_0.30-9.tar.gz in the
   "C:\R_temp" folder.
@@ -53,7 +55,7 @@ directories:
 
        Save these changes.
 
-4) 'Open a command window here' (google this phrase if you don't know
+5) 'Open a command window here' (google this phrase if you don't know
 how) in "C:\R_Temp\" and type:
 
   R CMD INSTALL Rmpi
@@ -62,11 +64,11 @@ how) in "C:\R_Temp\" and type:
 
   R CMD INSTALL npRmpi
 
-5) To test your installation now type:
+6) To test your installation now type:
 
   mpiexec -n 2 R --no-save -q < test.R > test_np_2.txt
 
-6) Now open test_np_2.txt and if you find no errors, your installation
+7) Now open test_np_2.txt and if you find no errors, your installation
 has been successful!
 
 Notes:

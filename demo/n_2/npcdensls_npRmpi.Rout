@@ -20,21 +20,9 @@ Type 'q()' to quit R.
 Loading required package: boot
 Loading required package: cubature
 Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-10) + Rmpi 0.5-9
-master (rank 0, comm 1) of size 2 is running on: jeffrey-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-ile file from npRmpi/inst/ in your
+master (rank 0, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
+slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
+> ## Make sure you have the .Rprofile file from npRmpi/inst/ in your
 > ## current directory or home directory. It is necessary.
 > 
 > ## To run this on systems with OPENMPI installed and working, try
@@ -46,44 +34,42 @@ ile file from npRmpi/inst/ in your
 > 
 > mpi.bcast.cmd(np.mpi.initialize(),
 +               caller.execute=TRUE)
-
-comm==rank= 0NULL
 > 
 > ## Turn off progress i/o as this clutters the output file (if you want
 > ## to see search progress you can comment out this command)
 > 
 > mpi.bcast.cmd(options(np.messages=FALSE),
 +               caller.execute=TRUE)
-
-comm==rank= 0NULL
 > 
 > ## Load your data and broadcast it to all slave nodes
 > 
-> library(MASS)
+> mpi.bcast.cmd(library(MASS),
++               caller.execute=TRUE)
 > 
 > mpi.bcast.cmd(set.seed(42),
 +               caller.execute=TRUE)
-
-comm==rank= 0NULL
 > 
-> n <- 500
+> mpi.bcast.cmd(n <- 500,
++               caller.execute=TRUE)
 > 
-> rho <- 0.25
-> mu <- c(0,0)
-> Sigma <- matrix(c(1,rho,rho,1),2,2)
-> data <- mvrnorm(n=n, mu, Sigma)
-> mydat <- data.frame(x=data[,2],y=data[,1])
-> 
-> mpi.bcast.Robj2slave(mydat)
+> mpi.bcast.cmd(rho <- 0.25,
++               caller.execute=TRUE)
+> mpi.bcast.cmd(mu <- c(0,0),
++               caller.execute=TRUE)
+> mpi.bcast.cmd(Sigma <- matrix(c(1,rho,rho,1),2,2),
++               caller.execute=TRUE)
+> mpi.bcast.cmd(data <- mvrnorm(n=n, mu, Sigma),
++               caller.execute=TRUE)
+> mpi.bcast.cmd(x <- data[,2],
++               caller.execute=TRUE)
+> mpi.bcast.cmd(y <- data[,1],
++               caller.execute=TRUE)
 > 
 > ## A conditional density estimation example. 
 > 
 > t <- system.time(mpi.bcast.cmd(bw <- npcdensbw(y~x,
-+                                                bwmethod="cv.ls",
-+                                                data=mydat),
++                                                bwmethod="cv.ls"),
 +                                caller.execute=TRUE))
-
-comm==rank= 0NULL
 > 
 > summary(bw)
 
@@ -106,8 +92,6 @@ No. Continuous Dependent Vars.: 1
 > 
 > t <- t + system.time(mpi.bcast.cmd(model <- npcdens(bws=bw),
 +                                    caller.execute=TRUE))
-
-comm==rank= 0NULL
 > 
 > summary(model)
 
@@ -128,11 +112,9 @@ No. Continuous Dependent Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 104.229 
+Elapsed time = 103.38 
 > 
 > ## Clean up properly then quit()
 > 
 > mpi.bcast.cmd(mpi.quit(),
 +               caller.execute=TRUE)
-
-comm==rank= 0NULL

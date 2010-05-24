@@ -20,25 +20,10 @@ Type 'q()' to quit R.
 Loading required package: boot
 Loading required package: cubature
 Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-10) + Rmpi 0.5-9
-master (rank 0, comm 1) of size 2 is running on: jeffrey-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-# current directory or home directory. It is necessary.
+master (rank 0, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
+slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
+> ## Make sure you have the .Rprofile file from npRmpi/inst/ in your
+> ## current directory or home directory. It is necessary.
 > 
 > ## To run this on systems with OPENMPI installed and working, try
 > ## mpirun -np 2 R CMD BATCH npcmstest_npRmpi. Check the time in the
@@ -49,47 +34,40 @@ comm!=rank= 0NULL
 > 
 > mpi.bcast.cmd(np.mpi.initialize(),
 +               caller.execute=TRUE)
-
-comm==rank= 0NULL
 > 
 > ## Turn off progress i/o as this clutters the output file (if you want
 > ## to see search progress you can comment out this command)
 > 
 > mpi.bcast.cmd(options(np.messages=FALSE),
 +               caller.execute=TRUE)
-
-comm==rank= 0NULL
 > 
 > mpi.bcast.cmd(data("oecdpanel"),
 +               caller.execute=TRUE)
-
-comm==rank= 0NULL
 > mpi.bcast.cmd(attach(oecdpanel),
 +               caller.execute=TRUE)
-
-comm==rank= 0NULL
 > 
-> oecd <- factor(oecd)
-> year <- factor(year)
+> mpi.bcast.cmd(oecd <- factor(oecd),
++               caller.execute=TRUE)
+> mpi.bcast.cmd(year <- factor(year),
++               caller.execute=TRUE)
 > 
-> model <- lm(growth ~ oecd +
-+             year +
-+             initgdp +
-+             I(initgdp^2) +
-+             I(initgdp^3) +
-+             I(initgdp^4) +
-+             popgro +
-+             inv +
-+             humancap +
-+             I(humancap^2) +
-+             I(humancap^3) - 1, 
-+             x=TRUE, 
-+             y=TRUE)
+> mpi.bcast.cmd(model <- lm(growth ~ oecd +
++                           year +
++                           initgdp +
++                           I(initgdp^2) +
++                           I(initgdp^3) +
++                           I(initgdp^4) +
++                           popgro +
++                           inv +
++                           humancap +
++                           I(humancap^2) +
++                           I(humancap^3) - 1, 
++                           x=TRUE, 
++                           y=TRUE),
++               caller.execute=TRUE)
 > 
-> X <- data.frame(oecd, year, initgdp, popgro, inv, humancap)
-> 
-> mpi.bcast.Robj2slave(model)
-> mpi.bcast.Robj2slave(X)
+> mpi.bcast.cmd(X <- data.frame(oecd, year, initgdp, popgro, inv, humancap),
++               caller.execute=TRUE)
 > 
 > ## Consistent model specification test (we override defaults for
 > ## demonstration purposes - don't do this for real problems).
@@ -101,8 +79,6 @@ comm==rank= 0NULL
 +                                                    ftol=.01,
 +                                                    tol=.01),
 +                                caller.execute=TRUE))
-
-comm==rank= 0NULL
 > 
 > output
 
@@ -118,11 +94,9 @@ Null of correct specification is rejected at the 0.1% level
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 48.649 
+Elapsed time = 48.504 
 > 
 > ## Clean up properly then quit()
 > 
 > mpi.bcast.cmd(mpi.quit(),
 +               caller.execute=TRUE)
-
-comm==rank= 0NULL

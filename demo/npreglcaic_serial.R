@@ -6,9 +6,10 @@
 library(np)
 options(np.messages=FALSE)
 
+set.seed(42)
+
 n <- 1000
 
-set.seed(42)
 x <- runif(n)
 z1 <- rbinom(n,1,.5)
 z2 <- rbinom(n,1,.5)

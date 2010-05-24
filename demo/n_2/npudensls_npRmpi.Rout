@@ -20,19 +20,9 @@ Type 'q()' to quit R.
 Loading required package: boot
 Loading required package: cubature
 Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-10) + Rmpi 0.5-9
-master (rank 0, comm 1) of size 2 is running on: jeffrey-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-you have the .Rprofile file from npRmpi/inst/ in your
+master (rank 0, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
+slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
+> ## Make sure you have the .Rprofile file from npRmpi/inst/ in your
 > ## current directory or home directory. It is necessary.
 > 
 > ## To run this on systems with OPENMPI installed and working, try
@@ -44,38 +34,30 @@ you have the .Rprofile file from npRmpi/inst/ in your
 > 
 > mpi.bcast.cmd(np.mpi.initialize(),
 +               caller.execute=TRUE)
-
-comm==rank= 0NULL
 > 
 > ## Turn off progress i/o as this clutters the output file (if you want
 > ## to see search progress you can comment out this command)
 > 
 > mpi.bcast.cmd(options(np.messages=FALSE),
 +               caller.execute=TRUE)
-
-comm==rank= 0NULL
 > 
 > ## Generate some data and broadcast it to all slaves (it will be known
 > ## to the master node)
 > 
-> n <- 2500
+> mpi.bcast.cmd(n <- 2500,
++               caller.execute=TRUE)
 > 
 > mpi.bcast.cmd(set.seed(42),
 +               caller.execute=TRUE)
-
-comm==rank= 0NULL
 > 
-> mydat <- data.frame(x=rnorm(n))
-> mpi.bcast.Robj2slave(mydat)
+> mpi.bcast.cmd(x <- rnorm(n),
++               caller.execute=TRUE)
 > 
 > ## A simple example with least squares cross-validation
 > 
 > t <- system.time(mpi.bcast.cmd(bw <- npudensbw(~x,
-+                                                bwmethod="cv.ls",
-+                                                data=mydat),
++                                                bwmethod="cv.ls"),
 +                                caller.execute=TRUE))
-
-comm==rank= 0NULL
 > 
 > summary(bw)
 
@@ -93,11 +75,9 @@ No. Continuous Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 29.519 
+Elapsed time = 28.542 
 > 
 > ## Clean up properly then quit()
 > 
 > mpi.bcast.cmd(mpi.quit(),
 +               caller.execute=TRUE)
-
-comm==rank= 0NULL

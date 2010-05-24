@@ -20,23 +20,9 @@ Type 'q()' to quit R.
 Loading required package: boot
 Loading required package: cubature
 Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-10) + Rmpi 0.5-9
-master (rank 0, comm 1) of size 2 is running on: jeffrey-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-
-comm!=rank= 0NULL
-i/inst/ in your
+master (rank 0, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
+slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro 
+> ## Make sure you have the .Rprofile file from npRmpi/inst/ in your
 > ## current directory or home directory. It is necessary.
 > 
 > ## To run this on systems with OPENMPI installed and working, try
@@ -48,32 +34,26 @@ i/inst/ in your
 > 
 > mpi.bcast.cmd(np.mpi.initialize(),
 +               caller.execute=TRUE)
-
-comm==rank= 0NULL
 > 
 > ## Turn off progress i/o as this clutters the output file (if you want
 > ## to see search progress you can comment out this command)
 > 
 > mpi.bcast.cmd(options(np.messages=FALSE),
 +               caller.execute=TRUE)
-
-comm==rank= 0NULL
 > 
 > ## Generate some data and broadcast it to all slaves (it will be known
 > ## to the master node)
 > 
 > mpi.bcast.cmd(set.seed(42),
 +               caller.execute=TRUE)
-
-comm==rank= 0NULL
 > 
-> n <- 1000
+> mpi.bcast.cmd(n <- 1000,
++               caller.execute=TRUE)
 > 
-> x <- rnorm(n)
-> y <- rnorm(n)
-> 
-> mpi.bcast.Robj2slave(x)
-> mpi.bcast.Robj2slave(y)
+> mpi.bcast.cmd(x <- rnorm(n),
++               caller.execute=TRUE)
+> mpi.bcast.cmd(y <- rnorm(n),
++               caller.execute=TRUE)
 > 
 > ## A simple example of the test for equality of univariate densities
 > 
@@ -81,8 +61,6 @@ comm==rank= 0NULL
 +                                                    method="summation",
 +                                                    bootstrap=TRUE),
 +                                caller.execute=TRUE))
-
-comm==rank= 0NULL
 > 
 > output
 
@@ -96,11 +74,9 @@ Fail to reject the null of equality at the 10% level
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 26.84 
+Elapsed time = 25.839 
 > 
 > ## Clean up properly then quit()
 > 
 > mpi.bcast.cmd(mpi.quit(),
 +               caller.execute=TRUE)
-
-comm==rank= 0NULL

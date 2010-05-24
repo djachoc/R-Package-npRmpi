@@ -11,6 +11,7 @@ set.seed(42)
 ## Significance testing with z irrelevant
 
 n <- 500
+
 z <- factor(rbinom(n,1,.5))
 x1 <- rnorm(n)
 x2 <- runif(n,-2,2)

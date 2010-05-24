@@ -8,9 +8,9 @@ options(np.messages=FALSE)
 
 ## Generate some data
 
-n <- 2500
-
 set.seed(42)
+
+n <- 2500
 
 x <- rchisq(n, df=3)
 x1 <- (ifelse(x < 6, x, 6) - 2.348)/1.511

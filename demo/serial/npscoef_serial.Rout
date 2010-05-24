@@ -30,19 +30,17 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-9)
 > 
 > ## Generate some data
 > 
-> n <- 2500
-> 
 > set.seed(42)
+> 
+> n <- 2500
 > 
 > x <- runif(n)
 > z <- runif(n, min=-2, max=2)
 > y <- x*exp(z)*(1.0+rnorm(n,sd = 0.2))
-> mydat <- data.frame(x,y,z)
-> rm(x,y,z)
 > 
 > ## A smooth coefficient model example
 > 
-> t <- system.time(bw <- npscoefbw(y~x|z,data=mydat))
+> t <- system.time(bw <- npscoefbw(y~x|z))
 > 
 > summary(bw)
 
@@ -81,9 +79,9 @@ No. Continuous Explanatory Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 36.443 
+Elapsed time = 36.577 
 > 
 > 
 > proc.time()
    user  system elapsed 
- 36.748   0.094  36.942 
+ 36.858   0.115  37.079 

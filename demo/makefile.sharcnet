@@ -1,26 +1,26 @@
 all:
 
-	export MPI_ROOT=/opt/sharcnet/openmpi/1.3.3/intel
-	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/sharcnet/openmpi/1.3.3/intel/lib
+	export MPI_ROOT=/opt/sharcnet/openmpi/current/intel
+	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/sharcnet/openmpi/current/intel/lib
 
-	sqsub -o npcdensls_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npcdensls_npRmpi.R
-	sqsub -o npcdensml_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npcdensml_npRmpi.R
-	sqsub -o npcmstest_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npcmstest_npRmpi.R
-	sqsub -o npconmode_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npconmode_npRmpi.R
-	sqsub -o npdeneqtest_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npdeneqtest_npRmpi.R
-	sqsub -o npdeptest_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npdeptest_npRmpi.R
-	sqsub -o npindexich_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npindexich_npRmpi.R
-	sqsub -o npindexks_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npindexks_npRmpi.R
-	sqsub -o npqreg_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npcdistccdf_npRmpi.R
-	sqsub -o npqreg_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npqreg_npRmpi.R
-	sqsub -o npreglcaic_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npreglcaic_npRmpi.R
-	sqsub -o npreglcls_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npreglcls_npRmpi.R
-	sqsub -o npregllaic_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npregllaic_npRmpi.R
-	sqsub -o npregllls_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npregllls_npRmpi.R
-	sqsub -o npscoef_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npscoef_npRmpi.R
-	sqsub -o npsdeptest_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH 	--no-save ../R/npsdeptest_npRmpi.R
-	sqsub -o npsigtest_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npsigtest_npRmpi.R
-	sqsub -o npsymtest_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npsymtest_npRmpi.R
-	sqsub -o npudensls_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npudensls_npRmpi.R
-	sqsub -o npudensml_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npudensml_npRmpi.R
-	sqsub -o npunitest_npRmpi.out -r 2h -q mpi -n $(n)  R CMD BATCH --no-save ../R/npunitest_npRmpi.R
+	sqsub -o npcdensls_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npcdensls_npRmpi.R
+	sqsub -o npcdensml_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npcdensml_npRmpi.R
+	sqsub -o npcmstest_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npcmstest_npRmpi.R
+	sqsub -o npconmode_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npconmode_npRmpi.R
+	sqsub -o npdeneqtest_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npdeneqtest_npRmpi.R
+	sqsub -o npdeptest_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npdeptest_npRmpi.R
+	sqsub -o npindexich_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npindexich_npRmpi.R
+	sqsub -o npindexks_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npindexks_npRmpi.R
+	sqsub -o npcdistccdf_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npcdistccdf_npRmpi.R
+	sqsub -o npqreg_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npqreg_npRmpi.R
+	sqsub -o npreglcaic_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npreglcaic_npRmpi.R
+	sqsub -o npreglcls_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npreglcls_npRmpi.R
+	sqsub -o npregllaic_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npregllaic_npRmpi.R
+	sqsub -o npregllls_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npregllls_npRmpi.R
+	sqsub -o npscoef_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npscoef_npRmpi.R
+	sqsub -o npsdeptest_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npsdeptest_npRmpi.R
+	sqsub -o npsigtest_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npsigtest_npRmpi.R
+	sqsub -o npsymtest_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npsymtest_npRmpi.R
+	sqsub -o npudensls_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npudensls_npRmpi.R
+	sqsub -o npudensml_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npudensml_npRmpi.R
+	sqsub -o npunitest_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npunitest_npRmpi.R

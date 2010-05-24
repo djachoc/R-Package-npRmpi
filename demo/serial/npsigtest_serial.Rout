@@ -33,19 +33,15 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-9)
 > ## Significance testing with z irrelevant
 > 
 > n <- 500
+> 
 > z <- factor(rbinom(n,1,.5))
 > x1 <- rnorm(n)
 > x2 <- runif(n,-2,2)
 > y <- x1 + x2 + rnorm(n)
-> mydat <- data.frame(z,x1,x2,y)
-> rm(z.x1,x2,y)
-Warning message:
-In rm(z.x1, x2, y) : object 'z.x1' not found
 > 
 > t <- system.time(model <- npreg(y~z+x1+x2,
 +                                 regtype="ll",
-+                                 bwmethod="cv.aic",
-+                                 data=mydat))
++                                 bwmethod="cv.aic"))
 > 
 > 
 > ## An example of the consistent nonparametric significance test
@@ -72,8 +68,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 135.118 
+Elapsed time = 135.798 
 > 
 > proc.time()
    user  system elapsed 
-135.504   0.079 135.611 
+135.812   0.164 136.295 

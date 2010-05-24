@@ -30,17 +30,16 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-9)
 > 
 > ## Generate some data
 > 
-> n <- 2500
-> 
 > set.seed(42)
 > 
-> mydat <- data.frame(x=rnorm(n))
+> n <- 2500
+> 
+> x <- rnorm(n)
 > 
 > ## A simple example with likelihood cross-validation
 > 
 > t <- system.time(bw <- npudensbw(~x,
-+                                  bwmethod="cv.ml",
-+                                  data=mydat))
++                                  bwmethod="cv.ml"))
 > 
 > summary(bw)
 
@@ -58,8 +57,8 @@ No. Continuous Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 24.074 
+Elapsed time = 24.157 
 > 
 > proc.time()
    user  system elapsed 
- 24.501   0.045  24.776 
+ 24.509   0.056  24.627 
