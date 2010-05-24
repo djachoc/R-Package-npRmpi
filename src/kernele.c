@@ -12565,7 +12565,7 @@ int itmax)
 	double **matrix_Y_continuous_eval;
 
 	#ifdef MPI2
-	int stride = ceil((double) num_obs / (double) iNum_Processors);
+	int stride = ceil((double) num_obs_train / (double) iNum_Processors);
 	if(stride < 1) stride = 1;
 	#endif
 
