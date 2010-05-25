@@ -41,23 +41,17 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > mpi.bcast.cmd(options(np.messages=FALSE),
 +               caller.execute=TRUE)
 > 
-> mpi.bcast.cmd(library(MASS),
-+               caller.execute=TRUE)
-> mpi.bcast.cmd(data(birthwt),
-+               caller.execute=TRUE)
+> library(MASS)
+> data(birthwt)
 > 
-> mpi.bcast.cmd(birthwt$low <- factor(birthwt$low),
-+               caller.execute=TRUE)
-> mpi.bcast.cmd(birthwt$smoke <- factor(birthwt$smoke),
-+               caller.execute=TRUE)
-> mpi.bcast.cmd(birthwt$race <- factor(birthwt$race),
-+               caller.execute=TRUE)
-> mpi.bcast.cmd(birthwt$ht <- factor(birthwt$ht),
-+               caller.execute=TRUE)
-> mpi.bcast.cmd(birthwt$ui <- factor(birthwt$ui),
-+               caller.execute=TRUE)
-> mpi.bcast.cmd(birthwt$ftv <- ordered(birthwt$ftv),
-+               caller.execute=TRUE)
+> birthwt$low <- factor(birthwt$low)
+> birthwt$smoke <- factor(birthwt$smoke)
+> birthwt$race <- factor(birthwt$race)
+> birthwt$ht <- factor(birthwt$ht)
+> birthwt$ui <- factor(birthwt$ui)
+> birthwt$ftv <- ordered(birthwt$ftv)
+> 
+> mpi.bcast.Robj2slave(birthwt)
 > 
 > ## A conditional mode example
 > 
@@ -145,7 +139,7 @@ No. Ordered Categorical Explanatory Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 35.232 
+Elapsed time = 37.715 
 > 
 > ## Clean up properly then quit()
 > 

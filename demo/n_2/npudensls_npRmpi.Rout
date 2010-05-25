@@ -44,19 +44,19 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > ## Generate some data and broadcast it to all slaves (it will be known
 > ## to the master node)
 > 
-> mpi.bcast.cmd(n <- 2500,
-+               caller.execute=TRUE)
-> 
 > mpi.bcast.cmd(set.seed(42),
 +               caller.execute=TRUE)
 > 
-> mpi.bcast.cmd(x <- rnorm(n),
-+               caller.execute=TRUE)
+> n <- 2500
+> 
+> mydat <- data.frame(x=rnorm(n))
+> mpi.bcast.Robj2slave(mydat)
 > 
 > ## A simple example with least squares cross-validation
 > 
 > t <- system.time(mpi.bcast.cmd(bw <- npudensbw(~x,
-+                                                bwmethod="cv.ls"),
++                                                bwmethod="cv.ls",
++                                                data=mydat),
 +                                caller.execute=TRUE))
 > 
 > summary(bw)
@@ -75,7 +75,7 @@ No. Continuous Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 28.542 
+Elapsed time = 28.537 
 > 
 > ## Clean up properly then quit()
 > 

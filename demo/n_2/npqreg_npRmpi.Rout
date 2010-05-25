@@ -41,8 +41,8 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > mpi.bcast.cmd(options(np.messages=FALSE),
 +              caller.execute=TRUE)
 > 
-> mpi.bcast.cmd(data("Italy"),
-+              caller.execute=TRUE)
+> data("Italy")
+> mpi.bcast.Robj2slave(Italy)
 > 
 > ## A quantile regression example
 > 
@@ -78,7 +78,7 @@ No. Ordered Categorical Explanatory Vars.: 1
 +                                    caller.execute=TRUE))
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 47.557 
+Elapsed time = 52.734 
 > 
 > ## Clean up properly then quit()
 > 

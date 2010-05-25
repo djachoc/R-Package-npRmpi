@@ -46,20 +46,23 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > 
 > ## Significance testing with z irrelevant
 > 
-> mpi.bcast.cmd(n <- 500,
-+               caller.execute=TRUE)
-> mpi.bcast.cmd(z <- factor(rbinom(n,1,.5)),
-+               caller.execute=TRUE)
-> mpi.bcast.cmd(x1 <- rnorm(n),
-+               caller.execute=TRUE)
-> mpi.bcast.cmd(x2 <- runif(n,-2,2),
-+               caller.execute=TRUE)
-> mpi.bcast.cmd(y <- x1 + x2 + rnorm(n),
-+               caller.execute=TRUE)
+> n <- 500
+> 
+> z <- factor(rbinom(n,1,.5))
+> x1 <- rnorm(n)
+> x2 <- runif(n,-2,2)
+> y <- x1 + x2 + rnorm(n)
+> mydat <- data.frame(z,x1,x2,y)
+> rm(z.x1,x2,y)
+Warning message:
+In rm(z.x1, x2, y) : object 'z.x1' not found
+> 
+> mpi.bcast.Robj2slave(mydat)
 > 
 > t <- system.time(mpi.bcast.cmd(model <- npreg(y~z+x1+x2,
 +                                               regtype="ll",
-+                                               bwmethod="cv.aic"),
++                                               bwmethod="cv.aic",
++                                               data=mydat),
 +                                caller.execute=TRUE))
 > 
 > ## An example of the consistent nonparametric significance test
@@ -87,7 +90,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 82.913 
+Elapsed time = 83.044 
 > 
 > ## Clean up properly then quit()
 > 

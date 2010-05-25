@@ -47,13 +47,13 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > mpi.bcast.cmd(set.seed(42),
 +               caller.execute=TRUE)
 > 
-> mpi.bcast.cmd(n <- 1000,
-+               caller.execute=TRUE)
+> n <- 1000
 > 
-> mpi.bcast.cmd(x <- rnorm(n),
-+               caller.execute=TRUE)
-> mpi.bcast.cmd(y <- rnorm(n),
-+               caller.execute=TRUE)
+> x <- rnorm(n)
+> y <- rnorm(n)
+> 
+> mpi.bcast.Robj2slave(x)
+> mpi.bcast.Robj2slave(y)
 > 
 > ## A simple example of the test for equality of univariate densities
 > 
@@ -74,7 +74,7 @@ Fail to reject the null of equality at the 10% level
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 25.839 
+Elapsed time = 25.868 
 > 
 > ## Clean up properly then quit()
 > 

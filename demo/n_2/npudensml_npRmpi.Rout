@@ -47,16 +47,16 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > mpi.bcast.cmd(set.seed(42),
 +               caller.execute=TRUE)
 > 
-> mpi.bcast.cmd(n <- 2500,
-+               caller.execute=TRUE)
+> n <- 2500
 > 
-> mpi.bcast.cmd(x <- rnorm(n),
-+               caller.execute=TRUE)
+> mydat <- data.frame(x=rnorm(n))
+> mpi.bcast.Robj2slave(mydat)
 > 
 > ## A simple example with likelihood cross-validation
 > 
 > t <- system.time(mpi.bcast.cmd(bw <- npudensbw(~x,
-+                                                bwmethod="cv.ml"),
++                                                bwmethod="cv.ml",
++                                                data=mydat),
 +                                caller.execute=TRUE))
 > 
 > summary(bw)
@@ -75,7 +75,7 @@ No. Continuous Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 13.394 
+Elapsed time = 13.472 
 > 
 > ## Clean up properly then quit()
 > 

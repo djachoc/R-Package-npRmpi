@@ -53,8 +53,8 @@ Fail to reject the null of equality at the 10% level
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 41.038 
+Elapsed time = 41.169 
 > 
 > proc.time()
    user  system elapsed 
- 41.436   0.052  41.499 
+ 41.485   0.067  41.637 

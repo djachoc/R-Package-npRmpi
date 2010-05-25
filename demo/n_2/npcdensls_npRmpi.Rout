@@ -43,32 +43,26 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > 
 > ## Load your data and broadcast it to all slave nodes
 > 
-> mpi.bcast.cmd(library(MASS),
-+               caller.execute=TRUE)
+> library(MASS)
 > 
 > mpi.bcast.cmd(set.seed(42),
 +               caller.execute=TRUE)
 > 
-> mpi.bcast.cmd(n <- 500,
-+               caller.execute=TRUE)
+> n <- 500
 > 
-> mpi.bcast.cmd(rho <- 0.25,
-+               caller.execute=TRUE)
-> mpi.bcast.cmd(mu <- c(0,0),
-+               caller.execute=TRUE)
-> mpi.bcast.cmd(Sigma <- matrix(c(1,rho,rho,1),2,2),
-+               caller.execute=TRUE)
-> mpi.bcast.cmd(data <- mvrnorm(n=n, mu, Sigma),
-+               caller.execute=TRUE)
-> mpi.bcast.cmd(x <- data[,2],
-+               caller.execute=TRUE)
-> mpi.bcast.cmd(y <- data[,1],
-+               caller.execute=TRUE)
+> rho <- 0.25
+> mu <- c(0,0)
+> Sigma <- matrix(c(1,rho,rho,1),2,2)
+> data <- mvrnorm(n=n, mu, Sigma)
+> mydat <- data.frame(x=data[,2],y=data[,1])
+> 
+> mpi.bcast.Robj2slave(mydat)
 > 
 > ## A conditional density estimation example. 
 > 
 > t <- system.time(mpi.bcast.cmd(bw <- npcdensbw(y~x,
-+                                                bwmethod="cv.ls"),
++                                                bwmethod="cv.ls",
++                                                data=mydat),
 +                                caller.execute=TRUE))
 > 
 > summary(bw)
@@ -112,7 +106,7 @@ No. Continuous Dependent Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 103.38 
+Elapsed time = 115.043 
 > 
 > ## Clean up properly then quit()
 > 

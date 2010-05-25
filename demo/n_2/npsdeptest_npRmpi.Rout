@@ -49,7 +49,7 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > 
 > ## A function to create a time series
 > 
-> mpi.bcast.cmd(ar.series <- function(phi,epsilon) {
+> ar.series <- function(phi,epsilon) {
 +   n <- length(epsilon)
 +   series <- numeric(n)
 +   series[1] <- epsilon[1]/(1-phi)
@@ -57,16 +57,15 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 +     series[i] <- phi*series[i-1] + epsilon[i]
 +   }
 +   return(series)
-+ },
-+               caller.execute=TRUE)
++ }
 > 
-> mpi.bcast.cmd(n <- 500,
-+               caller.execute=TRUE)
+> n <- 500
 > 
 > ## Stationary persistent time-series
 > 
-> mpi.bcast.cmd(yt <- ar.series(0.95,rnorm(n)),
-+               caller.execute=TRUE)
+> yt <- ar.series(0.95,rnorm(n))
+> 
+> mpi.bcast.Robj2slave(yt)
 > 
 > ## A simple example of a test for serial dependence
 > 
@@ -90,7 +89,7 @@ Null of independence is rejected at lag 2 at the 0.1% level
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 54.445 
+Elapsed time = 57.61 
 > 
 > ## Clean up properly then quit()
 > 

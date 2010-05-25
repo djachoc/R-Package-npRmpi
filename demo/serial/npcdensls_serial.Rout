@@ -38,13 +38,13 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-9)
 > mu <- c(0,0)
 > Sigma <- matrix(c(1,rho,rho,1),2,2)
 > data <- mvrnorm(n=n, mu, Sigma)
-> x <- data[,2]
-> y <- data[,1]
+> mydat <- data.frame(x=data[,2],y=data[,1])
 > 
 > ## A simple example with least-squares cross-validation
 > 
 > t <- system.time(bw <- npcdensbw(y~x,
-+                                  bwmethod="cv.ls"))
++                                  bwmethod="cv.ls",
++                                  data=mydat))
 > 
 > summary(bw)
 
@@ -86,9 +86,9 @@ No. Continuous Dependent Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 118.434 
+Elapsed time = 122.067 
 > 
 > 
 > proc.time()
    user  system elapsed 
-118.164   0.170 118.988 
+121.251   0.236 122.721 

@@ -38,10 +38,15 @@ Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-9)
 > x1 <- rnorm(n)
 > x2 <- runif(n,-2,2)
 > y <- x1 + x2 + rnorm(n)
+> mydat <- data.frame(z,x1,x2,y)
+> rm(z.x1,x2,y)
+Warning message:
+In rm(z.x1, x2, y) : object 'z.x1' not found
 > 
 > t <- system.time(model <- npreg(y~z+x1+x2,
 +                                 regtype="ll",
-+                                 bwmethod="cv.aic"))
++                                 bwmethod="cv.aic",
++                                 data=mydat))
 > 
 > 
 > ## An example of the consistent nonparametric significance test
@@ -68,8 +73,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 135.798 
+Elapsed time = 138.092 
 > 
 > proc.time()
    user  system elapsed 
-135.812   0.164 136.295 
+136.069   0.233 138.594 

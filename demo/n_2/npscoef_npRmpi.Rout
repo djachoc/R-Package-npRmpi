@@ -47,19 +47,19 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > mpi.bcast.cmd(set.seed(42),
 +               caller.execute=TRUE)
 > 
-> mpi.bcast.cmd(n <- 2500,
-+               caller.execute=TRUE)
+> n <- 2500
 > 
-> mpi.bcast.cmd(x <- runif(n),
-+               caller.execute=TRUE)
-> mpi.bcast.cmd(z <- runif(n, min=-2, max=2),
-+               caller.execute=TRUE)
-> mpi.bcast.cmd(y <- x*exp(z)*(1.0+rnorm(n,sd = 0.2)),
-+               caller.execute=TRUE)
+> x <- runif(n)
+> z <- runif(n, min=-2, max=2)
+> y <- x*exp(z)*(1.0+rnorm(n,sd = 0.2))
+> mydat <- data.frame(x,y,z)
+> rm(x,y,z)
+> 
+> mpi.bcast.Robj2slave(mydat)
 > 
 > ## A smooth coefficient model example
 > 
-> t <- system.time(mpi.bcast.cmd(bw <- npscoefbw(y~x|z),
+> t <- system.time(mpi.bcast.cmd(bw <- npscoefbw(y~x|z,data=mydat),
 +                                caller.execute=TRUE))
 > 
 > summary(bw)
@@ -100,7 +100,7 @@ No. Continuous Explanatory Vars.: 1
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 29.48 
+Elapsed time = 31.705 
 > 
 > ## Clean up properly then quit()
 > 

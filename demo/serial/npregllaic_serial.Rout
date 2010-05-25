@@ -28,9 +28,10 @@ Loading required package: cubature
 Nonparametric Kernel Methods for Mixed Datatypes (version 0.30-9)
 > options(np.messages=FALSE)
 > 
+> set.seed(42)
+> 
 > n <- 1000
 > 
-> set.seed(42)
 > x <- runif(n)
 > z1 <- rbinom(n,1,.5)
 > z2 <- rbinom(n,1,.5)
@@ -90,9 +91,9 @@ No. Unordered Categorical Explanatory Vars.: 2
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 82.656 
+Elapsed time = 85.497 
 > 
 > 
 > proc.time()
    user  system elapsed 
- 82.966   0.095  83.159 
+ 82.904   0.196  86.080 

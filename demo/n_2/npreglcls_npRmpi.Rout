@@ -44,9 +44,10 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > ## Generate data and broadcast it to all slave nodes in the form of a
 > ## data frame
 > 
+> set.seed(42)
+> 
 > n <- 1000
 > 
-> set.seed(42)
 > x <- runif(n)
 > z1 <- rbinom(n,1,.5)
 > z2 <- rbinom(n,1,.5)
@@ -110,7 +111,7 @@ No. Unordered Categorical Explanatory Vars.: 2
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 46.071 
+Elapsed time = 49.727 
 > 
 > ## Clean up properly then quit()
 > 

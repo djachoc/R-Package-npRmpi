@@ -49,7 +49,7 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 > 
 > ## A function to create a time series
 > 
-> mpi.bcast.cmd(ar.series <- function(phi,epsilon) {
+> ar.series <- function(phi,epsilon) {
 +   n <- length(epsilon)
 +   series <- numeric(n)
 +   series[1] <- epsilon[1]/(1-phi)
@@ -57,16 +57,15 @@ slave1 (rank 1, comm 1) of size 2 is running on: jeffrey-racines-macbook-pro
 +     series[i] <- phi*series[i-1] + epsilon[i]
 +   }
 +   return(series)
-+ },
-+               caller.execute=TRUE)
++ }
 > 
-> mpi.bcast.cmd(n <- 1000,
-+               caller.execute=TRUE)
+> n <- 1000
 > 
 > ## Stationary persistent symmetric time-series
 > 
-> mpi.bcast.cmd(yt <- ar.series(0.5,rnorm(n)),
-+               caller.execute=TRUE)
+> yt <- ar.series(0.5,rnorm(n))
+> 
+> mpi.bcast.Robj2slave(yt)
 > 
 > ## A simple example of the test for symmetry
 > 
@@ -88,7 +87,7 @@ Fail to reject the null of symmetry at the 10% level
 
 > 
 > cat("Elapsed time =", t[3], "\n")
-Elapsed time = 27.442 
+Elapsed time = 27.486 
 > 
 > ## Clean up properly then quit()
 > 
