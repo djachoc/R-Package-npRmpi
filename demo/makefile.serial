@@ -9,6 +9,7 @@ all:
 	R CMD BATCH --vanilla ../npdeptest_serial.R
 	R CMD BATCH --vanilla ../npindexich_serial.R
 	R CMD BATCH --vanilla ../npindexks_serial.R
+	R CMD BATCH --vanilla ../npplreg_serial.R
 	R CMD BATCH --vanilla ../npqreg_serial.R
 	R CMD BATCH --vanilla ../npreglcaic_serial.R
 	R CMD BATCH --vanilla ../npreglcls_serial.R

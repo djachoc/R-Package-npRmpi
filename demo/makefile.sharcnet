@@ -12,6 +12,7 @@ all:
 	sqsub -o npindexich_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npindexich_npRmpi.R
 	sqsub -o npindexks_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npindexks_npRmpi.R
 	sqsub -o npcdistccdf_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npcdistccdf_npRmpi.R
+	sqsub -o npplreg_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npplreg_npRmpi.R
 	sqsub -o npqreg_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npqreg_npRmpi.R
 	sqsub -o npreglcaic_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npreglcaic_npRmpi.R
 	sqsub -o npreglcls_npRmpi.out -r 20m -q mpi -n $(n)  R CMD BATCH --no-save ../R/npreglcls_npRmpi.R
