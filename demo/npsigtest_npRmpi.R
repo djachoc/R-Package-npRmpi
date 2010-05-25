@@ -29,7 +29,7 @@ x1 <- rnorm(n)
 x2 <- runif(n,-2,2)
 y <- x1 + x2 + rnorm(n)
 mydat <- data.frame(z,x1,x2,y)
-rm(z.x1,x2,y)
+rm(z,x1,x2,y)
 
 mpi.bcast.Robj2slave(mydat)
 

@@ -5,7 +5,7 @@
   \code{np.mpi.initialize} is used to initialize master and slave nodes.
 }
 \usage{
-np.mpi.initialize()
+mpi.bcast.cmd(np.mpi.initialize(),caller.execute=TRUE)
 }
 
 \value{
