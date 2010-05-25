@@ -277,6 +277,11 @@ mpi.bcast.cmd(model <- npreg(bws=bw,
 
 summary(model)
 
+## For the interactive run only we close the slaves perhaps to proceed
+## with other examples and so forth. This is redundant in batch mode.
+
+mpi.close.Rslaves()
+
 ## Note that in order to exit npRmpi properly avoid quit(), and instead
 ## use mpi.quit() as follows.
 
