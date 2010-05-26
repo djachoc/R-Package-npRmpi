@@ -1,7 +1,7 @@
 Title: Compiling npRmpi from source code under MS Windows XP (32-bit &
 Service Pack 3)
 
-Date: 05/21/2010
+Date: 05/26/2010
 Author: David T. Jacho-Chavez (djachoch@indiana.edu)
 
 These are based on those given in http://www.stats.uwo.ca/faculty/yu/Rmpi/
@@ -41,7 +41,7 @@ test.R                     http://www.economics.mcmaster.ca/faculty/racinej
       variable "PATH" (it is version dependent. Either User or System
       variables will be fine). Click Edit to get a new window.
 
-      At end of Variable value, add
+      At the end of Variable value, add
 
       ;C:\Program Files\R\R-2.11.0\bin;
 
@@ -59,9 +59,9 @@ test.R                     http://www.economics.mcmaster.ca/faculty/racinej
       variable "PATH" (it is version dependent. Either User or System
       variables will be fine). Click Edit to get a new window.
 
-      At end of Variable value, add
+      At the beginning of Variable value, add
 
-      ;C:\Rtools\bin;C:\Rtools\perl\bin;C:\Rtools\MinGW\bin;C:\R\bin;
+      C:\Rtools\bin;C:\Rtools\perl\bin;C:\Rtools\MinGW\bin;C:\R\bin;
 
 (iii) mpich2-1.2.1p1-win-ia32 (If you experience any difficulties,
       kindly refer to installation instructions at
@@ -101,7 +101,7 @@ test.R                     http://www.economics.mcmaster.ca/faculty/racinej
 
 4) Copy npRmpi_0.40-0.tar.gz to the "C:\R_temp" folder.
 
-5) (i) Untar npRmpi_0.30-9.tar.gz in the "C:\R_temp" folder.
+5) (i) Untar npRmpi_0.40-0.tar.gz in the "C:\R_temp" folder.
 
   * To 'untar' in MS Windows, please download & install the following
     freeware programme: 7-zip (http://www.7-zip.org)
