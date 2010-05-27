@@ -64,12 +64,12 @@ TESTING:
 
 (iii) Now type
 
-	   mpiexec -n 2 R --no-save -q < test.R > test_out.txt
+     mpiexec -n 2 R --no-save -q < test.R > test_out.txt
 
      (Change 2 for 3 or 4 if you got a quad-core desktop)
 
 (iv) After execution, type
 
-	test_out.txt
+    test_out.txt
 
     and notepad will open and display the generated output.
