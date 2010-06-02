@@ -361,6 +361,35 @@ npindex.sibandwidth <-
 
     if (no.ex) index.tmean <- index.mean
 
+    ## jracine, add vcov method... thanks to Escanciano, Juan Carlos
+    ## <jescanci@indiana.edu> for pushing me on this... use
+    ## index.tmean (training X) and index (tx) - need gradients ==
+    ## TRUE in order for this to work
+
+    if(bws$method == "ichimura" & gradients == TRUE) {
+
+      ## Need to add... these are placeholders..
+      q <- ncol(txdat)
+      Bvcov <- matrix(NA,q,q)
+
+    } else if(bws$method == "kleinspady" & gradients == TRUE) {
+
+      ## We divide by P(1-P) so test for P=0 or 1...
+      keep.ks <- which(index.tmean < 1 & index.tmean > 0)
+      dg.db.ks <- txdat[,-1,drop=FALSE]*index.grad[,1]
+      ## First row & column of covariance matrix are zero due to
+      ## identification condition that beta_1=0. Note the n^{-1} in
+      ## the E and the \sqrt{n} in the normalization of \hat\beta will
+      ## cancel.
+      q <- ncol(txdat)
+      Bvcov <- matrix(0,q,q)
+      Bvcov[-1,-1] <- solve(t(dg.db.ks[keep.ks,])%*%(dg.db.ks[keep.ks,]/(index.tmean[keep.ks]*
+        (1-index.tmean[keep.ks]))))
+
+      ## Now export these in an S3 method...
+
+    }
+
     ## TRISTEN XXX - for continuous y we want to return the fitted model
     ## along with the measures of goodness of fit RSQ, MSE, and other
     ## measures of goodness of fit. For discrete y (0/1), npconmode()
@@ -457,12 +486,10 @@ npindex.sibandwidth <-
     eval(parse(text=paste(
                  "singleindex(bws = bws, index = index.eval, mean = index.mean,",
                  ifelse(errors,"merr = index.merr,",""),
-                 ifelse(gradients,"grad = index.grad, mean.grad = colMeans(index.grad),",""),
+                 ifelse(gradients,"grad = index.grad, mean.grad = colMeans(index.grad), betavcov = Bvcov,",""),
                  ifelse(errors & gradients,"gerr = index.gerr, mean.gerr = index.mgerr,",""),
                  strres,
                  "ntrain = nrow(txdat),", strgof,
                  "trainiseval = no.ex, residuals = residuals, gradients = gradients)")))
   
   }
-
-
