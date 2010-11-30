@@ -1,3 +1,7 @@
+* Error being thrown by system(..., intern=TRUE) when mpi.quit() is
+  called, changed to FALSE (change to system() behaviour detailed in R
+  changelog 2.12.0)
+
 Changes from Version 0.40-1 to 0.40-3 [23-July-2010]
 
 * Added random seed (defaults to 42) to npscoefbw to ensure consistent
