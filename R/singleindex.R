@@ -6,7 +6,8 @@ singleindex =
            ntrain, trainiseval = FALSE, residuals = FALSE,
            gradients = FALSE, xtra = NA,
            confusion.matrix = NA, CCR.overall = NA,
-           CCR.byoutcome =  NA, fit.mcfadden = NA){
+           CCR.byoutcome =  NA, fit.mcfadden = NA
+           ){
 
     if (missing(bws) | missing(index) | missing(mean) | missing(ntrain))
       stop("improper invocation of singleindex constructor")
