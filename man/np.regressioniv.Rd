@@ -113,7 +113,7 @@ npregiv(y,
   \code{"Tikhonov"}).
   }
   \item{...}{
-    additional arguments supplied to \code{crs}.
+    additional arguments supplied to \code{\link{npksum}}.
   }
 }
 \details{
@@ -143,9 +143,9 @@ npregiv(y,
   falling in value and starts rising.
 }
 \value{
-  \code{crsiv} returns a list with components \code{phihat} and either
+  \code{npregiv} returns a list with components \code{phihat} and either
   \code{alpha} when \code{method="Tikhonov"} or \code{num.iterations}
-  when \code{method="Landweber-Fridman"} and \code{norm.stop}.
+   and \code{norm.stop} when \code{method="Landweber-Fridman"}.
 }
 \references{
   
@@ -192,6 +192,7 @@ This function should be considered to be in `beta test' status until further not
 \code{\link{npreg}}
 }
 \examples{
+% \dontrun{
 ## This illustration was made possible by Samuele Centorrino
 ## <samuele.centorrino@univ-tlse1.fr>
 
@@ -277,6 +278,7 @@ legend(quantile(z,trim),quantile(y,1-trim),
        lty=c(1,2,4),
        col=c("black","blue","red"),
        lwd=c(2,2,2))
-
+       
+% } % enddontrun
 }
 \keyword{ instrument }
