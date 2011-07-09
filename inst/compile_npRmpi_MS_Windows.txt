@@ -1,7 +1,6 @@
-Title: Compiling npRmpi from source code under MS Windows XP (32-bit &
-Service Pack 3)
+Title: Compiling npRmpi from source code under MS Windows 7 (32-bit/64-bit)
 
-Date: 05/26/2010
+Date: 07/09/2011
 Author: David T. Jacho-Chavez (djachoch@indiana.edu)
 
 These are based on those given in http://www.stats.uwo.ca/faculty/yu/Rmpi/
@@ -10,12 +9,13 @@ These are based on those given in http://www.stats.uwo.ca/faculty/yu/Rmpi/
 
 2) Download the following files and place then in "C:\R_temp" (note
    version numbers may be more recent so use the most recent
-   available):
+   available, and note that for 64-bit replace `32' with `64' in the
+   appropriate places below):
 
-R-2.11.0-win32.exe         http://www.r-project.org/
-Rtools211.exe              http://www.murdoch-sutherland.com/Rtools/
-mpich2-1.2.1p1-win-ia32    http://www-unix.mcs.anl.gov/mpi/mpich2
-npRmpi_0.40-0.tar.gz       http://cran.r-project.org/web/packages/npRmpi/index.html
+R-2.13.1-win32.exe         http://www.r-project.org/
+Rtools213.exe              http://www.murdoch-sutherland.com/Rtools/
+mpich2-1.4-win-ia32        http://www-unix.mcs.anl.gov/mpi/mpich2
+npRmpi_0.40-7.tar.gz       http://cran.r-project.org/web/packages/npRmpi/index.html
 test.R                     http://www.economics.mcmaster.ca/faculty/racinej
 .Rprofile                  http://www.economics.mcmaster.ca/faculty/racinej
 
@@ -27,7 +27,7 @@ test.R                     http://www.economics.mcmaster.ca/faculty/racinej
 3) Install the following programmes (in this order) using the default
    directories:
 
-  (i) R-2.11.0-win32.exe (If you experience any difficulties, 
+  (i) R-2.13.1-win32.exe (If you experience any difficulties, 
       kindly refer to installation instructions at
       http://www.r-project.org/)
 
@@ -43,9 +43,9 @@ test.R                     http://www.economics.mcmaster.ca/faculty/racinej
 
       At the end of Variable value, add
 
-      ;C:\Program Files\R\R-2.11.0\bin;
+      ;C:\Program Files\R\R-2.13.1\bin;
 
- (ii) Rtools211.exe (If you experience any difficulties, kindly
+ (ii) Rtools213.exe (If you experience any difficulties, kindly
       refer to installation instructions at
       http://www.murdoch-sutherland.com/Rtools/)
 
@@ -63,7 +63,7 @@ test.R                     http://www.economics.mcmaster.ca/faculty/racinej
 
       C:\Rtools\bin;C:\Rtools\perl\bin;C:\Rtools\MinGW\bin;C:\R\bin;
 
-(iii) mpich2-1.2.1p1-win-ia32 (If you experience any difficulties,
+(iii) mpich2-1.4-win-ia32 (If you experience any difficulties,
       kindly refer to installation instructions at
       http://www.stats.uwo.ca/faculty/yu/Rmpi/windows.htm)
 
@@ -99,9 +99,9 @@ test.R                     http://www.economics.mcmaster.ca/faculty/racinej
       (change `mypassword' to your actual password). click "Get
       Settings" again to see if your host gets green color.
 
-4) Copy npRmpi_0.40-0.tar.gz to the "C:\R_temp" folder.
+4) Copy npRmpi_0.40-7.tar.gz to the "C:\R_temp" folder.
 
-5) (i) Untar npRmpi_0.40-0.tar.gz in the "C:\R_temp" folder.
+5) (i) Untar npRmpi_0.40-7.tar.gz in the "C:\R_temp" folder.
 
   * To 'untar' in MS Windows, please download & install the following
     freeware programme: 7-zip (http://www.7-zip.org)
