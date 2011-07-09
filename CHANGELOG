@@ -1,5 +1,6 @@
 * Minor modifications to Rmpi.c and Rmpi.h and Makevars.win (thanks to
-  David Jacho-Chavez) for building under recent version of Windows.
+  David Jacho-Chavez) for building under recent version of Windows
+  (Windows 7).
 
 Changes from Version 0.40-6 to 0.40-7 [8-Jun-2011]
 
