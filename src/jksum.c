@@ -1087,7 +1087,7 @@ double *weighted_sum){
   /* Declarations */
 
   int i,j,l, mstep, js, je, num_obs_eval_alloc, sum_element_length;
-  int do_psum, switch_te; 
+  int do_psum; 
 
 #ifdef MPI2
   // switch parallelisation strategies based on biggest stride

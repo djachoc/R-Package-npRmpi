@@ -67,9 +67,9 @@ test.R                     http://www.economics.mcmaster.ca/faculty/racinej
       kindly refer to installation instructions at
       http://www.stats.uwo.ca/faculty/yu/Rmpi/windows.htm)
 
-      Before installing MPICH2, you need Microsoft .Net 2.0 .NET
-      Framework Version 2.0 Redistributable Package and Visual C++
-      2010 Redistributable Package (x86).
+      Before installing MPICH2, you need Microsoft .Net Framework 4
+      (Standalone Installer) Visual C++ 2010 Redistributable Package
+      (x86).
 
       After installation, add the MPICH2 bin directory to your PATH
       environment variables.
