@@ -1,3 +1,5 @@
+* Fixed bug in jksum.c for adaptive bandwidths and matrix tydat
+
 * Minor modifications to Rmpi.c and Rmpi.h and Makevars.win (thanks to
   David Jacho-Chavez) for building under recent version of Windows
   (Windows 7).
