@@ -8,9 +8,8 @@ These are based on those given in http://www.stats.uwo.ca/faculty/yu/Rmpi/
 1) Create the folder "R_temp" in your C:\ drive.
 
 2) Download the following files and place then in "C:\R_temp" (note
-   version numbers may be more recent so use the most recent
-   available, and note that for 64-bit replace `32' with `64' in the
-   appropriate places below):
+   version numbers as most recent versions of each program may create
+   undesirable results):
 
 R-2.13.1-win.exe           http://www.r-project.org/
 Rtools213.exe              http://www.murdoch-sutherland.com/Rtools/
@@ -49,8 +48,8 @@ test.R                     http://www.economics.mcmaster.ca/faculty/racinej
       refer to installation instructions at
       http://www.murdoch-sutherland.com/Rtools/)
 
-      After installation, add the Rtools bin directory to your PATH
-      environment variables.
+      During installation, accept all default folders. After installation,
+      add the Rtools bin directory to your PATH environment variables.
 
       Right click "My Computer" and choose "Properties". Click
       "Advanced system settings" to get a new window.
@@ -67,7 +66,7 @@ test.R                     http://www.economics.mcmaster.ca/faculty/racinej
       kindly refer to installation instructions at
       http://www.stats.uwo.ca/faculty/yu/Rmpi/windows.htm)
 
-      Before installing MPICH2, you need Microsoft .Net Framework 4
+      Before installing MPICH2, you may need Microsoft .Net Framework 4
       (Standalone Installer) Visual C++ 2010 Redistributable Package
       (x86).
 
