@@ -230,7 +230,7 @@ mpi.bcast.cmd(data("Italy"),
 mpi.bcast.cmd(attach(Italy),
               caller.execute=TRUE)
 
-mpi.bcast.cmd(bw <- npcdensbw(formula=gdp~ordered(year), tol=.1, ftol=.1),
+mpi.bcast.cmd(bw <- npcdensbw(formula=gdp~ordered(year)),
               caller.execute=TRUE)
 
 mpi.bcast.cmd(fhat <- npcdens(bws=bw),
