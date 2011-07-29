@@ -69,7 +69,7 @@ b.star(data,
 }
 
 \examples{
-set.seed(12345)
+set.seed(42)
 
 # Function to generate an AR(1) series
 
