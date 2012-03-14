@@ -1,6 +1,6 @@
 Package: npRmpi
-Version: 0.40-13
-Date: 2012-03-05
+Version: 0.40-14
+Date: 2012-03-13
 Depends: boot, cubature
 Suggests: quantreg, MASS
 Title: Parallel nonparametric kernel smoothing methods for mixed data types
