@@ -4,7 +4,7 @@ This is the R package `npRmpi' (NonpRmpiarametric Kernel Methods for Mixed Datat
 
 ## Installation
 
-You can install the stable version on [CRAN](http://cran.r-project.org/package=npRmpi):
+Presuming that a working implementation of MPI exists on the target machine, you can install the stable version on [CRAN](http://cran.r-project.org/package=npRmpi):
 
 ```r
 install.packages('npRmpi', dependencies = TRUE)
