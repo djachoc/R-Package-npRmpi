@@ -1,5 +1,8 @@
 Changes from Version 0.40-13 to 0.40-14 [XXX]
 
+* Fixed glitch in npreg summary where `Residual standard error' was
+  reporting residual variance
+
 * Added reference to R2 measure (Doksum and Samarov (1995))
 
 * Startup message points to the faq, faq is now a vignette
