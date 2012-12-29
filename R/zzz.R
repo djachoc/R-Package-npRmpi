@@ -5,7 +5,7 @@
     options(np.messages = TRUE)
 
 }
-.Last.lib <- function (lpath){
+.onUnload <- function (lpath){
   library.dynam.unload("npRmpi", libpath=lpath) 
 }
 .onLoad <- function (lib, pkg) {
