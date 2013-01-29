@@ -90,6 +90,7 @@ mpi.setup.rngstream <- function(seed=c(runif(3,0,2^32-210),runif(3,0,2^32-22854)
 
 mpi.setup.sprng <- function (seed = runif(1, 1, 2^31-1),
                kindprng = "default", para = 0, comm=1) {
+  stop("rsprng is not supported by npRmpi")
     commsize <- mpi.comm.size(comm)
     if (commsize < 3)
         stop("There is no slave or only one slave")
@@ -109,12 +110,12 @@ mpi.setup.sprng <- function (seed = runif(1, 1, 2^31-1),
 #        stop("It seems rsprng is not installed properly on slave machines.")
     assign(".Sprng.seed", as.integer(c(seed, kind, para)), envir=.GlobalEnv)
     #adapted from snow
-    initSprngNode <- function (streamno, nstream, seed, kind, para) {
-        .Call("r_init_sprng", as.integer(kind), as.integer(streamno), 
-                as.integer(nstream), as.integer(seed), as.integer(para),
-                PACKAGE = "rsprng")
-        RNGkind("user")
-    }
+#    initSprngNode <- function (streamno, nstream, seed, kind, para) {
+#        .Call("r_init_sprng", as.integer(kind), as.integer(streamno), 
+#                as.integer(nstream), as.integer(seed), as.integer(para),
+#                PACKAGE = "rsprng")
+#        RNGkind("user")
+#    }
 
     invisible(mpi.apply(0:(commsize-2), initSprngNode, commsize-1, seed, kind, para))
 }
